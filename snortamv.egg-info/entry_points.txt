@@ -1,0 +1,2 @@
+[console_scripts]
+snortamv = main:main

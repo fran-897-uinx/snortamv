@@ -1,0 +1,3 @@
+# Local rule format (demo)
+alert icmp any any -> any any (msg:"ICMP detected"; sid:1000001; rev:1;)
+alert tcp any any -> any any (msg:"This ia a tcp transfer"; sid:0001; rev:1;)

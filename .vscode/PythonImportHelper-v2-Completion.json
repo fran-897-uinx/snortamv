@@ -1,0 +1,1008 @@
+[
+    {
+        "label": "json",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "json",
+        "description": "json",
+        "detail": "json",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "shutil",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "shutil",
+        "description": "shutil",
+        "detail": "shutil",
+        "documentation": {}
+    },
+    {
+        "label": "sqlite3",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "sqlite3",
+        "description": "sqlite3",
+        "detail": "sqlite3",
+        "documentation": {}
+    },
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "hashlib",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "hashlib",
+        "description": "hashlib",
+        "detail": "hashlib",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Dict",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "database.db",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "database.db",
+        "description": "database.db",
+        "detail": "database.db",
+        "documentation": {}
+    },
+    {
+        "label": "create_account",
+        "importPath": "database.db",
+        "description": "database.db",
+        "isExtraImport": true,
+        "detail": "database.db",
+        "documentation": {}
+    },
+    {
+        "label": "get_account",
+        "importPath": "database.db",
+        "description": "database.db",
+        "isExtraImport": true,
+        "detail": "database.db",
+        "documentation": {}
+    },
+    {
+        "label": "delete_account",
+        "importPath": "database.db",
+        "description": "database.db",
+        "isExtraImport": true,
+        "detail": "database.db",
+        "documentation": {}
+    },
+    {
+        "label": "get_account",
+        "importPath": "database.db",
+        "description": "database.db",
+        "isExtraImport": true,
+        "detail": "database.db",
+        "documentation": {}
+    },
+    {
+        "label": "verify_password",
+        "importPath": "database.db",
+        "description": "database.db",
+        "isExtraImport": true,
+        "detail": "database.db",
+        "documentation": {}
+    },
+    {
+        "label": "update_account",
+        "importPath": "database.db",
+        "description": "database.db",
+        "isExtraImport": true,
+        "detail": "database.db",
+        "documentation": {}
+    },
+    {
+        "label": "get_account",
+        "importPath": "database.db",
+        "description": "database.db",
+        "isExtraImport": true,
+        "detail": "database.db",
+        "documentation": {}
+    },
+    {
+        "label": "verify_password",
+        "importPath": "database.db",
+        "description": "database.db",
+        "isExtraImport": true,
+        "detail": "database.db",
+        "documentation": {}
+    },
+    {
+        "label": "platform",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "platform",
+        "description": "platform",
+        "detail": "platform",
+        "documentation": {}
+    },
+    {
+        "label": "subprocess",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "subprocess",
+        "description": "subprocess",
+        "detail": "subprocess",
+        "documentation": {}
+    },
+    {
+        "label": "sys",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "sys",
+        "description": "sys",
+        "detail": "sys",
+        "documentation": {}
+    },
+    {
+        "label": "time",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "time",
+        "description": "time",
+        "detail": "time",
+        "documentation": {}
+    },
+    {
+        "label": "pyfiglet",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "pyfiglet",
+        "description": "pyfiglet",
+        "detail": "pyfiglet",
+        "documentation": {}
+    },
+    {
+        "label": "Console",
+        "importPath": "rich.console",
+        "description": "rich.console",
+        "isExtraImport": true,
+        "detail": "rich.console",
+        "documentation": {}
+    },
+    {
+        "label": "create_default_rules",
+        "importPath": "modules.configuration.setup_rules",
+        "description": "modules.configuration.setup_rules",
+        "isExtraImport": true,
+        "detail": "modules.configuration.setup_rules",
+        "documentation": {}
+    },
+    {
+        "label": "validate_configuration",
+        "importPath": "modules.configuration.validate_conf",
+        "description": "modules.configuration.validate_conf",
+        "isExtraImport": true,
+        "detail": "modules.configuration.validate_conf",
+        "documentation": {}
+    },
+    {
+        "label": "create_account_cli",
+        "importPath": "modules.acc_managt.creat_acc",
+        "description": "modules.acc_managt.creat_acc",
+        "isExtraImport": true,
+        "detail": "modules.acc_managt.creat_acc",
+        "documentation": {}
+    },
+    {
+        "label": "delete_account_cli",
+        "importPath": "modules.acc_managt.delete_acc",
+        "description": "modules.acc_managt.delete_acc",
+        "isExtraImport": true,
+        "detail": "modules.acc_managt.delete_acc",
+        "documentation": {}
+    },
+    {
+        "label": "update_account_cli",
+        "importPath": "modules.acc_managt.update_acc",
+        "description": "modules.acc_managt.update_acc",
+        "isExtraImport": true,
+        "detail": "modules.acc_managt.update_acc",
+        "documentation": {}
+    },
+    {
+        "label": "get_venv_python",
+        "importPath": "activate",
+        "description": "activate",
+        "isExtraImport": true,
+        "detail": "activate",
+        "documentation": {}
+    },
+    {
+        "label": "activenv",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "activenv",
+        "description": "activenv",
+        "detail": "activenv",
+        "documentation": {}
+    },
+    {
+        "label": "actvenv",
+        "importPath": "post_installer",
+        "description": "post_installer",
+        "isExtraImport": true,
+        "detail": "post_installer",
+        "documentation": {}
+    },
+    {
+        "label": "setup",
+        "importPath": "setuptools",
+        "description": "setuptools",
+        "isExtraImport": true,
+        "detail": "setuptools",
+        "documentation": {}
+    },
+    {
+        "label": "find_packages",
+        "importPath": "setuptools",
+        "description": "setuptools",
+        "isExtraImport": true,
+        "detail": "setuptools",
+        "documentation": {}
+    },
+    {
+        "label": "install",
+        "importPath": "setuptools.command.install",
+        "description": "setuptools.command.install",
+        "isExtraImport": true,
+        "detail": "setuptools.command.install",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "importPath": "version",
+        "description": "version",
+        "isExtraImport": true,
+        "detail": "version",
+        "documentation": {}
+    },
+    {
+        "label": "create_account",
+        "kind": 2,
+        "importPath": "build.lib.modules.acc_managt.creat_acc",
+        "description": "build.lib.modules.acc_managt.creat_acc",
+        "peekOfCode": "def create_account(root: Path):\n    p = _accounts_path(root)\n    if not p.exists():\n        username = input(\n            \"Username (it is a one time creation ))\",\n        )\n        Fullname = input(\n            \"Fullname \",\n        )\n        Password = input(\"Enter your pin or password: \")",
+        "detail": "build.lib.modules.acc_managt.creat_acc",
+        "documentation": {}
+    },
+    {
+        "label": "ACCOUNTS_FILE",
+        "kind": 5,
+        "importPath": "build.lib.modules.acc_managt.creat_acc",
+        "description": "build.lib.modules.acc_managt.creat_acc",
+        "peekOfCode": "ACCOUNTS_FILE = \"accounts.json\"\ndef _accounts_path(root: Path) -> Path:\n    return root / ACCOUNTS_FILE\n# def create_account(root: Path):\n#     p = _accounts_path(root)\n#     if not p.exists():\n#         p.write_text(\"{}\")\n#     data = json.loads(p.read_text())\n#     username = input(\"Enter username: \")\n#     if username in data:",
+        "detail": "build.lib.modules.acc_managt.creat_acc",
+        "documentation": {}
+    },
+    {
+        "label": "data",
+        "kind": 5,
+        "importPath": "build.lib.modules.acc_managt.creat_acc",
+        "description": "build.lib.modules.acc_managt.creat_acc",
+        "peekOfCode": "data = {}\ndef create_account(root: Path):\n    p = _accounts_path(root)\n    if not p.exists():\n        username = input(\n            \"Username (it is a one time creation ))\",\n        )\n        Fullname = input(\n            \"Fullname \",\n        )",
+        "detail": "build.lib.modules.acc_managt.creat_acc",
+        "documentation": {}
+    },
+    {
+        "label": "delete_account",
+        "kind": 2,
+        "importPath": "build.lib.modules.acc_managt.delete_acc",
+        "description": "build.lib.modules.acc_managt.delete_acc",
+        "peekOfCode": "def delete_account(root: Path):\n    p = _accounts_path(root)\n    if not p.exists():\n        print(\"No accounts file found\")\n        return\n    data = json.loads(p.read_text())\n    username = input(\"Enter username to delete: \")\n    if username not in data:\n        print(\"User not found\")\n        return",
+        "detail": "build.lib.modules.acc_managt.delete_acc",
+        "documentation": {}
+    },
+    {
+        "label": "ACCOUNTS_FILE",
+        "kind": 5,
+        "importPath": "build.lib.modules.acc_managt.delete_acc",
+        "description": "build.lib.modules.acc_managt.delete_acc",
+        "peekOfCode": "ACCOUNTS_FILE = \"accounts.json\"\ndef _accounts_path(root: Path) -> Path:\n    return root / ACCOUNTS_FILE\ndef delete_account(root: Path):\n    p = _accounts_path(root)\n    if not p.exists():\n        print(\"No accounts file found\")\n        return\n    data = json.loads(p.read_text())\n    username = input(\"Enter username to delete: \")",
+        "detail": "build.lib.modules.acc_managt.delete_acc",
+        "documentation": {}
+    },
+    {
+        "label": "update_account",
+        "kind": 2,
+        "importPath": "build.lib.modules.acc_managt.update_acc",
+        "description": "build.lib.modules.acc_managt.update_acc",
+        "peekOfCode": "def update_account(root: Path):\n    p = _accounts_path(root)\n    if not p.exists():\n        print(\"No accounts file found\")\n        return\n    data = json.loads(p.read_text())\n    username = input(\"Enter username to update: \")\n    if username not in data:\n        print(\"User not found\")\n        return",
+        "detail": "build.lib.modules.acc_managt.update_acc",
+        "documentation": {}
+    },
+    {
+        "label": "ACCOUNTS_FILE",
+        "kind": 5,
+        "importPath": "build.lib.modules.acc_managt.update_acc",
+        "description": "build.lib.modules.acc_managt.update_acc",
+        "peekOfCode": "ACCOUNTS_FILE = \"accounts.json\"\ndef _accounts_path(root: Path) -> Path:\n    return root / ACCOUNTS_FILE\ndef update_account(root: Path):\n    p = _accounts_path(root)\n    if not p.exists():\n        print(\"No accounts file found\")\n        return\n    data = json.loads(p.read_text())\n    username = input(\"Enter username to update: \")",
+        "detail": "build.lib.modules.acc_managt.update_acc",
+        "documentation": {}
+    },
+    {
+        "label": "modify_conf",
+        "kind": 2,
+        "importPath": "build.lib.modules.configuration.modify_conf",
+        "description": "build.lib.modules.configuration.modify_conf",
+        "peekOfCode": "def modify_conf(root: Path, changes: dict):\n    # Very small demonstration: append a line to snort.conf.template\n    tpl = root / \"templates\" / \"snort.conf.tpl\"\n    if not tpl.exists():\n        print(\"Template not found\")\n        return\n    with open(tpl, \"a\") as f:\n        for k, v in changes.items():\n            f.write(f\"# {k} -> {v}\\n\")\n    print(\"Modified template (demo)\")",
+        "detail": "build.lib.modules.configuration.modify_conf",
+        "documentation": {}
+    },
+    {
+        "label": "create_default_rules",
+        "kind": 2,
+        "importPath": "build.lib.modules.configuration.setup_rules",
+        "description": "build.lib.modules.configuration.setup_rules",
+        "peekOfCode": "def create_default_rules(root: Path):\n    rules_dir = root / \"rules\"\n    rules_dir.mkdir(exist_ok=True)\n    local_rules = rules_dir / \"local.rules\"\n    if not local_rules.exists():\n        local_rules.write_text(\"\".join(DEFAULT_RULES))\n        print(f\"Created default local.rules at {local_rules}\")\n    else:\n        print(\"local.rules already exists\")\ndef interactive_add_rule(root: Path):",
+        "detail": "build.lib.modules.configuration.setup_rules",
+        "documentation": {}
+    },
+    {
+        "label": "interactive_add_rule",
+        "kind": 2,
+        "importPath": "build.lib.modules.configuration.setup_rules",
+        "description": "build.lib.modules.configuration.setup_rules",
+        "peekOfCode": "def interactive_add_rule(root: Path):\n    rules_dir = root / \"rules\"\n    rules_dir.mkdir(exist_ok=True)\n    local_rules = rules_dir / \"local.rules\"\n    if not local_rules.exists():\n        local_rules.write_text(\"\".join(DEFAULT_RULES))\n        print(\"Add a simple alert rule (demo)\")\n        proto = input(\"Protocol (tcp/udp/icmp): \")\n        src = input(\"Source (e.g. any): \")\n        src_port = input(\"Source port (e.g. any): \")",
+        "detail": "build.lib.modules.configuration.setup_rules",
+        "documentation": {}
+    },
+    {
+        "label": "list_local_rules",
+        "kind": 2,
+        "importPath": "build.lib.modules.configuration.setup_rules",
+        "description": "build.lib.modules.configuration.setup_rules",
+        "peekOfCode": "def list_local_rules(root: Path):\n    local_rules = root / \"rules\" / \"local.rules\"\n    if not local_rules.exists():\n        print(\"No local.rules found. Run `python main.py setup` to create defaults.\")\n        return\n    print(local_rules.read_text())",
+        "detail": "build.lib.modules.configuration.setup_rules",
+        "documentation": {}
+    },
+    {
+        "label": "DEFAULT_RULES",
+        "kind": 5,
+        "importPath": "build.lib.modules.configuration.setup_rules",
+        "description": "build.lib.modules.configuration.setup_rules",
+        "peekOfCode": "DEFAULT_RULES = [\n    \"# Local rule format (demo)\\n\",\n    'alert icmp any any -> any any (msg:\"ICMP detected\"; sid:1000001; rev:1;)\\n',\n]\ndef create_default_rules(root: Path):\n    rules_dir = root / \"rules\"\n    rules_dir.mkdir(exist_ok=True)\n    local_rules = rules_dir / \"local.rules\"\n    if not local_rules.exists():\n        local_rules.write_text(\"\".join(DEFAULT_RULES))",
+        "detail": "build.lib.modules.configuration.setup_rules",
+        "documentation": {}
+    },
+    {
+        "label": "validate_configuration",
+        "kind": 2,
+        "importPath": "build.lib.modules.configuration.validate_conf",
+        "description": "build.lib.modules.configuration.validate_conf",
+        "peekOfCode": "def validate_configuration(root: Path):\n    # Simple validation: check that rules file exists and is not empty\n    rules = root / \"rules\" / \"local.rules\"\n    if not rules.exists():\n        print(\"Validation failed: local.rules missing\")\n        return False\n    content = rules.read_text().strip()\n    if not content:\n        print(\"Validation failed: local.rules is empty\")\n        return False",
+        "detail": "build.lib.modules.configuration.validate_conf",
+        "documentation": {}
+    },
+    {
+        "label": "check_snort",
+        "kind": 2,
+        "importPath": "build.lib.modules.utilities.check_depend",
+        "description": "build.lib.modules.utilities.check_depend",
+        "peekOfCode": "def check_snort():\n    path = shutil.which(\"snort\")\n    if path:\n        print(f\"Found snort at: {path}\")\n        return True\n    else:\n        print(\"snort executable not found in PATH. Some features may not work.\")\n        return False",
+        "detail": "build.lib.modules.utilities.check_depend",
+        "documentation": {}
+    },
+    {
+        "label": "handle_error",
+        "kind": 2,
+        "importPath": "build.lib.modules.utilities.error_hander",
+        "description": "build.lib.modules.utilities.error_hander",
+        "peekOfCode": "def handle_error(e: Exception, context: str = \"\"):\n    print(f\"ERROR in {context}: {e}\")",
+        "detail": "build.lib.modules.utilities.error_hander",
+        "documentation": {}
+    },
+    {
+        "label": "get_connection",
+        "kind": 2,
+        "importPath": "database.db",
+        "description": "database.db",
+        "peekOfCode": "def get_connection():\n    conn = sqlite3.connect(DB_PATH)\n    conn.row_factory = sqlite3.Row\n    return conn\n# Simple password hashing\ndef hash_password(plaintext: str) -> str:\n    return hashlib.sha256(plaintext.encode(\"utf-8\")).hexdigest()\n# Initialize database and tables\ndef init_db():\n    conn = get_connection()",
+        "detail": "database.db",
+        "documentation": {}
+    },
+    {
+        "label": "hash_password",
+        "kind": 2,
+        "importPath": "database.db",
+        "description": "database.db",
+        "peekOfCode": "def hash_password(plaintext: str) -> str:\n    return hashlib.sha256(plaintext.encode(\"utf-8\")).hexdigest()\n# Initialize database and tables\ndef init_db():\n    conn = get_connection()\n    cur = conn.cursor()\n    cur.execute(\n        \"\"\"\n        CREATE TABLE IF NOT EXISTS accounts (\n            id INTEGER PRIMARY KEY AUTOINCREMENT,",
+        "detail": "database.db",
+        "documentation": {}
+    },
+    {
+        "label": "init_db",
+        "kind": 2,
+        "importPath": "database.db",
+        "description": "database.db",
+        "peekOfCode": "def init_db():\n    conn = get_connection()\n    cur = conn.cursor()\n    cur.execute(\n        \"\"\"\n        CREATE TABLE IF NOT EXISTS accounts (\n            id INTEGER PRIMARY KEY AUTOINCREMENT,\n            username TEXT UNIQUE NOT NULL,\n            fullname TEXT,\n            password_hash TEXT NOT NULL,",
+        "detail": "database.db",
+        "documentation": {}
+    },
+    {
+        "label": "create_account",
+        "kind": 2,
+        "importPath": "database.db",
+        "description": "database.db",
+        "peekOfCode": "def create_account(username: str, fullname: str, password: str) -> bool:\n    conn = get_connection()\n    cur = conn.cursor()\n    try:\n        cur.execute(\n            \"INSERT INTO accounts (username, fullname, password_hash) VALUES (?, ?, ?)\",\n            (username, fullname, hash_password(password)),\n        )\n        conn.commit()\n        return True",
+        "detail": "database.db",
+        "documentation": {}
+    },
+    {
+        "label": "get_account",
+        "kind": 2,
+        "importPath": "database.db",
+        "description": "database.db",
+        "peekOfCode": "def get_account(username: str) -> Optional[Dict[str, Any]]:\n    conn = get_connection()\n    cur = conn.cursor()\n    cur.execute(\"SELECT id, username, fullname, created_at FROM accounts WHERE username = ?\", (username,))\n    row = cur.fetchone()\n    conn.close()\n    return dict(row) if row else None\ndef verify_password(username: str, password: str) -> bool:\n    conn = get_connection()\n    cur = conn.cursor()",
+        "detail": "database.db",
+        "documentation": {}
+    },
+    {
+        "label": "verify_password",
+        "kind": 2,
+        "importPath": "database.db",
+        "description": "database.db",
+        "peekOfCode": "def verify_password(username: str, password: str) -> bool:\n    conn = get_connection()\n    cur = conn.cursor()\n    cur.execute(\"SELECT password_hash FROM accounts WHERE username = ?\", (username,))\n    row = cur.fetchone()\n    conn.close()\n    if not row:\n        return False\n    return row[\"password_hash\"] == hash_password(password)\ndef update_account(username: str, new_fullname: Optional[str] = None, new_password: Optional[str] = None) -> bool:",
+        "detail": "database.db",
+        "documentation": {}
+    },
+    {
+        "label": "update_account",
+        "kind": 2,
+        "importPath": "database.db",
+        "description": "database.db",
+        "peekOfCode": "def update_account(username: str, new_fullname: Optional[str] = None, new_password: Optional[str] = None) -> bool:\n    conn = get_connection()\n    cur = conn.cursor()\n    # ensure user exists\n    cur.execute(\"SELECT id FROM accounts WHERE username = ?\", (username,))\n    if not cur.fetchone():\n        conn.close()\n        return False\n    if new_fullname and new_password:\n        cur.execute(",
+        "detail": "database.db",
+        "documentation": {}
+    },
+    {
+        "label": "delete_account",
+        "kind": 2,
+        "importPath": "database.db",
+        "description": "database.db",
+        "peekOfCode": "def delete_account(username: str) -> bool:\n    conn = get_connection()\n    cur = conn.cursor()\n    cur.execute(\"DELETE FROM accounts WHERE username = ?\", (username,))\n    changed = cur.rowcount\n    conn.commit()\n    conn.close()\n    return changed > 0\ndef list_accounts() -> list:\n    conn = get_connection()",
+        "detail": "database.db",
+        "documentation": {}
+    },
+    {
+        "label": "list_accounts",
+        "kind": 2,
+        "importPath": "database.db",
+        "description": "database.db",
+        "peekOfCode": "def list_accounts() -> list:\n    conn = get_connection()\n    cur = conn.cursor()\n    cur.execute(\"SELECT id, username, fullname, created_at FROM accounts ORDER BY id\")\n    rows = cur.fetchall()\n    conn.close()\n    return [dict(r) for r in rows]\n# Migrate from legacy accounts.json (if exists in project root)\ndef migrate_from_json(project_root: Path) -> int:\n    json_path = project_root / \"accounts.json\"",
+        "detail": "database.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrate_from_json",
+        "kind": 2,
+        "importPath": "database.db",
+        "description": "database.db",
+        "peekOfCode": "def migrate_from_json(project_root: Path) -> int:\n    json_path = project_root / \"accounts.json\"\n    if not json_path.exists():\n        return 0\n    import json\n    count = 0\n    with json_path.open() as f:\n        data = json.load(f)\n    for username, info in data.items():\n        fullname = info.get(\"Fullname\") or info.get(\"fullname\") or \"\"",
+        "detail": "database.db",
+        "documentation": {}
+    },
+    {
+        "label": "USERDIR",
+        "kind": 5,
+        "importPath": "database.db",
+        "description": "database.db",
+        "peekOfCode": "USERDIR = os.getlogin()\nLOCAL_APPDATA = f\"C:\\\\Users\\\\{USERDIR}\\\\Desktop\"\nAPP_DIR = Path(LOCAL_APPDATA) / \"SnortAMV\"\nAPP_DIR.mkdir(parents=True, exist_ok=True)\nDB_PATH = APP_DIR / \"sqlite.db\"\n### Debug Message\nif os.path.exists(DB_PATH) ==False:\n    open(DB_PATH,\"x\")\nelse:\n    print(\"fILE ALREADY EXISTS\")",
+        "detail": "database.db",
+        "documentation": {}
+    },
+    {
+        "label": "LOCAL_APPDATA",
+        "kind": 5,
+        "importPath": "database.db",
+        "description": "database.db",
+        "peekOfCode": "LOCAL_APPDATA = f\"C:\\\\Users\\\\{USERDIR}\\\\Desktop\"\nAPP_DIR = Path(LOCAL_APPDATA) / \"SnortAMV\"\nAPP_DIR.mkdir(parents=True, exist_ok=True)\nDB_PATH = APP_DIR / \"sqlite.db\"\n### Debug Message\nif os.path.exists(DB_PATH) ==False:\n    open(DB_PATH,\"x\")\nelse:\n    print(\"fILE ALREADY EXISTS\")\n### end of Debug Message",
+        "detail": "database.db",
+        "documentation": {}
+    },
+    {
+        "label": "APP_DIR",
+        "kind": 5,
+        "importPath": "database.db",
+        "description": "database.db",
+        "peekOfCode": "APP_DIR = Path(LOCAL_APPDATA) / \"SnortAMV\"\nAPP_DIR.mkdir(parents=True, exist_ok=True)\nDB_PATH = APP_DIR / \"sqlite.db\"\n### Debug Message\nif os.path.exists(DB_PATH) ==False:\n    open(DB_PATH,\"x\")\nelse:\n    print(\"fILE ALREADY EXISTS\")\n### end of Debug Message\n# SQLite connection (use row factory for dict-like access)",
+        "detail": "database.db",
+        "documentation": {}
+    },
+    {
+        "label": "DB_PATH",
+        "kind": 5,
+        "importPath": "database.db",
+        "description": "database.db",
+        "peekOfCode": "DB_PATH = APP_DIR / \"sqlite.db\"\n### Debug Message\nif os.path.exists(DB_PATH) ==False:\n    open(DB_PATH,\"x\")\nelse:\n    print(\"fILE ALREADY EXISTS\")\n### end of Debug Message\n# SQLite connection (use row factory for dict-like access)\ndef get_connection():\n    conn = sqlite3.connect(DB_PATH)",
+        "detail": "database.db",
+        "documentation": {}
+    },
+    {
+        "label": "create_account_cli",
+        "kind": 2,
+        "importPath": "modules.acc_managt.creat_acc",
+        "description": "modules.acc_managt.creat_acc",
+        "peekOfCode": "def create_account_cli(root: Path):\n    username = input(\"Enter username: \").strip()\n    if get_account(username):\n        print(\"User already exists\")\n        return\n    fullname = input(\"Full name: \").strip()\n    password = input(\"Password: \").strip()\n    ok = create_account(username, fullname, password)\n    if ok:\n        print(f\"Created account: {username}\")",
+        "detail": "modules.acc_managt.creat_acc",
+        "documentation": {}
+    },
+    {
+        "label": "delete_account_cli",
+        "kind": 2,
+        "importPath": "modules.acc_managt.delete_acc",
+        "description": "modules.acc_managt.delete_acc",
+        "peekOfCode": "def delete_account_cli(root: Path):\n    username = input(\"Enter username to delete: \").strip()\n    acc = get_account(username)\n    if not acc:\n        print(\"User not found\")\n        return\n    password = input(\"Enter your password to confirm deletion: \").strip()\n    if not verify_password(username, password):\n        print(\"Incorrect password\")\n        return",
+        "detail": "modules.acc_managt.delete_acc",
+        "documentation": {}
+    },
+    {
+        "label": "update_account_cli",
+        "kind": 2,
+        "importPath": "modules.acc_managt.update_acc",
+        "description": "modules.acc_managt.update_acc",
+        "peekOfCode": "def update_account_cli(root: Path):\n    username = input(\"Enter username to update: \").strip()\n    acc = get_account(username)\n    if not acc:\n        print(\"User not found\")\n        return\n    password = input(\"Enter your password to confirm: \").strip()\n    if not verify_password(username, password):\n        print(\"Incorrect password.\")\n        return",
+        "detail": "modules.acc_managt.update_acc",
+        "documentation": {}
+    },
+    {
+        "label": "modify_conf",
+        "kind": 2,
+        "importPath": "modules.configuration.modify_conf",
+        "description": "modules.configuration.modify_conf",
+        "peekOfCode": "def modify_conf(root: Path, changes: dict):\n    # Very small demonstration: append a line to snort.conf.template\n    tpl = root / \"templates\" / \"snort.conf.tpl\"\n    if not tpl.exists():\n        print(\"Template not found\")\n        return\n    with open(tpl, \"a\") as f:\n        for k, v in changes.items():\n            f.write(f\"# {k} -> {v}\\n\")\n    print(\"Modified template (demo)\")",
+        "detail": "modules.configuration.modify_conf",
+        "documentation": {}
+    },
+    {
+        "label": "create_default_rules",
+        "kind": 2,
+        "importPath": "modules.configuration.setup_rules",
+        "description": "modules.configuration.setup_rules",
+        "peekOfCode": "def create_default_rules(root: Path):\n    rules_dir = root / \"rules\"\n    rules_dir.mkdir(exist_ok=True)\n    local_rules = rules_dir / \"local.rules\"\n    if not local_rules.exists():\n        local_rules.write_text(\"\".join(DEFAULT_RULES))\n        print(f\"Created default local.rules at {local_rules}\")\n    else:\n        print(\"local.rules already exists\")\ndef interactive_add_rule(root: Path):",
+        "detail": "modules.configuration.setup_rules",
+        "documentation": {}
+    },
+    {
+        "label": "interactive_add_rule",
+        "kind": 2,
+        "importPath": "modules.configuration.setup_rules",
+        "description": "modules.configuration.setup_rules",
+        "peekOfCode": "def interactive_add_rule(root: Path):\n    rules_dir = root / \"rules\"\n    rules_dir.mkdir(exist_ok=True)\n    local_rules = rules_dir / \"local.rules\"\n    if not local_rules.exists():\n        local_rules.write_text(\"\".join(DEFAULT_RULES))\n        print(\"Add a simple alert rule (demo)\")\n        proto = input(\"Protocol (tcp/udp/icmp): \")\n        src = input(\"Source (e.g. any): \")\n        src_port = input(\"Source port (e.g. any): \")",
+        "detail": "modules.configuration.setup_rules",
+        "documentation": {}
+    },
+    {
+        "label": "list_local_rules",
+        "kind": 2,
+        "importPath": "modules.configuration.setup_rules",
+        "description": "modules.configuration.setup_rules",
+        "peekOfCode": "def list_local_rules(root: Path):\n    local_rules = root / \"rules\" / \"local.rules\"\n    if not local_rules.exists():\n        print(\"No local.rules found. Run `python main.py setup` to create defaults.\")\n        return\n    print(local_rules.read_text())",
+        "detail": "modules.configuration.setup_rules",
+        "documentation": {}
+    },
+    {
+        "label": "DEFAULT_RULES",
+        "kind": 5,
+        "importPath": "modules.configuration.setup_rules",
+        "description": "modules.configuration.setup_rules",
+        "peekOfCode": "DEFAULT_RULES = [\n    \"# Local rule format (demo)\\n\",\n    'alert icmp any any -> any any (msg:\"ICMP detected\"; sid:1000001; rev:1;)\\n',\n]\ndef create_default_rules(root: Path):\n    rules_dir = root / \"rules\"\n    rules_dir.mkdir(exist_ok=True)\n    local_rules = rules_dir / \"local.rules\"\n    if not local_rules.exists():\n        local_rules.write_text(\"\".join(DEFAULT_RULES))",
+        "detail": "modules.configuration.setup_rules",
+        "documentation": {}
+    },
+    {
+        "label": "validate_configuration",
+        "kind": 2,
+        "importPath": "modules.configuration.validate_conf",
+        "description": "modules.configuration.validate_conf",
+        "peekOfCode": "def validate_configuration(root: Path):\n    # Simple validation: check that rules file exists and is not empty\n    rules = root / \"rules\" / \"local.rules\"\n    if not rules.exists():\n        print(\"Validation failed: local.rules missing\")\n        return False\n    content = rules.read_text().strip()\n    if not content:\n        print(\"Validation failed: local.rules is empty\")\n        return False",
+        "detail": "modules.configuration.validate_conf",
+        "documentation": {}
+    },
+    {
+        "label": "check_snort",
+        "kind": 2,
+        "importPath": "modules.utilities.check_depend",
+        "description": "modules.utilities.check_depend",
+        "peekOfCode": "def check_snort():\n    path = shutil.which(\"snort\")\n    if path:\n        print(f\"Found snort at: {path}\")\n        return True\n    else:\n        print(\"snort executable not found in PATH. Some features may not work.\")\n        return False",
+        "detail": "modules.utilities.check_depend",
+        "documentation": {}
+    },
+    {
+        "label": "handle_error",
+        "kind": 2,
+        "importPath": "modules.utilities.error_hander",
+        "description": "modules.utilities.error_hander",
+        "peekOfCode": "def handle_error(e: Exception, context: str = \"\"):\n    print(f\"ERROR in {context}: {e}\")",
+        "detail": "modules.utilities.error_hander",
+        "documentation": {}
+    },
+    {
+        "label": "create_venv",
+        "kind": 2,
+        "importPath": "activate",
+        "description": "activate",
+        "peekOfCode": "def create_venv():\n    if not os.path.exists(VENV):\n        print(f\"[+] Creating environment... \")\n        subprocess.run([sys.executable, \"-m\", \"venv\", VENV], check=True)\n    else:\n        print(\"[+] Environment already exists.\")\ndef get_venv_python():\n    os_type = platform.system().lower()\n    if os_type == \"windows\":\n        return os.path.join(VENV, \"Scripts\", \"python.exe\")",
+        "detail": "activate",
+        "documentation": {}
+    },
+    {
+        "label": "get_venv_python",
+        "kind": 2,
+        "importPath": "activate",
+        "description": "activate",
+        "peekOfCode": "def get_venv_python():\n    os_type = platform.system().lower()\n    if os_type == \"windows\":\n        return os.path.join(VENV, \"Scripts\", \"python.exe\")\n    else:\n        return os.path.join(VENV, \"bin\", \"python\")\ndef install_requirements(venv_python):\n    if not os.path.exists(\"requirements.txt\"):\n        print(\"[!] No requirements.txt found. Skipping...\")\n        return",
+        "detail": "activate",
+        "documentation": {}
+    },
+    {
+        "label": "install_requirements",
+        "kind": 2,
+        "importPath": "activate",
+        "description": "activate",
+        "peekOfCode": "def install_requirements(venv_python):\n    if not os.path.exists(\"requirements.txt\"):\n        print(\"[!] No requirements.txt found. Skipping...\")\n        return\n    print(\"[+] Checking installed packages...\")\n    # Get installed packages inside venv\n    result = subprocess.run(\n        [venv_python, \"-m\", \"pip\", \"freeze\"],\n        capture_output=True,\n        text=True",
+        "detail": "activate",
+        "documentation": {}
+    },
+    {
+        "label": "run_app",
+        "kind": 2,
+        "importPath": "activate",
+        "description": "activate",
+        "peekOfCode": "def run_app(venv_python):\n    print(\"\\n[+] Launching SnortAMV...\\n\")\n    if not os.path.exists(\"main.py\"):\n        print(\"❌ ERROR: main.py not found!\")\n        return\n    subprocess.run([venv_python, \"main.py\"])\ndef show_manual_activation():\n    os_type = platform.system().lower()\n    print(\"\\n[!] If you want to activate environment manually:\")\n    if os_type == \"windows\":",
+        "detail": "activate",
+        "documentation": {}
+    },
+    {
+        "label": "show_manual_activation",
+        "kind": 2,
+        "importPath": "activate",
+        "description": "activate",
+        "peekOfCode": "def show_manual_activation():\n    os_type = platform.system().lower()\n    print(\"\\n[!] If you want to activate environment manually:\")\n    if os_type == \"windows\":\n        print(\"    env\\\\Scripts\\\\activate\")\n    else:\n        print(\"    source env/bin/activate\")\n    print()\nif __name__ == \"__main__\":\n    print(\"[=] Detecting OS and preparing environment...\\n\")",
+        "detail": "activate",
+        "documentation": {}
+    },
+    {
+        "label": "VENV",
+        "kind": 5,
+        "importPath": "activate",
+        "description": "activate",
+        "peekOfCode": "VENV = \"env\"\ndef create_venv():\n    if not os.path.exists(VENV):\n        print(f\"[+] Creating environment... \")\n        subprocess.run([sys.executable, \"-m\", \"venv\", VENV], check=True)\n    else:\n        print(\"[+] Environment already exists.\")\ndef get_venv_python():\n    os_type = platform.system().lower()\n    if os_type == \"windows\":",
+        "detail": "activate",
+        "documentation": {}
+    },
+    {
+        "label": "get_shell",
+        "kind": 2,
+        "importPath": "activenv",
+        "description": "activenv",
+        "peekOfCode": "def get_shell():\n    \"\"\"Detect current shell.\"\"\"\n    if os.name == \"nt\":  # Windows\n        parent = os.environ.get(\"COMSPEC\", \"\")\n        if \"powershell.exe\" in parent.lower():\n            return \"powershell\"\n        if \"cmd.exe\" in parent.lower():\n            return \"cmd\"\n        return \"cmd\"\n    # Linux / macOS",
+        "detail": "activenv",
+        "documentation": {}
+    },
+    {
+        "label": "get_venv_paths",
+        "kind": 2,
+        "importPath": "activenv",
+        "description": "activenv",
+        "peekOfCode": "def get_venv_paths():\n    \"\"\"Return activation script paths for all OS/shell types.\"\"\"\n    return {\n        \"windows\": {\n            \"powershell\": os.path.join(VENV, \"Scripts\", \"Activate.ps1\"),\n            \"cmd\": os.path.join(VENV, \"Scripts\", \"activate.bat\"),\n            \"python\": os.path.join(VENV, \"Scripts\", \"python.exe\")\n        },\n        \"unix\": {\n            \"bash\": os.path.join(VENV, \"bin\", \"activate\"),",
+        "detail": "activenv",
+        "documentation": {}
+    },
+    {
+        "label": "activate_and_run",
+        "kind": 2,
+        "importPath": "activenv",
+        "description": "activenv",
+        "peekOfCode": "def activate_and_run():\n    os_type = platform.system().lower()\n    shell = get_shell()\n    paths = get_venv_paths()\n    print(f\"Detected OS: {os_type}\")\n    print(f\"Detected shell: {shell}\")\n    # 1. WINDOWS\n    if os_type == \"windows\":\n        p = paths[\"windows\"][\"python\"]\n        if os.path.exists(p):",
+        "detail": "activenv",
+        "documentation": {}
+    },
+    {
+        "label": "VENV",
+        "kind": 5,
+        "importPath": "activenv",
+        "description": "activenv",
+        "peekOfCode": "VENV = \"env\"   # Change if your venv folder has a different name\ndef get_shell():\n    \"\"\"Detect current shell.\"\"\"\n    if os.name == \"nt\":  # Windows\n        parent = os.environ.get(\"COMSPEC\", \"\")\n        if \"powershell.exe\" in parent.lower():\n            return \"powershell\"\n        if \"cmd.exe\" in parent.lower():\n            return \"cmd\"\n        return \"cmd\"",
+        "detail": "activenv",
+        "documentation": {}
+    },
+    {
+        "label": "Time",
+        "kind": 2,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "def Time():\n    hour = int(time.strftime(\"%H\"))\n    if 12 <= hour < 17:\n        print(\"Good Afternoon\")\n    elif 1 <= hour < 12:\n        print(\"Good Morning\")\n    elif 17 <= hour < 21:\n        print(\"Good Evening\")\n    else:\n        print(\"Good Night\")",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "Greating",
+        "kind": 2,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "def Greating():\n    text = pyfiglet.figlet_format(\"SNORT { AMV }\")\n    for line in text.split(\"\\n\"):\n        console.print(line, style=\"bold white\")\n        time.sleep(0.05)\n    width = shutil.get_terminal_size().columns\n    great = f\"WE Welcome You To SNORT AUTOMATED VERSION\".rjust(width, \" \")\n    for t in great:\n        console.print(t, end=\" \", style=\"blue\")\n        time.sleep(0.01)",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "check_snort",
+        "kind": 2,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "def check_snort():\n    snort_path = shutil.which(\"snort\") or shutil.which(\"snort3\")\n    if snort_path:\n        print(f\"[✓] Snort found at {snort_path}\")\n        return True\n    print(\"[!] Snort not found. Please run post_installer.py first.\")\n    return False\ndef help():\n    print(\n        \"\"\"\\n",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "help",
+        "kind": 2,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "def help():\n    print(\n        \"\"\"\\n\nSnortAMV - Automated Snort Manager\nUsage:\n    python main.py                    Show this help\n    python main.py --version           Show version\n    python main.py setup               Run initial setup\n    python main.py rules add           Create a local rule interactively\n    python main.py rules list          List local.rules",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "def main():\n    Time()\n    Greating()\n    if \"--version\" in sys.argv:\n        print(\"snortAMV v1.0.0\")\n        return\n    if len(sys.argv) < 2:\n        help()\n        return\n    cmd = sys.argv[1]",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "ROOT",
+        "kind": 5,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "ROOT = Path(__file__).parent.resolve()\nif str(ROOT) not in sys.path:\n    sys.path.insert(0, str(ROOT))\nfrom modules.configuration.setup_rules import create_default_rules\nfrom modules.configuration.validate_conf import validate_configuration\nfrom modules.acc_managt.creat_acc import create_account_cli\nfrom modules.acc_managt.delete_acc import delete_account_cli\nfrom modules.acc_managt.update_acc import update_account_cli\nfrom activate import get_venv_python\nconsole = Console()",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "console",
+        "kind": 5,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "console = Console()\ndef Time():\n    hour = int(time.strftime(\"%H\"))\n    if 12 <= hour < 17:\n        print(\"Good Afternoon\")\n    elif 1 <= hour < 12:\n        print(\"Good Morning\")\n    elif 17 <= hour < 21:\n        print(\"Good Evening\")\n    else:",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "snort_installed",
+        "kind": 2,
+        "importPath": "post_installer",
+        "description": "post_installer",
+        "peekOfCode": "def snort_installed():\n    return shutil.which(\"snort\") is not None or shutil.which(\"snort3\") is not None\n# ---------------------------------------\n#   INSTALL SNORT 3 BY OS\n# ---------------------------------------\ndef install_snort():\n    os_type = platform.system().lower()\n    print(\"\\n[=] Checking if Snort is installed...\")\n    if snort_installed():\n        print(\"[✓] Snort already installed. Skipping installation.\\n\")",
+        "detail": "post_installer",
+        "documentation": {}
+    },
+    {
+        "label": "install_snort",
+        "kind": 2,
+        "importPath": "post_installer",
+        "description": "post_installer",
+        "peekOfCode": "def install_snort():\n    os_type = platform.system().lower()\n    print(\"\\n[=] Checking if Snort is installed...\")\n    if snort_installed():\n        print(\"[✓] Snort already installed. Skipping installation.\\n\")\n        return\n    print(\"[+] Snort not found. Installing Snort 3...\\n\")\n    # -------------------------------\n    # WINDOWS\n    # -------------------------------",
+        "detail": "post_installer",
+        "documentation": {}
+    },
+    {
+        "label": "create_venv",
+        "kind": 2,
+        "importPath": "post_installer",
+        "description": "post_installer",
+        "peekOfCode": "def create_venv():\n    if not os.path.exists(VENV):\n        print(\"[+] Creating virtual environment...\")\n        subprocess.run([sys.executable, \"-m\", \"venv\", VENV], check=True)\n    else:\n        print(\"[✓] Virtual environment already exists.\")\n# ---------------------------------------\n#   GET PYTHON INSIDE VENV\n# ---------------------------------------\ndef get_venv_python():",
+        "detail": "post_installer",
+        "documentation": {}
+    },
+    {
+        "label": "get_venv_python",
+        "kind": 2,
+        "importPath": "post_installer",
+        "description": "post_installer",
+        "peekOfCode": "def get_venv_python():\n    os_type = platform.system().lower()\n    if os_type == \"windows\":\n        return os.path.join(VENV, \"Scripts\", \"python.exe\")\n    elif os_type == \"linux\" or os_type == \"darwin\":\n        return os.path.join(VENV, \"bin\", \"python\")\n# ---------------------------------------\n#   INSTALL REQUIREMENTS INSIDE VENV\n# ---------------------------------------\ndef install_requirements(venv_python):",
+        "detail": "post_installer",
+        "documentation": {}
+    },
+    {
+        "label": "install_requirements",
+        "kind": 2,
+        "importPath": "post_installer",
+        "description": "post_installer",
+        "peekOfCode": "def install_requirements(venv_python):\n    if not os.path.exists(\"requirements.txt\"):\n        print(\"[!] requirements.txt not found. Skipping.\")\n        return\n    print(\"[+] Checking installed packages inside venv...\")\n    result = subprocess.run(\n        [venv_python, \"-m\", \"pip\", \"freeze\"], capture_output=True, text=True\n    )\n    installed = {\n        line.split(\"==\")[0].lower(): line.split(\"==\")[1]",
+        "detail": "post_installer",
+        "documentation": {}
+    },
+    {
+        "label": "actvenv",
+        "kind": 2,
+        "importPath": "post_installer",
+        "description": "post_installer",
+        "peekOfCode": "def actvenv(venv_python):\n    if not os.path.exists(\"activenv.py\"):\n        print(\n            \"Please go to the README.MD the see \\n how to activate the Virtual environment\"\n        )\n        return\n    print(\"[+] Activating virtual Environment\")\n    subprocess.run([venv_python, \"activenv.py\"])\n# ---------------------------------------\n#   RUN APPLICATION INSIDE VENV",
+        "detail": "post_installer",
+        "documentation": {}
+    },
+    {
+        "label": "run_app",
+        "kind": 2,
+        "importPath": "post_installer",
+        "description": "post_installer",
+        "peekOfCode": "def run_app(venv_python):\n    if not os.path.exists(\"main.py\"):\n        print(\"❌ ERROR: main.py not found.\")\n        return\n    print(\"[+] Launching SnortAMV inside activated venv...\\n\")\n    subprocess.run([venv_python, \"main.py\"])\n# ---------------------------------------\n#               MAIN\n# ---------------------------------------\nif __name__ == \"__main__\":",
+        "detail": "post_installer",
+        "documentation": {}
+    },
+    {
+        "label": "VENV",
+        "kind": 5,
+        "importPath": "post_installer",
+        "description": "post_installer",
+        "peekOfCode": "VENV = \"env\"\n# ---------------------------------------\n#   CHECK if Snort is installed\n# ---------------------------------------\ndef snort_installed():\n    return shutil.which(\"snort\") is not None or shutil.which(\"snort3\") is not None\n# ---------------------------------------\n#   INSTALL SNORT 3 BY OS\n# ---------------------------------------\ndef install_snort():",
+        "detail": "post_installer",
+        "documentation": {}
+    },
+    {
+        "label": "PostInstallCommand",
+        "kind": 6,
+        "importPath": "setup",
+        "description": "setup",
+        "peekOfCode": "class PostInstallCommand(install):\n    \"\"\"Run post_installer.py automatically after pip install.\"\"\"\n    def run(self):\n        install.run(self)\n        subprocess.run([sys.executable, \"post_installer.py\"])\nsetup(\n    name=\"snortamv\",\n    version=\"1.0.0\",\n    packages=find_packages(),\n    include_package_data=True,",
+        "detail": "setup",
+        "documentation": {}
+    }
+]
