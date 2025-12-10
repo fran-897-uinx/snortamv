@@ -772,6 +772,15 @@
         "documentation": {}
     },
     {
+        "label": "test_app_runs",
+        "kind": 2,
+        "importPath": "tests.test_app_runs",
+        "description": "tests.test_app_runs",
+        "peekOfCode": "def test_app_runs():\n    assert True",
+        "detail": "tests.test_app_runs",
+        "documentation": {}
+    },
+    {
         "label": "create_venv",
         "kind": 2,
         "importPath": "activate",
