@@ -884,7 +884,7 @@
         "kind": 2,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "def Greating():\n    text = pyfiglet.figlet_format(\"SNORT { AMV }\")\n    for line in text.split(\"\\n\"):\n        console.print(line, style=\"bold white\")\n        time.sleep(0.05)\n    width = shutil.get_terminal_size().columns\n    great = f\"WE Welcome You To SNORT AUTOMATED VERSION\".rjust(width, \" \")\n    for t in great:\n        console.print(t, end=\" \", style=\"blue\")\n        time.sleep(0.01)",
+        "peekOfCode": "def Greating():\n    text = pyfiglet.figlet_format(\"SNORT { AMV }\")\n    for line in text.split(\"\\n\"):\n        console.print(line, style=\"bold white\")\n        time.sleep(0.05)\n    width = shutil.get_terminal_size().columns\n    great = f\"WE Welcome You To SNORT AUTOMATED VERSION\".ljust(width, \" \")\n    for t in great:\n        console.print(t, end=\" \", style=\"blue\")\n        time.sleep(0.01)",
         "detail": "main",
         "documentation": {}
     },
@@ -893,7 +893,7 @@
         "kind": 2,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "def check_snort():\n    snort_path = shutil.which(\"snort\") or shutil.which(\"snort3\")\n    if snort_path:\n        print(f\"[✓] Snort found at {snort_path}\")\n        return True\n    print(\"[!] Snort not found. Please run post_installer.py first.\")\n    return False\ndef help():\n    print(\n        \"\"\"\\n",
+        "peekOfCode": "def check_snort():\n    snort_path = shutil.which(\"snort\") or shutil.which(\"snort3\")\n    if snort_path:\n        print(f\"[✓] Snort found at {snort_path}\")\n        return True\n    print(\"[!] Snort not found. Please run post_installer.py first.\")\n    return False\ndef help():\n    match os_type.lower():\n        case \"windows\":",
         "detail": "main",
         "documentation": {}
     },
@@ -902,7 +902,7 @@
         "kind": 2,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "def help():\n    print(\n        \"\"\"\\n\nSnortAMV - Automated Snort Manager\nUsage:\n    python main.py                    Show this help\n    python main.py --version           Show version\n    python main.py setup               Run initial setup\n    python main.py rules add           Create a local rule interactively\n    python main.py rules list          List local.rules",
+        "peekOfCode": "def help():\n    match os_type.lower():\n        case \"windows\":\n            print(\n                \"\"\"\\n\n        SnortAMV - Automated Snort Manager\n        Usage:\n            python main.py                    Show this help\n            python main.py --version           Show version\n            python main.py setup               Run initial setup",
         "detail": "main",
         "documentation": {}
     },
@@ -911,7 +911,7 @@
         "kind": 2,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "def main():\n    Time()\n    Greating()\n    if \"--version\" in sys.argv:\n        print(\"snortAMV v1.0.0\")\n        return\n    if len(sys.argv) < 2:\n        help()\n        return\n    cmd = sys.argv[1]",
+        "peekOfCode": "def main():\n    Time()\n    if \"--version\" in sys.argv:\n        print(\"snortAMV v1.0.0\")\n        return\n    if len(sys.argv) < 2:\n        Greating()\n        help()\n        return\n    cmd = sys.argv[1]",
         "detail": "main",
         "documentation": {}
     },
@@ -929,7 +929,16 @@
         "kind": 5,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "console = Console()\ndef Time():\n    hour = int(time.strftime(\"%H\"))\n    if 12 <= hour < 17:\n        print(\"Good Afternoon\")\n    elif 1 <= hour < 12:\n        print(\"Good Morning\")\n    elif 17 <= hour < 21:\n        print(\"Good Evening\")\n    else:",
+        "peekOfCode": "console = Console()\nos_type = platform.system().lower()\ndef Time():\n    hour = int(time.strftime(\"%H\"))\n    if 12 <= hour < 17:\n        print(\"Good Afternoon\")\n    elif 1 <= hour < 12:\n        print(\"Good Morning\")\n    elif 17 <= hour < 21:\n        print(\"Good Evening\")",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "os_type",
+        "kind": 5,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "os_type = platform.system().lower()\ndef Time():\n    hour = int(time.strftime(\"%H\"))\n    if 12 <= hour < 17:\n        print(\"Good Afternoon\")\n    elif 1 <= hour < 12:\n        print(\"Good Morning\")\n    elif 17 <= hour < 21:\n        print(\"Good Evening\")\n    else:",
         "detail": "main",
         "documentation": {}
     },
