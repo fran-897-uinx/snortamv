@@ -9,6 +9,8 @@ import pyfiglet
 import shutil
 from pathlib import Path
 from rich.console import Console
+import platform
+import subprocess
 
 ROOT = Path(__file__).parent.resolve()
 if str(ROOT) not in sys.path:
@@ -24,6 +26,7 @@ from modules.acc_managt.update_acc import update_account_cli
 from activate import get_venv_python
 
 console = Console()
+os_type = platform.system().lower()
 
 
 def Time():
@@ -44,7 +47,7 @@ def Greating():
         console.print(line, style="bold white")
         time.sleep(0.05)
     width = shutil.get_terminal_size().columns
-    great = f"WE Welcome You To SNORT AUTOMATED VERSION".rjust(width, " ")
+    great = f"WE Welcome You To SNORT AUTOMATED VERSION".ljust(width, " ")
     for t in great:
         console.print(t, end=" ", style="blue")
         time.sleep(0.01)
@@ -61,32 +64,52 @@ def check_snort():
 
 
 def help():
-    print(
-        """\n
-SnortAMV - Automated Snort Manager
-Usage:
-    python main.py                    Show this help
-    python main.py --version           Show version
-    python main.py setup               Run initial setup
-    python main.py rules add           Create a local rule interactively
-    python main.py rules list          List local.rules
-    python main.py config validate     Validate the configuration
-    python main.py acc create          Create a project user
-    python main.py acc delete          Delete a project user
-    python main.py acc update          Update a project user
-"""
-    )
+    match os_type.lower():
+        case "windows":
+            print(
+                """\n
+        SnortAMV - Automated Snort Manager
+        Usage:
+            python main.py                    Show this help
+            python main.py --version           Show version
+            python main.py setup               Run initial setup
+            python main.py rules add           Create a local rule interactively
+            python main.py rules list          List local.rules
+            python main.py config validate     Validate the configuration
+            python main.py acc create          Create a project user
+            python main.py acc delete          Delete a project user
+            python main.py acc update          Update a project user
+            python main.py run                 Runs the snort 
+        """
+            )
+        case "linux":
+            print(
+                """\n
+        SnortAMV - Automated Snort Manager
+        Usage:
+            python3 main.py                    Show this help
+            python3 main.py --version           Show version
+            python3 main.py setup               Run initial setup
+            python3 main.py rules add           Create a local rule interactively
+            python3 main.py rules list          List local.rules
+            python3 main.py config validate     Validate the configuration
+            python3 main.py acc create          Create a project user
+            python3 main.py acc delete          Delete a project user
+            python3 main.py acc update          Update a project user
+            python3 main.py run                 Runs the snort 
+        """
+            )
 
 
 def main():
     Time()
-    Greating()
 
     if "--version" in sys.argv:
         print("snortAMV v1.0.0")
         return
 
     if len(sys.argv) < 2:
+        Greating()
         help()
         return
 
@@ -98,6 +121,24 @@ def main():
             return
         create_default_rules(ROOT)
         print("Setup complete.")
+    elif cmd == "run":
+        os_type = platform.system().lower()
+
+        if os_type == "windows":
+            console.print(
+                "Operating system has been detected as Windows", style="green"
+            )
+        subprocess.run(
+            ["powershell", "-ExecutionPolicy", "Bypass", "-File", "snort.ps1"],
+            check=True,
+        )
+
+        if os_type == "linux":
+            console.print("Operating system has been detected as Linux", style="green")
+            subprocess.run(["bash", "snort_auto.bash"], check=True)
+
+        else:
+            console.print(f"Unsupported operating system: {os_type}", style="red")
 
     elif cmd == "rules":
         if len(sys.argv) < 3:
