@@ -1,0 +1,63 @@
+# ================= Python =================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+
+# ============== Virtual Envs ==============
+.venv
+env/
+venv/
+
+# ============== Build Artifacts ===========
+build/
+dist/
+*.whl
+*.tar.gz
+*.egg-info/
+.eggs/
+
+# ============== IDE & Editors =============
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# ============== Runtime Logs ==============
+log/
+snort.log.*
+
+# ============== Security ==================
+.env
+.env.local
+*.key
+*.pem
+accounts.json
+
+# TLS secrets (keep structure, ignore content)
+lock/*
+!lock/.keep
+!lock/ssl.log.txt
+
+# ============== Temp Files ================
+*.tmp
+*.bak
+*.backup
+.temp/
+
+# ============== Snort =====================
+snort.conf.bak
+snort.conf.backup
+rules/*.backup
+
+# ============== Requirements ==============
+!requirements.txt
+!requirements-windows.txt
+!requirements-linux.txt

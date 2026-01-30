@@ -1,5 +1,10 @@
+README.md
+activate.py
+activenv.py
+main.py
 pyproject.toml
 setup.py
+version.py
 database/__init__.py
 database/db.py
 modules/__init__.py
@@ -20,3 +25,4 @@ snortamv.egg-info/dependency_links.txt
 snortamv.egg-info/entry_points.txt
 snortamv.egg-info/requires.txt
 snortamv.egg-info/top_level.txt
+tests/test_app_runs.py

@@ -189,6 +189,15 @@
         "documentation": {}
     },
     {
+        "label": "platform",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "platform",
+        "description": "platform",
+        "detail": "platform",
+        "documentation": {}
+    },
+    {
         "label": "database.db",
         "kind": 6,
         "isExtraImport": true,
@@ -262,12 +271,28 @@
         "documentation": {}
     },
     {
-        "label": "platform",
+        "label": "rich",
         "kind": 6,
         "isExtraImport": true,
-        "importPath": "platform",
-        "description": "platform",
-        "detail": "platform",
+        "importPath": "rich",
+        "description": "rich",
+        "detail": "rich",
+        "documentation": {}
+    },
+    {
+        "label": "Console",
+        "importPath": "rich.console",
+        "description": "rich.console",
+        "isExtraImport": true,
+        "detail": "rich.console",
+        "documentation": {}
+    },
+    {
+        "label": "Console",
+        "importPath": "rich.console",
+        "description": "rich.console",
+        "isExtraImport": true,
+        "detail": "rich.console",
         "documentation": {}
     },
     {
@@ -304,14 +329,6 @@
         "importPath": "pyfiglet",
         "description": "pyfiglet",
         "detail": "pyfiglet",
-        "documentation": {}
-    },
-    {
-        "label": "Console",
-        "importPath": "rich.console",
-        "description": "rich.console",
-        "isExtraImport": true,
-        "detail": "rich.console",
         "documentation": {}
     },
     {
@@ -372,14 +389,6 @@
         "documentation": {}
     },
     {
-        "label": "actvenv",
-        "importPath": "post_installer",
-        "description": "post_installer",
-        "isExtraImport": true,
-        "detail": "post_installer",
-        "documentation": {}
-    },
-    {
         "label": "setup",
         "importPath": "setuptools",
         "description": "setuptools",
@@ -401,6 +410,14 @@
         "description": "setuptools.command.install",
         "isExtraImport": true,
         "detail": "setuptools.command.install",
+        "documentation": {}
+    },
+    {
+        "label": "exists",
+        "importPath": "os.path",
+        "description": "os.path",
+        "isExtraImport": true,
+        "detail": "os.path",
         "documentation": {}
     },
     {
@@ -551,7 +568,7 @@
         "kind": 2,
         "importPath": "database.db",
         "description": "database.db",
-        "peekOfCode": "def get_connection():\n    conn = sqlite3.connect(DB_PATH)\n    conn.row_factory = sqlite3.Row\n    return conn\n# Simple password hashing\ndef hash_password(plaintext: str) -> str:\n    return hashlib.sha256(plaintext.encode(\"utf-8\")).hexdigest()\n# Initialize database and tables\ndef init_db():\n    conn = get_connection()",
+        "peekOfCode": "def get_connection():\n    if OS_TYPE == \"windows\":\n        conn = sqlite3.connect(DB_PATH)\n        conn.row_factory = sqlite3.Row\n        return conn\n    if OS_TYPE == \"linux\":\n        conn = sqlite3.connect(LINUX_DB)\n        conn.row_factory = sqlite3.Row\n        return conn\n# Simple password hashing",
         "detail": "database.db",
         "documentation": {}
     },
@@ -569,7 +586,7 @@
         "kind": 2,
         "importPath": "database.db",
         "description": "database.db",
-        "peekOfCode": "def init_db():\n    conn = get_connection()\n    cur = conn.cursor()\n    cur.execute(\n        \"\"\"\n        CREATE TABLE IF NOT EXISTS accounts (\n            id INTEGER PRIMARY KEY AUTOINCREMENT,\n            username TEXT UNIQUE NOT NULL,\n            fullname TEXT,\n            password_hash TEXT NOT NULL,",
+        "peekOfCode": "def init_db():\n    conn = get_connection()\n    cur = conn.cursor()\n    cur.execute(\n        \"\"\"\n        CREATE TABLE IF NOT EXISTS accounts (\n            id INTEGER PRIMARY KEY AUTOINCREMENT,\n            username TEXT UNIQUE NOT NULL,\n            firstname TEXT,\n            fullname TEXT,",
         "detail": "database.db",
         "documentation": {}
     },
@@ -578,7 +595,7 @@
         "kind": 2,
         "importPath": "database.db",
         "description": "database.db",
-        "peekOfCode": "def create_account(username: str, fullname: str, password: str) -> bool:\n    conn = get_connection()\n    cur = conn.cursor()\n    try:\n        cur.execute(\n            \"INSERT INTO accounts (username, fullname, password_hash) VALUES (?, ?, ?)\",\n            (username, fullname, hash_password(password)),\n        )\n        conn.commit()\n        return True",
+        "peekOfCode": "def create_account(username: str, firstname: str, fullname: str, password: str) -> bool:\n    conn = get_connection()\n    cur = conn.cursor()\n    try:\n        cur.execute(\n            \"INSERT INTO accounts (username, firstname, fullname, password_hash) VALUES (?, ?, ?, ?)\",\n            (username, firstname, fullname, password_hash(password)),\n        )\n        conn.commit()\n        return True",
         "detail": "database.db",
         "documentation": {}
     },
@@ -587,7 +604,7 @@
         "kind": 2,
         "importPath": "database.db",
         "description": "database.db",
-        "peekOfCode": "def get_account(username: str) -> Optional[Dict[str, Any]]:\n    conn = get_connection()\n    cur = conn.cursor()\n    cur.execute(\"SELECT id, username, fullname, created_at FROM accounts WHERE username = ?\", (username,))\n    row = cur.fetchone()\n    conn.close()\n    return dict(row) if row else None\ndef verify_password(username: str, password: str) -> bool:\n    conn = get_connection()\n    cur = conn.cursor()",
+        "peekOfCode": "def get_account(username: str) -> Optional[Dict[str, Any]]:\n    conn = get_connection()\n    cur = conn.cursor()\n    cur.execute(\n        \"SELECT id, username,firstname, fullname, created_at FROM accounts WHERE username = ?\",\n        (username,),\n    )\n    row = cur.fetchone()\n    conn.close()\n    return dict(row) if row else None",
         "detail": "database.db",
         "documentation": {}
     },
@@ -596,7 +613,7 @@
         "kind": 2,
         "importPath": "database.db",
         "description": "database.db",
-        "peekOfCode": "def verify_password(username: str, password: str) -> bool:\n    conn = get_connection()\n    cur = conn.cursor()\n    cur.execute(\"SELECT password_hash FROM accounts WHERE username = ?\", (username,))\n    row = cur.fetchone()\n    conn.close()\n    if not row:\n        return False\n    return row[\"password_hash\"] == hash_password(password)\ndef update_account(username: str, new_fullname: Optional[str] = None, new_password: Optional[str] = None) -> bool:",
+        "peekOfCode": "def verify_password(username: str, password: str) -> bool:\n    conn = get_connection()\n    cur = conn.cursor()\n    cur.execute(\"SELECT password_hash FROM accounts WHERE username = ?\", (username,))\n    row = cur.fetchone()\n    conn.close()\n    if not row:\n        return False\n    return row[\"password_hash\"] == hash_password(password)\ndef update_account(",
         "detail": "database.db",
         "documentation": {}
     },
@@ -605,7 +622,7 @@
         "kind": 2,
         "importPath": "database.db",
         "description": "database.db",
-        "peekOfCode": "def update_account(username: str, new_fullname: Optional[str] = None, new_password: Optional[str] = None) -> bool:\n    conn = get_connection()\n    cur = conn.cursor()\n    # ensure user exists\n    cur.execute(\"SELECT id FROM accounts WHERE username = ?\", (username,))\n    if not cur.fetchone():\n        conn.close()\n        return False\n    if new_fullname and new_password:\n        cur.execute(",
+        "peekOfCode": "def update_account(\n    username: str,\n    new_fullname: Optional[str] = None,\n    new_password: Optional[str] = None,\n) -> bool:\n    conn = get_connection()\n    cur = conn.cursor()\n    # ensure user exists\n    cur.execute(\"SELECT id FROM accounts WHERE username = ?\", (username,))\n    if not cur.fetchone():",
         "detail": "database.db",
         "documentation": {}
     },
@@ -623,7 +640,7 @@
         "kind": 2,
         "importPath": "database.db",
         "description": "database.db",
-        "peekOfCode": "def list_accounts() -> list:\n    conn = get_connection()\n    cur = conn.cursor()\n    cur.execute(\"SELECT id, username, fullname, created_at FROM accounts ORDER BY id\")\n    rows = cur.fetchall()\n    conn.close()\n    return [dict(r) for r in rows]\n# Migrate from legacy accounts.json (if exists in project root)\ndef migrate_from_json(project_root: Path) -> int:\n    json_path = project_root / \"accounts.json\"",
+        "peekOfCode": "def list_accounts() -> list:\n    conn = get_connection()\n    cur = conn.cursor()\n    cur.execute(\n        \"SELECT id, username,firstname, fullname, created_at FROM accounts ORDER BY id\"\n    )\n    rows = cur.fetchall()\n    conn.close()\n    return [dict(r) for r in rows]\n# Migrate from legacy accounts.json (if exists in project root)",
         "detail": "database.db",
         "documentation": {}
     },
@@ -632,43 +649,16 @@
         "kind": 2,
         "importPath": "database.db",
         "description": "database.db",
-        "peekOfCode": "def migrate_from_json(project_root: Path) -> int:\n    json_path = project_root / \"accounts.json\"\n    if not json_path.exists():\n        return 0\n    import json\n    count = 0\n    with json_path.open() as f:\n        data = json.load(f)\n    for username, info in data.items():\n        fullname = info.get(\"Fullname\") or info.get(\"fullname\") or \"\"",
+        "peekOfCode": "def migrate_from_json(project_root: Path) -> int:\n    json_path = project_root / \"accounts.json\"\n    if not json_path.exists():\n        return 0\n    import json\n    count = 0\n    with json_path.open() as f:\n        data = json.load(f)\n    for username, info in data.items():\n        firstname = info.get(\"Firstname\") or info.get(\"firstname\") or \"\"",
         "detail": "database.db",
         "documentation": {}
     },
     {
-        "label": "USERDIR",
+        "label": "OS_TYPE",
         "kind": 5,
         "importPath": "database.db",
         "description": "database.db",
-        "peekOfCode": "USERDIR = os.getlogin()\nLOCAL_APPDATA = f\"C:\\\\Users\\\\{USERDIR}\\\\Desktop\"\nAPP_DIR = Path(LOCAL_APPDATA) / \"SnortAMV\"\nAPP_DIR.mkdir(parents=True, exist_ok=True)\nDB_PATH = APP_DIR / \"sqlite.db\"\n### Debug Message\nif os.path.exists(DB_PATH) ==False:\n    open(DB_PATH,\"x\")\nelse:\n    print(\"fILE ALREADY EXISTS\")",
-        "detail": "database.db",
-        "documentation": {}
-    },
-    {
-        "label": "LOCAL_APPDATA",
-        "kind": 5,
-        "importPath": "database.db",
-        "description": "database.db",
-        "peekOfCode": "LOCAL_APPDATA = f\"C:\\\\Users\\\\{USERDIR}\\\\Desktop\"\nAPP_DIR = Path(LOCAL_APPDATA) / \"SnortAMV\"\nAPP_DIR.mkdir(parents=True, exist_ok=True)\nDB_PATH = APP_DIR / \"sqlite.db\"\n### Debug Message\nif os.path.exists(DB_PATH) ==False:\n    open(DB_PATH,\"x\")\nelse:\n    print(\"fILE ALREADY EXISTS\")\n### end of Debug Message",
-        "detail": "database.db",
-        "documentation": {}
-    },
-    {
-        "label": "APP_DIR",
-        "kind": 5,
-        "importPath": "database.db",
-        "description": "database.db",
-        "peekOfCode": "APP_DIR = Path(LOCAL_APPDATA) / \"SnortAMV\"\nAPP_DIR.mkdir(parents=True, exist_ok=True)\nDB_PATH = APP_DIR / \"sqlite.db\"\n### Debug Message\nif os.path.exists(DB_PATH) ==False:\n    open(DB_PATH,\"x\")\nelse:\n    print(\"fILE ALREADY EXISTS\")\n### end of Debug Message\n# SQLite connection (use row factory for dict-like access)",
-        "detail": "database.db",
-        "documentation": {}
-    },
-    {
-        "label": "DB_PATH",
-        "kind": 5,
-        "importPath": "database.db",
-        "description": "database.db",
-        "peekOfCode": "DB_PATH = APP_DIR / \"sqlite.db\"\n### Debug Message\nif os.path.exists(DB_PATH) ==False:\n    open(DB_PATH,\"x\")\nelse:\n    print(\"fILE ALREADY EXISTS\")\n### end of Debug Message\n# SQLite connection (use row factory for dict-like access)\ndef get_connection():\n    conn = sqlite3.connect(DB_PATH)",
+        "peekOfCode": "OS_TYPE = platform.system().lower()\n# Windows AppData path\nif OS_TYPE == \"windows\":\n    USERDIR = os.getlogin()\n    LOCAL_APPDATA = f\"C:\\\\Users\\\\{USERDIR}\\\\Desktop\"\n    APP_DIR = Path(LOCAL_APPDATA) / \"SnortAMV\"\n    APP_DIR.mkdir(parents=True, exist_ok=True)\n    DB_PATH = APP_DIR / \"sqlite.db\"\nif OS_TYPE == \"linux\":\n    LINUX_DIR = os.getcwd()",
         "detail": "database.db",
         "documentation": {}
     },
@@ -677,7 +667,7 @@
         "kind": 2,
         "importPath": "modules.acc_managt.creat_acc",
         "description": "modules.acc_managt.creat_acc",
-        "peekOfCode": "def create_account_cli(root: Path):\n    username = input(\"Enter username: \").strip()\n    if get_account(username):\n        print(\"User already exists\")\n        return\n    fullname = input(\"Full name: \").strip()\n    password = input(\"Password: \").strip()\n    ok = create_account(username, fullname, password)\n    if ok:\n        print(f\"Created account: {username}\")",
+        "peekOfCode": "def create_account_cli(root: Path):\n    username = input(\"Enter username: \").strip()\n    if get_account(username):\n        print(\"User already exists\")\n        return\n    firstname = input(\"First name: \").strip()\n    fullname = input(\"Full name: \").strip()\n    password = input(\"Password: \").strip()\n    ok = create_account(username, firstname, fullname, password)\n    if ok:",
         "detail": "modules.acc_managt.creat_acc",
         "documentation": {}
     },
@@ -722,7 +712,7 @@
         "kind": 2,
         "importPath": "modules.configuration.setup_rules",
         "description": "modules.configuration.setup_rules",
-        "peekOfCode": "def interactive_add_rule(root: Path):\n    rules_dir = root / \"rules\"\n    rules_dir.mkdir(exist_ok=True)\n    local_rules = rules_dir / \"local.rules\"\n    if not local_rules.exists():\n        local_rules.write_text(\"\".join(DEFAULT_RULES))\n        print(\"Add a simple alert rule (demo)\")\n        proto = input(\"Protocol (tcp/udp/icmp): \")\n        src = input(\"Source (e.g. any): \")\n        src_port = input(\"Source port (e.g. any): \")",
+        "peekOfCode": "def interactive_add_rule(root: Path):\n    rules_dir = root / \"rules\"\n    rules_dir.mkdir(exist_ok=True)\n    local_rules = rules_dir / \"local.rules\"\n    if not local_rules.exists():\n        local_rules.write_text(\"\".join(DEFAULT_RULES))\n        print(\"Add a simple alert rule (demo)\")\n        proto = input(\"Protocol (tcp/udp/icmp): \")\n        src = input(\"Source (e.g.192.168.0.2/any): \")\n        src_port = input(\"Source port (e.g.192.168.0.2/any): \")",
         "detail": "modules.configuration.setup_rules",
         "documentation": {}
     },
@@ -736,11 +726,20 @@
         "documentation": {}
     },
     {
+        "label": "console",
+        "kind": 5,
+        "importPath": "modules.configuration.setup_rules",
+        "description": "modules.configuration.setup_rules",
+        "peekOfCode": "console = Console()\nDEFAULT_RULES = [\n    'alert icmp any any -> any any (msg:\"ICMP detected\"; sid:1000001; rev:1;)\\n',\n]\ndef create_default_rules(root: Path):\n    rules_dir = root / \"rules\"\n    rules_dir.mkdir(exist_ok=True)\n    local_rules = rules_dir / \"local.rules\"\n    if not local_rules.exists():\n        local_rules.write_text(\"\".join(DEFAULT_RULES))",
+        "detail": "modules.configuration.setup_rules",
+        "documentation": {}
+    },
+    {
         "label": "DEFAULT_RULES",
         "kind": 5,
         "importPath": "modules.configuration.setup_rules",
         "description": "modules.configuration.setup_rules",
-        "peekOfCode": "DEFAULT_RULES = [\n    \"# Local rule format (demo)\\n\",\n    'alert icmp any any -> any any (msg:\"ICMP detected\"; sid:1000001; rev:1;)\\n',\n]\ndef create_default_rules(root: Path):\n    rules_dir = root / \"rules\"\n    rules_dir.mkdir(exist_ok=True)\n    local_rules = rules_dir / \"local.rules\"\n    if not local_rules.exists():\n        local_rules.write_text(\"\".join(DEFAULT_RULES))",
+        "peekOfCode": "DEFAULT_RULES = [\n    'alert icmp any any -> any any (msg:\"ICMP detected\"; sid:1000001; rev:1;)\\n',\n]\ndef create_default_rules(root: Path):\n    rules_dir = root / \"rules\"\n    rules_dir.mkdir(exist_ok=True)\n    local_rules = rules_dir / \"local.rules\"\n    if not local_rules.exists():\n        local_rules.write_text(\"\".join(DEFAULT_RULES))\n        print(f\"Created default local.rules at {local_rules}\")",
         "detail": "modules.configuration.setup_rules",
         "documentation": {}
     },
@@ -911,7 +910,7 @@
         "kind": 2,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "def main():\n    Time()\n    if \"--version\" in sys.argv:\n        print(\"snortAMV v1.0.0\")\n        return\n    if len(sys.argv) < 2:\n        Greating()\n        help()\n        return\n    cmd = sys.argv[1]",
+        "peekOfCode": "def main():\n    if \"--version\" in sys.argv:\n        print(\"snortAMV v1.0.0\")\n        return\n    if len(sys.argv) < 2:\n        Time()\n        Greating()\n        help()\n        return\n    cmd = sys.argv[1]",
         "detail": "main",
         "documentation": {}
     },
@@ -1019,7 +1018,16 @@
         "kind": 6,
         "importPath": "setup",
         "description": "setup",
-        "peekOfCode": "class PostInstallCommand(install):\n    \"\"\"Run post_installer.py automatically after pip install.\"\"\"\n    def run(self):\n        install.run(self)\n        subprocess.run([sys.executable, \"post_installer.py\"])\nsetup(\n    name=\"snortamv\",\n    version=\"1.0.0\",\n    packages=find_packages(),\n    include_package_data=True,",
+        "peekOfCode": "class PostInstallCommand(install):\n    \"\"\"Run post_installer.py automatically after pip install.\"\"\"\n    def run(self):\n        install.run(self)\n        # If a requirements.txt exists, try to install it first using pip\n        req_file = \"requirements.txt\"\n        linux_req_file = \"linux_requirements.txt\"\n        try:\n            if OS_TYPE == \"windows\":\n                if exists(req_file):",
+        "detail": "setup",
+        "documentation": {}
+    },
+    {
+        "label": "OS_TYPE",
+        "kind": 5,
+        "importPath": "setup",
+        "description": "setup",
+        "peekOfCode": "OS_TYPE = platform.system().lower()\nclass PostInstallCommand(install):\n    \"\"\"Run post_installer.py automatically after pip install.\"\"\"\n    def run(self):\n        install.run(self)\n        # If a requirements.txt exists, try to install it first using pip\n        req_file = \"requirements.txt\"\n        linux_req_file = \"linux_requirements.txt\"\n        try:\n            if OS_TYPE == \"windows\":",
         "detail": "setup",
         "documentation": {}
     }

@@ -4,7 +4,7 @@ import subprocess
 import sys
 import shutil
 import activenv
-from post_installer import actvenv
+
 
 VENV = "env"
 

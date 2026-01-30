@@ -1,2 +1,6 @@
+activate
+activenv
 database
+main
 modules
+version

@@ -12,6 +12,7 @@ $DAYSofVALID  = 7
 # ==============================
 # USER INPUT
 # ==============================
+
 Write-Host "[0] What is your AIM please..." -ForegroundColor Blue
 $AIM = Read-Host
 

@@ -80,12 +80,15 @@ def help():
             python main.py acc delete          Delete a project user
             python main.py acc update          Update a project user
             python main.py run                 Runs the snort 
+            python main.py decrypt             decrypt the snort to be readable
         """
             )
         case "linux":
             print(
                 """\n
         SnortAMV - Automated Snort Manager
+        IP Address: 192.168.0.0/16
+    
         Usage:
             python3 main.py                    Show this help
             python3 main.py --version           Show version
@@ -97,18 +100,20 @@ def help():
             python3 main.py acc delete          Delete a project user
             python3 main.py acc update          Update a project user
             python3 main.py run                 Runs the snort 
+            python3 main.py decrypt             decrypt the snort to be readable 
+            
         """
             )
 
 
 def main():
-    Time()
 
     if "--version" in sys.argv:
         print("snortAMV v1.0.0")
         return
 
     if len(sys.argv) < 2:
+        Time()
         Greating()
         help()
         return
@@ -128,10 +133,10 @@ def main():
             console.print(
                 "Operating system has been detected as Windows", style="green"
             )
-        subprocess.run(
-            ["powershell", "-ExecutionPolicy", "Bypass", "-File", "snort.ps1"],
-            check=True,
-        )
+            subprocess.run(
+                ["powershell", "-ExecutionPolicy", "Bypass", "-File", "snort.ps1"],
+                check=True,
+            )
 
         if os_type == "linux":
             console.print("Operating system has been detected as Linux", style="green")
@@ -139,7 +144,23 @@ def main():
 
         else:
             console.print(f"Unsupported operating system: {os_type}", style="red")
+    elif cmd.lower() == "decrypt":
+        os_type = platform.system().lower()
 
+        if os_type == "windows":
+            console.print(
+                "Operating system has been detected as Windows", style="green"
+            )
+            subprocess.run(
+                ["powershell", "-ExecutionPolicy", "Bypass", "-File", "decrypt.ps1"],
+                check=True,
+            )
+        if os_type == "linux":
+            console.print("Operating system has been detected as Linux", style="green")
+            subprocess.run(["bash", "decrypt.bash"], check=True)
+
+        else:
+            console.print(f"Unsupported operating system: {os_type}", style="red")
     elif cmd == "rules":
         if len(sys.argv) < 3:
             print("rules subcommands: add, list")
