@@ -44,10 +44,10 @@ setup(
     py_modules=["main", "version", "activate", "activenv"],
     include_package_data=True,
     install_requires=[
-        "certifi==2025.11.12",
+        "certifi==2024.7.4",
         "charset-normalizer==3.4.4",
         "click",
-        "idna==3.11",
+        "idna==3.7",
         "markdown-it-py==4.0.0",
         "mdurl==0.1.2",
         "MouseInfo==0.1.3",
@@ -60,9 +60,9 @@ setup(
         "PyRect==0.2.0",
         "PyScreeze==1.0.1",
         "pytweening==1.2.0",
-        "requests==2.32.5",
+        "requests==2.32.4",
         "rich==14.2.0",
-        "urllib3==2.6.0",
+        "urllib3==2.6.3",
     ],
     entry_points={
         "console_scripts": [
