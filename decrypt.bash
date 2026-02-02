@@ -74,7 +74,7 @@ echo
 echo "Available Snort log files:"
 ls -lh "$LOG_DIR" | awk '{print $9}' | grep -E 'snort' || true
 echo
-read -rp "📂 Enter Snort log filename: " filename
+read -rp "📂 Enter Snort log filename: eg. snort.log.192729972 " filename
 FILEPATH="$LOG_DIR/$filename"
 
 if [ ! -f "$FILEPATH" ]; then

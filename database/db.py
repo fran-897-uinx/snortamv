@@ -71,7 +71,9 @@ def init_db():
 
 
 # Account CRUD operations
-def create_account(username: str, firstname: str, fullname: str, password: str) -> bool:
+def create_account(
+    username: str, firstname: str, fullname: str, password_hash: str
+) -> bool:
     conn = get_connection()
     cur = conn.cursor()
     try:
