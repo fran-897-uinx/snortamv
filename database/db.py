@@ -79,7 +79,7 @@ def create_account(
     try:
         cur.execute(
             "INSERT INTO accounts (username, firstname, fullname, password_hash) VALUES (?, ?, ?, ?)",
-            (username, firstname, fullname, password_hash(password)),
+            (username, firstname, fullname, password_hash(password_hash)),
         )
         conn.commit()
         return True
@@ -109,7 +109,7 @@ def verify_password(username: str, password: str) -> bool:
     conn.close()
     if not row:
         return False
-    return row["password_hash"] == hash_password(password)
+    return row["password_hash"] == hash_password(password_hash)
 
 
 def update_account(

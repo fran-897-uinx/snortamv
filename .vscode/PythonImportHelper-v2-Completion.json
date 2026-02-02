@@ -595,7 +595,7 @@
         "kind": 2,
         "importPath": "database.db",
         "description": "database.db",
-        "peekOfCode": "def create_account(username: str, firstname: str, fullname: str, password: str) -> bool:\n    conn = get_connection()\n    cur = conn.cursor()\n    try:\n        cur.execute(\n            \"INSERT INTO accounts (username, firstname, fullname, password_hash) VALUES (?, ?, ?, ?)\",\n            (username, firstname, fullname, password_hash(password)),\n        )\n        conn.commit()\n        return True",
+        "peekOfCode": "def create_account(\n    username: str, firstname: str, fullname: str, password_hash: str\n) -> bool:\n    conn = get_connection()\n    cur = conn.cursor()\n    try:\n        cur.execute(\n            \"INSERT INTO accounts (username, firstname, fullname, password_hash) VALUES (?, ?, ?, ?)\",\n            (username, firstname, fullname, password_hash(password_hash)),\n        )",
         "detail": "database.db",
         "documentation": {}
     },
@@ -613,7 +613,7 @@
         "kind": 2,
         "importPath": "database.db",
         "description": "database.db",
-        "peekOfCode": "def verify_password(username: str, password: str) -> bool:\n    conn = get_connection()\n    cur = conn.cursor()\n    cur.execute(\"SELECT password_hash FROM accounts WHERE username = ?\", (username,))\n    row = cur.fetchone()\n    conn.close()\n    if not row:\n        return False\n    return row[\"password_hash\"] == hash_password(password)\ndef update_account(",
+        "peekOfCode": "def verify_password(username: str, password: str) -> bool:\n    conn = get_connection()\n    cur = conn.cursor()\n    cur.execute(\"SELECT password_hash FROM accounts WHERE username = ?\", (username,))\n    row = cur.fetchone()\n    conn.close()\n    if not row:\n        return False\n    return row[\"password_hash\"] == hash_password(password_hash)\ndef update_account(",
         "detail": "database.db",
         "documentation": {}
     },
