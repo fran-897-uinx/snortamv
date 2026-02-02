@@ -595,7 +595,7 @@
         "kind": 2,
         "importPath": "database.db",
         "description": "database.db",
-        "peekOfCode": "def create_account(username: str, firstname: str, fullname: str, password: str) -> bool:\n    conn = get_connection()\n    cur = conn.cursor()\n    try:\n        cur.execute(\n            \"INSERT INTO accounts (username, firstname, fullname, password) VALUES (?, ?, ?, ?)\",\n            (username, firstname, fullname, password_hash(password)),\n        )\n        conn.commit()\n        return True",
+        "peekOfCode": "def create_account(username: str, firstname: str, fullname: str, password: str) -> bool:\n    conn = get_connection()\n    cur = conn.cursor()\n    try:\n        cur.execute(\n            \"INSERT INTO accounts (username, firstname, fullname, password) VALUES (?, ?, ?, ?)\",\n            (username, firstname, fullname, hash_password(password)),\n        )\n        conn.commit()\n        return True",
         "detail": "database.db",
         "documentation": {}
     },

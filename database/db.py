@@ -77,7 +77,7 @@ def create_account(username: str, firstname: str, fullname: str, password: str) 
     try:
         cur.execute(
             "INSERT INTO accounts (username, firstname, fullname, password) VALUES (?, ?, ?, ?)",
-            (username, firstname, fullname, password_hash(password)),
+            (username, firstname, fullname, hash_password(password)),
         )
         conn.commit()
         return True
