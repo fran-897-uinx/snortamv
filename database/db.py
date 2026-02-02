@@ -61,7 +61,7 @@ def init_db():
             username TEXT UNIQUE NOT NULL,
             firstname TEXT,
             fullname TEXT,
-            password_hash TEXT NOT NULL,
+            password TEXT NOT NULL,
             created_at TEXT DEFAULT (datetime('now'))
         );
         """
@@ -71,15 +71,13 @@ def init_db():
 
 
 # Account CRUD operations
-def create_account(
-    username: str, firstname: str, fullname: str, password_hash: str
-) -> bool:
+def create_account(username: str, firstname: str, fullname: str, password: str) -> bool:
     conn = get_connection()
     cur = conn.cursor()
     try:
         cur.execute(
-            "INSERT INTO accounts (username, firstname, fullname, password_hash) VALUES (?, ?, ?, ?)",
-            (username, firstname, fullname, password_hash(password_hash)),
+            "INSERT INTO accounts (username, firstname, fullname, password) VALUES (?, ?, ?, ?)",
+            (username, firstname, fullname, password_hash(password)),
         )
         conn.commit()
         return True
@@ -109,7 +107,7 @@ def verify_password(username: str, password: str) -> bool:
     conn.close()
     if not row:
         return False
-    return row["password_hash"] == hash_password(password_hash)
+    return row["password_hash"] == hash_password(password)
 
 
 def update_account(
