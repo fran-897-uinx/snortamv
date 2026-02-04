@@ -568,7 +568,7 @@
         "kind": 2,
         "importPath": "database.db",
         "description": "database.db",
-        "peekOfCode": "def get_connection():\n    if OS_TYPE == \"windows\":\n        conn = sqlite3.connect(DB_PATH)\n        conn.row_factory = sqlite3.Row\n        return conn\n    if OS_TYPE == \"linux\":\n        conn = sqlite3.connect(LINUX_DB)\n        conn.row_factory = sqlite3.Row\n        return conn\n# Simple password hashing",
+        "peekOfCode": "def get_connection():\n    conn = sqlite3.connect(DB_PATH)\n    conn.row_factory = sqlite3.Row  # allows dict-like access\n    return conn\n# -------------------------\n# Password hashing\n# -------------------------\ndef hash_password(plaintext: str) -> str:\n    return hashlib.sha256(plaintext.encode(\"utf-8\")).hexdigest()\n# -------------------------",
         "detail": "database.db",
         "documentation": {}
     },
@@ -577,7 +577,7 @@
         "kind": 2,
         "importPath": "database.db",
         "description": "database.db",
-        "peekOfCode": "def hash_password(plaintext: str) -> str:\n    return hashlib.sha256(plaintext.encode(\"utf-8\")).hexdigest()\n# Initialize database and tables\ndef init_db():\n    conn = get_connection()\n    cur = conn.cursor()\n    cur.execute(\n        \"\"\"\n        CREATE TABLE IF NOT EXISTS accounts (\n            id INTEGER PRIMARY KEY AUTOINCREMENT,",
+        "peekOfCode": "def hash_password(plaintext: str) -> str:\n    return hashlib.sha256(plaintext.encode(\"utf-8\")).hexdigest()\n# -------------------------\n# Initialize DB\n# -------------------------\ndef init_db():\n    conn = get_connection()\n    cur = conn.cursor()\n    cur.execute(\n        \"\"\"",
         "detail": "database.db",
         "documentation": {}
     },
@@ -586,7 +586,7 @@
         "kind": 2,
         "importPath": "database.db",
         "description": "database.db",
-        "peekOfCode": "def init_db():\n    conn = get_connection()\n    cur = conn.cursor()\n    cur.execute(\n        \"\"\"\n        CREATE TABLE IF NOT EXISTS accounts (\n            id INTEGER PRIMARY KEY AUTOINCREMENT,\n            username TEXT UNIQUE NOT NULL,\n            firstname TEXT,\n            fullname TEXT,",
+        "peekOfCode": "def init_db():\n    conn = get_connection()\n    cur = conn.cursor()\n    cur.execute(\n        \"\"\"\n        CREATE TABLE IF NOT EXISTS accounts (\n            id INTEGER PRIMARY KEY AUTOINCREMENT,\n            username TEXT UNIQUE NOT NULL,\n            fullname TEXT,\n            password TEXT NOT NULL,",
         "detail": "database.db",
         "documentation": {}
     },
@@ -595,7 +595,7 @@
         "kind": 2,
         "importPath": "database.db",
         "description": "database.db",
-        "peekOfCode": "def create_account(username: str, firstname: str, fullname: str, password: str) -> bool:\n    conn = get_connection()\n    cur = conn.cursor()\n    try:\n        cur.execute(\n            \"INSERT INTO accounts (username, firstname, fullname, password) VALUES (?, ?, ?, ?)\",\n            (username, firstname, fullname, hash_password(password)),\n        )\n        conn.commit()\n        return True",
+        "peekOfCode": "def create_account(username: str, fullname: str, password: str) -> bool:\n    conn = get_connection()\n    cur = conn.cursor()\n    try:\n        cur.execute(\n            \"INSERT INTO accounts (username, fullname, password) VALUES (?, ?, ?)\",\n            (username, fullname, hash_password(password)),\n        )\n        conn.commit()\n        return True",
         "detail": "database.db",
         "documentation": {}
     },
@@ -604,7 +604,7 @@
         "kind": 2,
         "importPath": "database.db",
         "description": "database.db",
-        "peekOfCode": "def get_account(username: str) -> Optional[Dict[str, Any]]:\n    conn = get_connection()\n    cur = conn.cursor()\n    cur.execute(\n        \"SELECT id, username,firstname, fullname, created_at FROM accounts WHERE username = ?\",\n        (username,),\n    )\n    row = cur.fetchone()\n    conn.close()\n    return dict(row) if row else None",
+        "peekOfCode": "def get_account(username: str) -> Optional[Dict[str, Any]]:\n    conn = get_connection()\n    cur = conn.cursor()\n    cur.execute(\n        \"SELECT id, username, fullname, created_at FROM accounts WHERE username = ?\",\n        (username,),\n    )\n    row = cur.fetchone()\n    conn.close()\n    return dict(row) if row else None",
         "detail": "database.db",
         "documentation": {}
     },
@@ -613,7 +613,7 @@
         "kind": 2,
         "importPath": "database.db",
         "description": "database.db",
-        "peekOfCode": "def verify_password(username: str, password: str) -> bool:\n    conn = get_connection()\n    cur = conn.cursor()\n    cur.execute(\"SELECT password_hash FROM accounts WHERE username = ?\", (username,))\n    row = cur.fetchone()\n    conn.close()\n    if not row:\n        return False\n    return row[\"password_hash\"] == hash_password(password)\ndef update_account(",
+        "peekOfCode": "def verify_password(username: str, password: str) -> bool:\n    conn = get_connection()\n    cur = conn.cursor()\n    cur.execute(\"SELECT password FROM accounts WHERE username = ?\", (username,))\n    row = cur.fetchone()\n    conn.close()\n    if not row:\n        return False\n    return row[\"password\"] == hash_password(password)\ndef update_account(",
         "detail": "database.db",
         "documentation": {}
     },
@@ -640,7 +640,7 @@
         "kind": 2,
         "importPath": "database.db",
         "description": "database.db",
-        "peekOfCode": "def list_accounts() -> list:\n    conn = get_connection()\n    cur = conn.cursor()\n    cur.execute(\n        \"SELECT id, username,firstname, fullname, created_at FROM accounts ORDER BY id\"\n    )\n    rows = cur.fetchall()\n    conn.close()\n    return [dict(r) for r in rows]\n# Migrate from legacy accounts.json (if exists in project root)",
+        "peekOfCode": "def list_accounts() -> list:\n    conn = get_connection()\n    cur = conn.cursor()\n    cur.execute(\"SELECT id, username, fullname, created_at FROM accounts ORDER BY id\")\n    rows = cur.fetchall()\n    conn.close()\n    return [dict(r) for r in rows]\n# -------------------------\n# Migrate from JSON\n# -------------------------",
         "detail": "database.db",
         "documentation": {}
     },
@@ -649,7 +649,7 @@
         "kind": 2,
         "importPath": "database.db",
         "description": "database.db",
-        "peekOfCode": "def migrate_from_json(project_root: Path) -> int:\n    json_path = project_root / \"accounts.json\"\n    if not json_path.exists():\n        return 0\n    import json\n    count = 0\n    with json_path.open() as f:\n        data = json.load(f)\n    for username, info in data.items():\n        firstname = info.get(\"Firstname\") or info.get(\"firstname\") or \"\"",
+        "peekOfCode": "def migrate_from_json(project_root: Path) -> int:\n    json_path = project_root / \"accounts.json\"\n    if not json_path.exists():\n        return 0\n    count = 0\n    with json_path.open() as f:\n        data = json.load(f)\n    for username, info in data.items():\n        fullname = info.get(\"Fullname\") or info.get(\"fullname\") or \"\"\n        password = info.get(\"Password\") or info.get(\"password\") or \"\"",
         "detail": "database.db",
         "documentation": {}
     },
@@ -658,7 +658,7 @@
         "kind": 5,
         "importPath": "database.db",
         "description": "database.db",
-        "peekOfCode": "OS_TYPE = platform.system().lower()\n# Windows AppData path\nif OS_TYPE == \"windows\":\n    USERDIR = os.getlogin()\n    LOCAL_APPDATA = f\"C:\\\\Users\\\\{USERDIR}\\\\Desktop\"\n    APP_DIR = Path(LOCAL_APPDATA) / \"SnortAMV\"\n    APP_DIR.mkdir(parents=True, exist_ok=True)\n    DB_PATH = APP_DIR / \"sqlite.db\"\nif OS_TYPE == \"linux\":\n    LINUX_DIR = os.getcwd()",
+        "peekOfCode": "OS_TYPE = platform.system().lower()\n# -------------------------\n# Database paths\n# -------------------------\nif OS_TYPE == \"windows\":\n    USERDIR = os.getlogin()\n    LOCAL_APPDATA = f\"C:\\\\Users\\\\{USERDIR}\\\\Desktop\"\n    APP_DIR = Path(LOCAL_APPDATA) / \"SnortAMV\"\n    APP_DIR.mkdir(parents=True, exist_ok=True)\n    DB_PATH = APP_DIR / \"sqlite.db\"",
         "detail": "database.db",
         "documentation": {}
     },
@@ -667,7 +667,7 @@
         "kind": 2,
         "importPath": "modules.acc_managt.creat_acc",
         "description": "modules.acc_managt.creat_acc",
-        "peekOfCode": "def create_account_cli(root: Path):\n    username = input(\"Enter username: \").strip()\n    if get_account(username):\n        print(\"User already exists\")\n        return\n    firstname = input(\"First name: \").strip()\n    fullname = input(\"Full name: \").strip()\n    password = input(\"Password: \").strip()\n    ok = create_account(username, firstname, fullname, password)\n    if ok:",
+        "peekOfCode": "def create_account_cli(root: Path):\n    username = input(\"Enter username: \").strip()\n    if get_account(username):\n        print(\"User already exists\")\n        return\n    fullname = input(\"Full name: \").strip()\n    password = input(\"Password: \").strip()\n    ok = create_account(username, fullname, password)\n    if ok:\n        print(f\"Created account: {username}\")",
         "detail": "modules.acc_managt.creat_acc",
         "documentation": {}
     },

@@ -7,10 +7,9 @@ def create_account_cli(root: Path):
     if get_account(username):
         print("User already exists")
         return
-    firstname = input("First name: ").strip()
     fullname = input("Full name: ").strip()
     password = input("Password: ").strip()
-    ok = create_account(username, firstname, fullname, password)
+    ok = create_account(username, fullname, password)
     if ok:
         print(f"Created account: {username}")
     else:
