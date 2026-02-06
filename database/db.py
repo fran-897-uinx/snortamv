@@ -167,7 +167,7 @@ def migrate_from_json(project_root: Path) -> int:
         password = info.get("Password") or info.get("password") or ""
         if not username or not password:
             continue
-        if create_account(username, firstname, fullname, password):
+        if create_account(username, fullname, password):
             count += 1
 
     # Rename migrated file

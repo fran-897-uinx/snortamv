@@ -109,7 +109,7 @@ def show_help():
 def main():
 
     if "--version" in sys.argv:
-        print("snortAMV v1.0.0")
+        print("snortAMV v0.0.1")
         return
 
     if len(sys.argv) < 2:
