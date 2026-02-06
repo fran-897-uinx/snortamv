@@ -25,41 +25,50 @@ def create_default_rules(root: Path):
 def interactive_add_rule(root: Path):
     rules_dir = root / "rules"
     rules_dir.mkdir(exist_ok=True)
+
     local_rules = rules_dir / "local.rules"
+
+    # Create file with default rules only once
     if not local_rules.exists():
         local_rules.write_text("".join(DEFAULT_RULES))
-        print("Add a simple alert rule (demo)")
-        proto = input("Protocol (tcp/udp/icmp): ")
-        src = input("Source (e.g.192.168.0.2/any): ")
-        src_port = input("Source port (e.g.192.168.0.2/any): ")
-        dst = input("Destination (e.g.192.168.0.2/any): ")
-        dst_port = input("Destination port (e.g.192.168.0.2/any): ")
-        msg = input("Message: ")
-        sid = input("SID (unique integer): ")
-        rev = input("rev(integer): ")
-        rule = f'alert {proto} {src} {src_port} -> {dst} {dst_port} (msg:"{msg}"; sid:{sid}; rev:{rev};)\n'
-        with open(local_rules, "a") as f:
-            f.write(rule)
-        print(f"Rule added to {local_rules}")
-    else:
-        print("Available Status")
-        console.print(local_rules.read_text(), style="green")
-        print(
-            "You will be add to the Availble Rule: \n  Follow the instructions below Thanks"
-        )
-        local_rules.write_text("".join(DEFAULT_RULES))
-        print("Add a simple alert rule (demo)")
-        proto = input("Protocol (tcp/udp/icmp): ")
-        src = input("Source (e.g.192.168.0.2/any): ")
-        src_port = input("Source port (e.g.192.168.0.2/any): ")
-        dst = input("Destination (e.g.192.168.0.2/any): ")
-        dst_port = input("Destination port (e.g.192.168.0.2/any): ")
-        msg = input("Message: ")
-        sid = input("SID (unique integer): ")
-        rev = input("rev(integer): ")
-        rule = f'alert {proto} {src} {src_port} -> {dst} {dst_port} (msg:"{msg}"; sid:{sid}; rev:{rev};)\n'
-        with open(local_rules, "a") as f:
-            f.write(rule)
+        print("local.rules created with default rules.")
+
+    # Show existing rules
+    print("\nCurrent rules:\n")
+    console.print(local_rules.read_text(), style="green")
+
+    print("\nAdd a simple alert rule (demo)")
+
+    # --- User input ---
+    proto = input("Protocol (tcp/udp/icmp/ip): ").strip().lower()
+    if proto not in {"tcp", "udp", "icmp", "ip"}:
+        print("Invalid protocol.")
+        return
+
+    src = input("Source (e.g. 192.168.0.2 or any): ").strip()
+    src_port = input("Source port (e.g. 80 or any): ").strip()
+    dst = input("Destination (e.g. 192.168.0.10 or any): ").strip()
+    dst_port = input("Destination port (e.g. 443 or any): ").strip()
+    msg = input("Message: ").strip()
+
+    try:
+        sid = int(input("SID (unique integer): "))
+        rev = int(input("Rev (integer): "))
+    except ValueError:
+        print("SID and Rev must be integers.")
+        return
+
+    # --- Build rule ---
+    rule = (
+        f"alert {proto} {src} {src_port} -> {dst} {dst_port} "
+        f'(msg:"{msg}"; sid:{sid}; rev:{rev};)\n'
+    )
+
+    # Append rule safely
+    with open(local_rules, "a") as f:
+        f.write(rule)
+
+    print(f"\nRule successfully added to {local_rules}")
 
 
 def list_local_rules(root: Path):

@@ -31,10 +31,10 @@ os_type = platform.system().lower()
 
 def Time():
     hour = int(time.strftime("%H"))
-    if 12 <= hour < 17:
-        print("Good Afternoon")
-    elif 1 <= hour < 12:
+    if 00 <= hour < 12:
         print("Good Morning")
+    elif 12 <= hour < 17:
+        print("Good Afternoon")
     elif 17 <= hour < 21:
         print("Good Evening")
     else:
@@ -63,7 +63,7 @@ def check_snort():
     return False
 
 
-def help():
+def show_help():
     match os_type.lower():
         case "windows":
             print(
@@ -115,7 +115,7 @@ def main():
     if len(sys.argv) < 2:
         Time()
         Greating()
-        help()
+        show_help()
         return
 
     cmd = sys.argv[1]
@@ -126,41 +126,33 @@ def main():
             return
         create_default_rules(ROOT)
         print("Setup complete.")
-    elif cmd == "run":
-        os_type = platform.system().lower()
 
+    elif cmd == "run":
         if os_type == "windows":
-            console.print(
-                "Operating system has been detected as Windows", style="green"
-            )
+            console.print("Operating system detected: Windows", style="green")
             subprocess.run(
                 ["powershell", "-ExecutionPolicy", "Bypass", "-File", "snort.ps1"],
                 check=True,
             )
-
-        if os_type == "linux":
-            console.print("Operating system has been detected as Linux", style="green")
+        elif os_type == "linux":
+            console.print("Operating system detected: Linux", style="green")
             subprocess.run(["bash", "snort_auto.bash"], check=True)
-
         else:
             console.print(f"Unsupported operating system: {os_type}", style="red")
-    elif cmd.lower() == "decrypt":
-        os_type = platform.system().lower()
 
+    elif cmd.lower() == "decrypt":
         if os_type == "windows":
-            console.print(
-                "Operating system has been detected as Windows", style="green"
-            )
+            console.print("Operating system detected: Windows", style="green")
             subprocess.run(
                 ["powershell", "-ExecutionPolicy", "Bypass", "-File", "decrypt.ps1"],
                 check=True,
             )
-        if os_type == "linux":
-            console.print("Operating system has been detected as Linux", style="green")
+        elif os_type == "linux":
+            console.print("Operating system detected: Linux", style="green")
             subprocess.run(["bash", "decrypt.bash"], check=True)
-
         else:
             console.print(f"Unsupported operating system: {os_type}", style="red")
+
     elif cmd == "rules":
         if len(sys.argv) < 3:
             print("rules subcommands: add, list")
@@ -168,8 +160,8 @@ def main():
         sub = sys.argv[2]
         if sub == "add":
             from modules.configuration.setup_rules import interactive_add_rule
+            interactive_add_rule(ROOT)  #
 
-            interactive_add_rule(ROOT)
         elif sub == "list":
             from modules.configuration.setup_rules import list_local_rules
 
