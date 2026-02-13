@@ -1,196 +1,128 @@
 #!/usr/bin/env python3
-
-## Entry point of the project
-
 import os
-import sys
 import time
 import pyfiglet
 import shutil
-from pathlib import Path
-from rich.console import Console
 import platform
 import subprocess
+import sys
+import argparse
+from pathlib import Path
+from rich.console import Console
 
-ROOT = Path(__file__).parent.resolve()
-if str(ROOT) not in sys.path:
-    sys.path.insert(0, str(ROOT))
-
-
-from modules.configuration.setup_rules import create_default_rules
+from modules.configuration.setup_rules import create_default_rules, interactive_add_rule
 from modules.configuration.validate_conf import validate_configuration
 from modules.acc_managt.creat_acc import create_account_cli
 from modules.acc_managt.delete_acc import delete_account_cli
 from modules.acc_managt.update_acc import update_account_cli
 
-from activate import get_venv_python
+ROOT = Path(__file__).parent.resolve()
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 
 console = Console()
-os_type = platform.system().lower()
+OS_TYPE = platform.system().lower()
+VERSION = "0.0.1"
 
 
-def Time():
+# ---------------- UI ----------------
+def greeting_by_time():
     hour = int(time.strftime("%H"))
-    if 00 <= hour < 12:
-        print("Good Morning")
-    elif 12 <= hour < 17:
-        print("Good Afternoon")
-    elif 17 <= hour < 21:
-        print("Good Evening")
-    else:
-        print("Good Night")
+    if hour < 12:
+        return "Good Morning"
+    elif hour < 17:
+        return "Good Afternoon"
+    elif hour < 21:
+        return "Good Evening"
+    return "Good Night"
 
 
-def Greating():
-    text = pyfiglet.figlet_format("SNORT { AMV }")
-    for line in text.split("\n"):
-        console.print(line, style="bold white")
-        time.sleep(0.05)
-    width = shutil.get_terminal_size().columns
-    great = f"WE Welcome You To SNORT AUTOMATED VERSION".ljust(width, " ")
-    for t in great:
-        console.print(t, end=" ", style="blue")
-        time.sleep(0.01)
-    print("\n")
+def banner():
+    console.print(pyfiglet.figlet_format("SNORT AMV"), style="bold green")
+    console.print(f"{greeting_by_time()} 👋", style="green")
 
 
+# ---------------- Core ----------------
 def check_snort():
-    snort_path = shutil.which("snort") or shutil.which("snort3")
-    if snort_path:
-        print(f"[✓] Snort found at {snort_path}")
-        return True
-    print("[!] Snort not found. Please run post_installer.py first.")
-    return False
+    return shutil.which("snort") or shutil.which("snort3")
 
 
-def show_help():
-    match os_type.lower():
-        case "windows":
-            print(
-                """\n
-        SnortAMV - Automated Snort Manager
-        Usage:
-            python main.py                    Show this help
-            python main.py --version           Show version
-            python main.py setup               Run initial setup
-            python main.py rules add           Create a local rule interactively
-            python main.py rules list          List local.rules
-            python main.py config validate     Validate the configuration
-            python main.py acc create          Create a project user
-            python main.py acc delete          Delete a project user
-            python main.py acc update          Update a project user
-            python main.py run                 Runs the snort 
-            python main.py decrypt             decrypt the snort to be readable
-        """
-            )
-        case "linux":
-            print(
-                """\n
-        SnortAMV - Automated Snort Manager
-        IP Address: 192.168.0.0/16
-    
-        Usage:
-            python3 main.py                    Show this help
-            python3 main.py --version           Show version
-            python3 main.py setup               Run initial setup
-            python3 main.py rules add           Create a local rule interactively
-            python3 main.py rules list          List local.rules
-            python3 main.py config validate     Validate the configuration
-            python3 main.py acc create          Create a project user
-            python3 main.py acc delete          Delete a project user
-            python3 main.py acc update          Update a project user
-            python3 main.py run                 Runs the snort 
-            python3 main.py decrypt             decrypt the snort to be readable 
-            
-        """
-            )
+def setup_cmd(_):
+    if not check_snort():
+        console.print("[red]Snort not found[/red]")
+        sys.exit(1)
+    create_default_rules(ROOT)
+    console.print("[green]Setup complete[/green]")
 
 
-def main():
-
-    if "--version" in sys.argv:
-        print("snortAMV v0.0.1")
-        return
-
-    if len(sys.argv) < 2:
-        Time()
-        Greating()
-        show_help()
-        return
-
-    cmd = sys.argv[1]
-
-    if cmd == "setup":
-        print("Running setup checks...")
-        if not check_snort():
-            return
-        create_default_rules(ROOT)
-        print("Setup complete.")
-
-    elif cmd == "run":
-        if os_type == "windows":
-            console.print("Operating system detected: Windows", style="green")
-            subprocess.run(
-                ["powershell", "-ExecutionPolicy", "Bypass", "-File", "snort.ps1"],
-                check=True,
-            )
-        elif os_type == "linux":
-            console.print("Operating system detected: Linux", style="green")
-            subprocess.run(["bash", "snort_auto.bash"], check=True)
-        else:
-            console.print(f"Unsupported operating system: {os_type}", style="red")
-
-    elif cmd.lower() == "decrypt":
-        if os_type == "windows":
-            console.print("Operating system detected: Windows", style="green")
-            subprocess.run(
-                ["powershell", "-ExecutionPolicy", "Bypass", "-File", "decrypt.ps1"],
-                check=True,
-            )
-        elif os_type == "linux":
-            console.print("Operating system detected: Linux", style="green")
-            subprocess.run(["bash", "decrypt.bash"], check=True)
-        else:
-            console.print(f"Unsupported operating system: {os_type}", style="red")
-
-    elif cmd == "rules":
-        if len(sys.argv) < 3:
-            print("rules subcommands: add, list")
-            return
-        sub = sys.argv[2]
-        if sub == "add":
-            from modules.configuration.setup_rules import interactive_add_rule
-            interactive_add_rule(ROOT)  #
-
-        elif sub == "list":
-            from modules.configuration.setup_rules import list_local_rules
-
-            list_local_rules(ROOT)
-        else:
-            print("Unknown rules subcommand")
-
-    elif cmd == "config":
-        if len(sys.argv) < 3 or sys.argv[2] != "validate":
-            print("config subcommands: validate")
-            return
-        validate_configuration(ROOT)
-
-    elif cmd == "acc":
-        if len(sys.argv) < 3:
-            print("acc subcommands: create, delete, update")
-            return
-        sub = sys.argv[2]
-        if sub == "create":
-            create_account_cli(ROOT)
-        elif sub == "delete":
-            delete_account_cli(ROOT)
-        elif sub == "update":
-            update_account_cli(ROOT)
-        else:
-            print("Unknown acc subcommand")
-
+def run_cmd(_):
+    if OS_TYPE == "linux":
+        subprocess.run(["sudo", "bash", "snort_auto.bash"], check=True)
+    elif OS_TYPE == "windows":
+        subprocess.run(
+            ["powershell", "-ExecutionPolicy", "Bypass", "-File", "snort.ps1"],
+            check=True,
+        )
     else:
-        help()
+        sys.exit("Unsupported OS")
+
+
+def decrypt_cmd(_):
+    if OS_TYPE == "linux":
+        subprocess.run(["bash", "decrypt.bash"], check=True)
+    elif OS_TYPE == "windows":
+        subprocess.run(
+            ["powershell", "-ExecutionPolicy", "Bypass", "-File", "decrypt.ps1"],
+            check=True,
+        )
+
+
+def version_cmd(_):
+    print(f"SnortAMV v{VERSION}")
+
+
+# ---------------- CLI ----------------
+def main():
+    banner()
+
+    parser = argparse.ArgumentParser(description="SnortAMV – Automated Snort Manager")
+    sub = parser.add_subparsers(dest="command", required=True)
+
+    sub.add_parser("setup", help="Run initial setup").set_defaults(func=setup_cmd)
+    sub.add_parser("run", help="Runs the snort").set_defaults(func=run_cmd)
+    sub.add_parser("decrypt", help="decrypt the snort to be readable").set_defaults(
+        func=decrypt_cmd
+    )
+    sub.add_parser("validate", help="Validate the configuration").set_defaults(
+        func=lambda _: validate_configuration(ROOT)
+    )
+    sub.add_parser("version", help="Show version").set_defaults(func=version_cmd)
+
+    rule = sub.add_parser("rule", help="add an list out rules")
+    rule_sub = rule.add_subparsers(dest="action", required=True)
+    rule_sub.add_parser("add", help="Create a local rule interactively").set_defaults(
+        func=lambda _: interactive_add_rule(ROOT)
+    )
+    rule_sub.add_parser("list", help="List local.rules").set_defaults(
+        func=lambda _: print(open(ROOT / "rules/local.rules").read())
+    )
+
+    acc = sub.add_parser(
+        "acc", help="Create, Delete and update project profile or users"
+    )
+    acc_sub = acc.add_subparsers(dest="action", required=True)
+    acc_sub.add_parser("create", help="Create a project user").set_defaults(
+        func=lambda _: create_account_cli(ROOT)
+    )
+    acc_sub.add_parser("delete", help="Delete a project user").set_defaults(
+        func=lambda _: delete_account_cli(ROOT)
+    )
+    acc_sub.add_parser("update", help="Update a project user").set_defaults(
+        func=lambda _: update_account_cli(ROOT)
+    )
+
+    args = parser.parse_args()
+    args.func(args)
 
 
 if __name__ == "__main__":

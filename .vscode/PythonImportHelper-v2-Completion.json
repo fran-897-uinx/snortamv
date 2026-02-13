@@ -332,7 +332,24 @@
         "documentation": {}
     },
     {
+        "label": "argparse",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "argparse",
+        "description": "argparse",
+        "detail": "argparse",
+        "documentation": {}
+    },
+    {
         "label": "create_default_rules",
+        "importPath": "modules.configuration.setup_rules",
+        "description": "modules.configuration.setup_rules",
+        "isExtraImport": true,
+        "detail": "modules.configuration.setup_rules",
+        "documentation": {}
+    },
+    {
+        "label": "interactive_add_rule",
         "importPath": "modules.configuration.setup_rules",
         "description": "modules.configuration.setup_rules",
         "isExtraImport": true,
@@ -369,14 +386,6 @@
         "description": "modules.acc_managt.update_acc",
         "isExtraImport": true,
         "detail": "modules.acc_managt.update_acc",
-        "documentation": {}
-    },
-    {
-        "label": "get_venv_python",
-        "importPath": "activate",
-        "description": "activate",
-        "isExtraImport": true,
-        "detail": "activate",
         "documentation": {}
     },
     {
@@ -712,7 +721,7 @@
         "kind": 2,
         "importPath": "modules.configuration.setup_rules",
         "description": "modules.configuration.setup_rules",
-        "peekOfCode": "def interactive_add_rule(root: Path):\n    rules_dir = root / \"rules\"\n    rules_dir.mkdir(exist_ok=True)\n    local_rules = rules_dir / \"local.rules\"\n    if not local_rules.exists():\n        local_rules.write_text(\"\".join(DEFAULT_RULES))\n        print(\"Add a simple alert rule (demo)\")\n        proto = input(\"Protocol (tcp/udp/icmp): \")\n        src = input(\"Source (e.g.192.168.0.2/any): \")\n        src_port = input(\"Source port (e.g.192.168.0.2/any): \")",
+        "peekOfCode": "def interactive_add_rule(root: Path):\n    rules_dir = root / \"rules\"\n    rules_dir.mkdir(exist_ok=True)\n    local_rules = rules_dir / \"local.rules\"\n    # Create file with default rules only once\n    if not local_rules.exists():\n        local_rules.write_text(\"\".join(DEFAULT_RULES))\n        print(\"local.rules created with default rules.\")\n    # Show existing rules\n    print(\"\\nCurrent rules:\\n\")",
         "detail": "modules.configuration.setup_rules",
         "documentation": {}
     },
@@ -870,20 +879,20 @@
         "documentation": {}
     },
     {
-        "label": "Time",
+        "label": "greeting_by_time",
         "kind": 2,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "def Time():\n    hour = int(time.strftime(\"%H\"))\n    if 12 <= hour < 17:\n        print(\"Good Afternoon\")\n    elif 1 <= hour < 12:\n        print(\"Good Morning\")\n    elif 17 <= hour < 21:\n        print(\"Good Evening\")\n    else:\n        print(\"Good Night\")",
+        "peekOfCode": "def greeting_by_time():\n    hour = int(time.strftime(\"%H\"))\n    if hour < 12:\n        return \"Good Morning\"\n    elif hour < 17:\n        return \"Good Afternoon\"\n    elif hour < 21:\n        return \"Good Evening\"\n    return \"Good Night\"\ndef banner():",
         "detail": "main",
         "documentation": {}
     },
     {
-        "label": "Greating",
+        "label": "banner",
         "kind": 2,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "def Greating():\n    text = pyfiglet.figlet_format(\"SNORT { AMV }\")\n    for line in text.split(\"\\n\"):\n        console.print(line, style=\"bold white\")\n        time.sleep(0.05)\n    width = shutil.get_terminal_size().columns\n    great = f\"WE Welcome You To SNORT AUTOMATED VERSION\".ljust(width, \" \")\n    for t in great:\n        console.print(t, end=\" \", style=\"blue\")\n        time.sleep(0.01)",
+        "peekOfCode": "def banner():\n    console.print(pyfiglet.figlet_format(\"SNORT AMV\"), style=\"bold green\")\n    console.print(f\"{greeting_by_time()} 👋\", style=\"green\")\n# ---------------- Core ----------------\ndef check_snort():\n    return shutil.which(\"snort\") or shutil.which(\"snort3\")\ndef setup_cmd(_):\n    if not check_snort():\n        console.print(\"[red]Snort not found[/red]\")\n        sys.exit(1)",
         "detail": "main",
         "documentation": {}
     },
@@ -892,16 +901,43 @@
         "kind": 2,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "def check_snort():\n    snort_path = shutil.which(\"snort\") or shutil.which(\"snort3\")\n    if snort_path:\n        print(f\"[✓] Snort found at {snort_path}\")\n        return True\n    print(\"[!] Snort not found. Please run post_installer.py first.\")\n    return False\ndef help():\n    match os_type.lower():\n        case \"windows\":",
+        "peekOfCode": "def check_snort():\n    return shutil.which(\"snort\") or shutil.which(\"snort3\")\ndef setup_cmd(_):\n    if not check_snort():\n        console.print(\"[red]Snort not found[/red]\")\n        sys.exit(1)\n    create_default_rules(ROOT)\n    console.print(\"[green]Setup complete[/green]\")\ndef run_cmd(_):\n    if OS_TYPE == \"linux\":",
         "detail": "main",
         "documentation": {}
     },
     {
-        "label": "help",
+        "label": "setup_cmd",
         "kind": 2,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "def help():\n    match os_type.lower():\n        case \"windows\":\n            print(\n                \"\"\"\\n\n        SnortAMV - Automated Snort Manager\n        Usage:\n            python main.py                    Show this help\n            python main.py --version           Show version\n            python main.py setup               Run initial setup",
+        "peekOfCode": "def setup_cmd(_):\n    if not check_snort():\n        console.print(\"[red]Snort not found[/red]\")\n        sys.exit(1)\n    create_default_rules(ROOT)\n    console.print(\"[green]Setup complete[/green]\")\ndef run_cmd(_):\n    if OS_TYPE == \"linux\":\n        subprocess.run([\"sudo\", \"bash\", \"snort_auto.bash\"], check=True)\n    elif OS_TYPE == \"windows\":",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "run_cmd",
+        "kind": 2,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "def run_cmd(_):\n    if OS_TYPE == \"linux\":\n        subprocess.run([\"sudo\", \"bash\", \"snort_auto.bash\"], check=True)\n    elif OS_TYPE == \"windows\":\n        subprocess.run(\n            [\"powershell\", \"-ExecutionPolicy\", \"Bypass\", \"-File\", \"snort.ps1\"],\n            check=True,\n        )\n    else:\n        sys.exit(\"Unsupported OS\")",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "decrypt_cmd",
+        "kind": 2,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "def decrypt_cmd(_):\n    if OS_TYPE == \"linux\":\n        subprocess.run([\"bash\", \"decrypt.bash\"], check=True)\n    elif OS_TYPE == \"windows\":\n        subprocess.run(\n            [\"powershell\", \"-ExecutionPolicy\", \"Bypass\", \"-File\", \"decrypt.ps1\"],\n            check=True,\n        )\ndef version_cmd(_):\n    print(f\"SnortAMV v{VERSION}\")",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "version_cmd",
+        "kind": 2,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "def version_cmd(_):\n    print(f\"SnortAMV v{VERSION}\")\n# ---------------- CLI ----------------\ndef main():\n    banner()\n    parser = argparse.ArgumentParser(description=\"SnortAMV – Automated Snort Manager\")\n    sub = parser.add_subparsers(dest=\"command\", required=True)\n    sub.add_parser(\"setup\", help=\"Run initial setup\").set_defaults(func=setup_cmd)\n    sub.add_parser(\"run\", help=\"Runs the snort\").set_defaults(func=run_cmd)\n    sub.add_parser(\"decrypt\", help=\"decrypt the snort to be readable\").set_defaults(",
         "detail": "main",
         "documentation": {}
     },
@@ -910,7 +946,7 @@
         "kind": 2,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "def main():\n    if \"--version\" in sys.argv:\n        print(\"snortAMV v1.0.0\")\n        return\n    if len(sys.argv) < 2:\n        Time()\n        Greating()\n        help()\n        return\n    cmd = sys.argv[1]",
+        "peekOfCode": "def main():\n    banner()\n    parser = argparse.ArgumentParser(description=\"SnortAMV – Automated Snort Manager\")\n    sub = parser.add_subparsers(dest=\"command\", required=True)\n    sub.add_parser(\"setup\", help=\"Run initial setup\").set_defaults(func=setup_cmd)\n    sub.add_parser(\"run\", help=\"Runs the snort\").set_defaults(func=run_cmd)\n    sub.add_parser(\"decrypt\", help=\"decrypt the snort to be readable\").set_defaults(\n        func=decrypt_cmd\n    )\n    sub.add_parser(\"validate\", help=\"Validate the configuration\").set_defaults(",
         "detail": "main",
         "documentation": {}
     },
@@ -919,7 +955,7 @@
         "kind": 5,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "ROOT = Path(__file__).parent.resolve()\nif str(ROOT) not in sys.path:\n    sys.path.insert(0, str(ROOT))\nfrom modules.configuration.setup_rules import create_default_rules\nfrom modules.configuration.validate_conf import validate_configuration\nfrom modules.acc_managt.creat_acc import create_account_cli\nfrom modules.acc_managt.delete_acc import delete_account_cli\nfrom modules.acc_managt.update_acc import update_account_cli\nfrom activate import get_venv_python\nconsole = Console()",
+        "peekOfCode": "ROOT = Path(__file__).parent.resolve()\nif str(ROOT) not in sys.path:\n    sys.path.insert(0, str(ROOT))\nconsole = Console()\nOS_TYPE = platform.system().lower()\nVERSION = \"0.0.1\"\n# ---------------- UI ----------------\ndef greeting_by_time():\n    hour = int(time.strftime(\"%H\"))\n    if hour < 12:",
         "detail": "main",
         "documentation": {}
     },
@@ -928,16 +964,25 @@
         "kind": 5,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "console = Console()\nos_type = platform.system().lower()\ndef Time():\n    hour = int(time.strftime(\"%H\"))\n    if 12 <= hour < 17:\n        print(\"Good Afternoon\")\n    elif 1 <= hour < 12:\n        print(\"Good Morning\")\n    elif 17 <= hour < 21:\n        print(\"Good Evening\")",
+        "peekOfCode": "console = Console()\nOS_TYPE = platform.system().lower()\nVERSION = \"0.0.1\"\n# ---------------- UI ----------------\ndef greeting_by_time():\n    hour = int(time.strftime(\"%H\"))\n    if hour < 12:\n        return \"Good Morning\"\n    elif hour < 17:\n        return \"Good Afternoon\"",
         "detail": "main",
         "documentation": {}
     },
     {
-        "label": "os_type",
+        "label": "OS_TYPE",
         "kind": 5,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "os_type = platform.system().lower()\ndef Time():\n    hour = int(time.strftime(\"%H\"))\n    if 12 <= hour < 17:\n        print(\"Good Afternoon\")\n    elif 1 <= hour < 12:\n        print(\"Good Morning\")\n    elif 17 <= hour < 21:\n        print(\"Good Evening\")\n    else:",
+        "peekOfCode": "OS_TYPE = platform.system().lower()\nVERSION = \"0.0.1\"\n# ---------------- UI ----------------\ndef greeting_by_time():\n    hour = int(time.strftime(\"%H\"))\n    if hour < 12:\n        return \"Good Morning\"\n    elif hour < 17:\n        return \"Good Afternoon\"\n    elif hour < 21:",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "VERSION",
+        "kind": 5,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "VERSION = \"0.0.1\"\n# ---------------- UI ----------------\ndef greeting_by_time():\n    hour = int(time.strftime(\"%H\"))\n    if hour < 12:\n        return \"Good Morning\"\n    elif hour < 17:\n        return \"Good Afternoon\"\n    elif hour < 21:\n        return \"Good Evening\"",
         "detail": "main",
         "documentation": {}
     },
