@@ -1,6 +1,6 @@
 activate
 activenv
+cli
 database
-main
 modules
 version

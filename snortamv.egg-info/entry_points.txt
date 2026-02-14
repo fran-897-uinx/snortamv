@@ -1,2 +1,2 @@
 [console_scripts]
-snortamv = main:main
+snortamv = cli:main

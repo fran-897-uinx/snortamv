@@ -36,12 +36,12 @@ class PostInstallCommand(install):
 
 setup(
     name="snortamv",
-    version="1.0.0",
+    version="0.0.1",
     author="Francis David",
     description="Automated Snort IDS Manager",
     python_requires=">=3.8",
     packages=find_packages(),
-    py_modules=["main", "version", "activate", "activenv"],
+    py_modules=["cli", "version", "activate", "activenv"],
     include_package_data=True,
     install_requires=[
         "certifi==2024.7.4",
@@ -66,7 +66,7 @@ setup(
     ],
     entry_points={
         "console_scripts": [
-            "snortamv=main:main",
+            "snortamv=cli:main",
         ]
     },
     cmdclass={

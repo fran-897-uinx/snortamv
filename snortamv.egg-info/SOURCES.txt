@@ -1,7 +1,7 @@
 README.md
 activate.py
 activenv.py
-main.py
+cli.py
 pyproject.toml
 setup.py
 version.py

@@ -57,54 +57,53 @@ A Python-based CLI tool to manage Snort Network Intrusion Detection System (IDS)
 
 3. **Initialize your project:**
    ```bash
-   python main.py setup
+   snortamv setup
    ```
    This checks if Snort is installed and creates default detection rules.
 
 4. **Verify installation:**
    ```bash
-   python main.py --version
+   snortamv --version
    ```
 
 ## Usage
 
 ### Help
 ```bash
-python main.py
+snortamv -h
 ```
 
 ### Setup
 ```bash
-python main.py setup
+snortamv setup
 ```
 
 ### Rule Management
 ```bash
-python main.py rules add      # Add a custom detection rule interactively
-python main.py rules list     # Display all local rules
+snortamv rule add      # Add a custom detection rule interactively
+snortamv rule list     # Display all local rules
 ```
 
 ### Account Management
 ```bash
-python main.py acc create     # Create a project user
-python main.py acc delete     # Delete a user
-python main.py acc update     # Update user details
+snortamv acc create     # Create a project user
+snortamv acc delete     # Delete a user
+snortamv acc update     # Update user details
 ```
 
 ### Configuration
 ```bash
-python main.py config validate   # Validate Snort configuration
+snortamv validate   # Validate Snort configuration
 ```
 
 ### Run Snort
 ```bash
-python main.py run
+snortamv run
 ```
 
 ### Traffic Decryption
 ```bash
-./decrypt.bash     # Decrypt TLS traffic (Linux)
-.\decrypt.ps1      # Decrypt TLS traffic (Windows PowerShell)
+  snortamv decrypt # for both (Linux) and (windows powershell) 
 ```
 
 ## Project Structure
@@ -171,7 +170,7 @@ python post_installer.py
 ### Database errors
 If the SQLite database is corrupted, delete `sqlite.db` and re-run:
 ```bash
-python main.py setup
+snortamv setup
 ```
 
 ### Import errors
