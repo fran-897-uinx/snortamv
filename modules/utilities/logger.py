@@ -1,0 +1,47 @@
+import logging
+import platform
+import os
+import sys
+from pathlib import Path
+from logging.handlers import RotatingFileHandler
+
+APP_NAME = "snortamv"
+OS_TYPE = platform.system().lower()
+
+# ---------------- Paths ----------------
+if OS_TYPE == "windows":
+    BASE_DIR = Path.cwd()
+    LOG_DIR = BASE_DIR / "logs"
+elif OS_TYPE == "linux":
+    LOG_DIR = Path("/var/log/snortamv")
+else:
+    print("Unsupported OS")
+    sys.exit(1)
+
+LOG_DIR.mkdir(parents=True, exist_ok=True)
+LOG_FILE = LOG_DIR / "snortamv.log"
+
+# ---------------- Logging Setup ----------------
+LOG_LEVEL = logging.INFO  # change to DEBUG for dev
+
+formatter = logging.Formatter(
+    "%(asctime)s | %(levelname)s | %(name)s | %(message)s"
+)
+
+file_handler = RotatingFileHandler(
+    LOG_FILE,
+    maxBytes=5 * 1024 * 1024,  # 5MB
+    backupCount=5
+)
+file_handler.setFormatter(formatter)
+
+console_handler = logging.StreamHandler()
+console_handler.setFormatter(formatter)
+
+logging.basicConfig(
+    level=LOG_LEVEL,
+    handlers=[file_handler, console_handler],
+)
+
+def get_logger(name: str = APP_NAME) -> logging.Logger:
+    return logging.getLogger(name)

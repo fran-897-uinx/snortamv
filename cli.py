@@ -15,6 +15,7 @@ from modules.configuration.validate_conf import validate_configuration
 from modules.acc_managt.creat_acc import create_account_cli
 from modules.acc_managt.delete_acc import delete_account_cli
 from modules.acc_managt.update_acc import update_account_cli
+from modules.utilities.logger import get_logger
 
 ROOT = Path(__file__).parent.resolve()
 if str(ROOT) not in sys.path:
@@ -24,6 +25,12 @@ console = Console()
 OS_TYPE = platform.system().lower()
 VERSION = "0.0.1"
 
+logger = get_logger(__name__)
+
+logger.info("SnortAMV started")
+logger.debug("Detected OS: %s", OS_TYPE)
+logger.warning("Snort not detected, skipping scan")
+logger.error("Failed to parse rule file")
 
 # ---------------- UI ----------------
 def greeting_by_time():
