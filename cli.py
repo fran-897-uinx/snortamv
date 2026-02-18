@@ -27,10 +27,6 @@ VERSION = "0.0.1"
 
 logger = get_logger(__name__)
 
-logger.info("SnortAMV started")
-logger.debug("Detected OS: %s", OS_TYPE)
-logger.warning("Snort not detected, skipping scan")
-logger.error("Failed to parse rule file")
 
 # ---------------- UI ----------------
 def greeting_by_time():
@@ -51,25 +47,39 @@ def banner():
 
 # ---------------- Core ----------------
 def check_snort():
-    return shutil.which("snort") or shutil.which("snort3")
-
+    snort_path = shutil.which("snort") or shutil.which("snort3")
+    if not snort_path:
+        logger.warning("Snort not detected")
+    return snort_path
 
 def setup_cmd(_):
-    if not check_snort():
+    snort_path = check_snort()
+    if not snort_path:
+        logger.error("Cannot setup: Snort not found")
         console.print("[red]Snort not found[/red]")
         sys.exit(1)
-    create_default_rules(ROOT)
-    console.print("[green]Setup complete[/green]")
 
 
 def run_cmd(_):
     if OS_TYPE == "linux":
-        subprocess.run(["sudo", "bash", "snort_auto.bash"], check=True)
+        try:
+            subprocess.run(["sudo", "bash", "snort_auto.bash"], check=True)
+        except subprocess.CalledProcessError as e:
+            logger.error("Snort run failed: %s", e)
+            logger.error("Stdout: %s", e.stdout)
+            logger.error("Stderr: %s", e.stderr)
+            return
     elif OS_TYPE == "windows":
-        subprocess.run(
-            ["powershell", "-ExecutionPolicy", "Bypass", "-File", "snort.ps1"],
-            check=True,
-        )
+        try:
+            subprocess.run(
+                ["powershell", "-ExecutionPolicy", "Bypass", "-File", "snort.ps1"],
+                check=True,
+            )
+        except subprocess.CalledProcessError as e:
+            logger.error("Snort run failed: %s", e)
+            logger.error("Stdout: %s", e.stdout)
+            logger.error("Stderr: %s", e.stderr)
+            return
     else:
         sys.exit("Unsupported OS")
 
@@ -104,10 +114,10 @@ def main():
         func=lambda _: validate_configuration(ROOT)
     )
     parser.add_argument(
-    "--version",
-    action="version",
-    version=f"SnortAMV v{VERSION}",
-)
+        "--version",
+        action="version",
+        version=f"SnortAMV v{VERSION}",
+    )
 
     rule = sub.add_parser("rule", help="add an list out rules")
     rule_sub = rule.add_subparsers(dest="action", required=True)

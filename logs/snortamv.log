@@ -11,3 +11,6 @@
 2026-02-15 22:45:41,283 | INFO | __main__ | SnortAMV started
 2026-02-15 22:45:41,284 | WARNING | __main__ | Snort not detected, skipping scan
 2026-02-15 22:45:41,284 | ERROR | __main__ | Failed to parse rule file
+2026-02-18 19:14:11,467 | INFO | cli | SnortAMV started
+2026-02-18 19:14:11,468 | WARNING | cli | Snort not detected, skipping scan
+2026-02-18 19:14:11,469 | ERROR | cli | Failed to parse rule file
