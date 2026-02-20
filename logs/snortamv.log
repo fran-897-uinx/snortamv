@@ -73,3 +73,15 @@ UnicodeEncodeError: 'charmap' codec can't encode character '\u2713' in position 
 UnicodeEncodeError: 'charmap' codec can't encode character '\u2713' in position 1: character maps to <undefined>
 
 2026-02-20 23:06:43,506 | INFO | cli | Post installation completed successfully
+2026-02-21 00:06:57,028 | ERROR | cli | Post installation failed: Traceback (most recent call last):
+  File "C:\Users\DELL\Desktop\SnortAMV\post_installer.py", line 35, in <module>
+    print("\u274c Cannot detect Linux distro")
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\DELL\AppData\Local\Programs\Python\Python313\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\u274c' in position 0: character maps to <undefined>
+
+2026-02-21 00:07:35,869 | ERROR | cli | Post installation failed: 
+2026-02-21 00:07:49,851 | ERROR | cli | Post installation failed: 
+2026-02-21 00:08:57,370 | ERROR | cli | Post installation failed: 

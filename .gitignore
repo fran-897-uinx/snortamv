@@ -51,7 +51,7 @@ lock/*
 *.bak
 *.backup
 .temp/
-logs/
+logs/snortamv.log
 
 # ============== Snort =====================
 snort.conf.bak

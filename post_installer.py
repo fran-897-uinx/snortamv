@@ -4,9 +4,51 @@ import subprocess
 import sys
 import shutil
 import activenv
-
+from pathlib import Path
 
 VENV = "env"
+
+
+# ================Distro Detection================
+def get_linux_distro():
+    os_release = Path("/etc/os-release")
+    if not os_release.exists():
+        return None
+
+    data = {}
+    for line in os_release.read_text().splitlines():
+        if "=" in line:
+            k, v = line.split("=", 1)
+            data[k] = v.strip('"')
+
+    return {
+        "id": data.get("ID"),
+        "name": data.get("NAME"),
+        "version": data.get("VERSION_ID"),
+    }
+
+
+distro = get_linux_distro()
+
+
+if not distro:
+    print(" Cannot detect Linux distro")
+    sys.exit(1)
+
+print(f"Running on {distro['name']} {distro['version']}")
+
+
+def get_pkg_manager(distro):
+    distro_id = distro["id"]
+
+    if distro_id in ("ubuntu", "debian"):
+        return "apt"
+    if distro_id in ("fedora", "rhel", "centos"):
+        return "dnf"
+    if distro_id in ("arch", "manjaro"):
+        return "pacman"
+
+    return None
 
 
 # ---------------------------------------
@@ -52,17 +94,30 @@ def install_snort():
     # LINUX
     # -------------------------------
     elif os_type == "linux":
-        print("[+] Installing Snort 3 for Linux...")
-        subprocess.run(
-            ["sudo", "apt", "update"],
-            capture_output=True,
-            text=True,
-        )
-        subprocess.run(
-            ["sudo", "apt", "install", "-y", "snort"],
-            capture_output=True,
-            text=True,
-        )
+        print("[+] Installing Snort for Linux...")
+
+        distro = get_linux_distro()
+        if not distro:
+            print(" Cannot detect Linux distro")
+            return
+
+        pm = get_pkg_manager(distro)
+
+        if pm == "apt":
+            subprocess.run(["sudo", "apt", "update"], check=True)
+            subprocess.run(["sudo", "apt", "install", "-y", "snort"], check=True)
+
+        elif pm == "dnf":
+            subprocess.run(["sudo", "dnf", "install", "-y", "snort"], check=True)
+
+        elif pm == "pacman":
+            subprocess.run(
+                ["sudo", "pacman", "-Sy", "--noconfirm", "snort"],
+                check=True,
+            )
+
+        else:
+            print(" Unsupported Linux distro")
 
     # -------------------------------
     # MACOS

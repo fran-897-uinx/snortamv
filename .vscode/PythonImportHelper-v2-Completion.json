@@ -137,6 +137,14 @@
         "documentation": {}
     },
     {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
         "label": "shutil",
         "kind": 6,
         "isExtraImport": true,
@@ -1101,6 +1109,24 @@
         "documentation": {}
     },
     {
+        "label": "get_linux_distro",
+        "kind": 2,
+        "importPath": "post_installer",
+        "description": "post_installer",
+        "peekOfCode": "def get_linux_distro():\n    os_release = Path(\"/etc/os-release\")\n    if not os_release.exists():\n        return None\n    data = {}\n    for line in os_release.read_text().splitlines():\n        if \"=\" in line:\n            k, v = line.split(\"=\", 1)\n            data[k] = v.strip('\"')\n    return {",
+        "detail": "post_installer",
+        "documentation": {}
+    },
+    {
+        "label": "get_pkg_manager",
+        "kind": 2,
+        "importPath": "post_installer",
+        "description": "post_installer",
+        "peekOfCode": "def get_pkg_manager(distro):\n    distro_id = distro[\"id\"]\n    if distro_id in (\"ubuntu\", \"debian\"):\n        return \"apt\"\n    if distro_id in (\"fedora\", \"rhel\", \"centos\"):\n        return \"dnf\"\n    if distro_id in (\"arch\", \"manjaro\"):\n        return \"pacman\"\n    return None\n# ---------------------------------------",
+        "detail": "post_installer",
+        "documentation": {}
+    },
+    {
         "label": "snort_installed",
         "kind": 2,
         "importPath": "post_installer",
@@ -1168,7 +1194,16 @@
         "kind": 5,
         "importPath": "post_installer",
         "description": "post_installer",
-        "peekOfCode": "VENV = \"env\"\n# ---------------------------------------\n#   CHECK if Snort is installed\n# ---------------------------------------\ndef snort_installed():\n    return shutil.which(\"snort\") is not None or shutil.which(\"snort3\") is not None\n# ---------------------------------------\n#   INSTALL SNORT 3 BY OS\n# ---------------------------------------\ndef install_snort():",
+        "peekOfCode": "VENV = \"env\"\n# ================Distro Detection================\ndef get_linux_distro():\n    os_release = Path(\"/etc/os-release\")\n    if not os_release.exists():\n        return None\n    data = {}\n    for line in os_release.read_text().splitlines():\n        if \"=\" in line:\n            k, v = line.split(\"=\", 1)",
+        "detail": "post_installer",
+        "documentation": {}
+    },
+    {
+        "label": "distro",
+        "kind": 5,
+        "importPath": "post_installer",
+        "description": "post_installer",
+        "peekOfCode": "distro = get_linux_distro()\nif not distro:\n    print(\" Cannot detect Linux distro\")\n    sys.exit(1)\nprint(f\"Running on {distro['name']} {distro['version']}\")\ndef get_pkg_manager(distro):\n    distro_id = distro[\"id\"]\n    if distro_id in (\"ubuntu\", \"debian\"):\n        return \"apt\"\n    if distro_id in (\"fedora\", \"rhel\", \"centos\"):",
         "detail": "post_installer",
         "documentation": {}
     },
