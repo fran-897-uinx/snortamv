@@ -51,6 +51,13 @@ def get_pkg_manager(distro):
     return None
 
 
+def get_aur_helper():
+    for helper in ("yay", "paru"):
+        if shutil.which(helper):
+            return helper
+    return None
+
+
 # ---------------------------------------
 #   CHECK if Snort is installed
 # ---------------------------------------
@@ -111,10 +118,26 @@ def install_snort():
             subprocess.run(["sudo", "dnf", "install", "-y", "snort"], check=True)
 
         elif pm == "pacman":
-            subprocess.run(
-                ["pacman", "-Sy", "--noconfirm", "snort"],
-                check=True,
-            )
+            aur = get_aur_helper()
+
+            if not aur:
+                print("❌ Arch detected but no AUR helper found.")
+                print("👉 Install one of these first:")
+                print("   sudo pacman -S --needed base-devel git")
+                print("   git clone https://aur.archlinux.org/yay.git")
+                print("   cd yay && makepkg -si")
+                return
+
+            print(f"[+] Installing Snort using AUR helper ({aur})...")
+            try:
+                subprocess.run(
+                    [aur, "-S", "--noconfirm", "snort"],
+                    check=True,
+                )
+            except subprocess.CalledProcessError as e:
+                print("[!] snort not found, trying snort3-git...")
+                subprocess.run([aur, "-S", "--noconfirm", "snort3-git"], check=True)
+                return
 
         else:
             print(" Unsupported Linux distro")

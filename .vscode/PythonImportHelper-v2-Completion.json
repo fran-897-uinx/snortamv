@@ -1122,7 +1122,16 @@
         "kind": 2,
         "importPath": "post_installer",
         "description": "post_installer",
-        "peekOfCode": "def get_pkg_manager(distro):\n    distro_id = distro[\"id\"]\n    if distro_id in (\"ubuntu\", \"debian\"):\n        return \"apt\"\n    if distro_id in (\"fedora\", \"rhel\", \"centos\"):\n        return \"dnf\"\n    if distro_id in (\"arch\", \"manjaro\"):\n        return \"pacman\"\n    return None\n# ---------------------------------------",
+        "peekOfCode": "def get_pkg_manager(distro):\n    distro_id = distro[\"id\"]\n    if distro_id in (\"ubuntu\", \"debian\"):\n        return \"apt\"\n    if distro_id in (\"fedora\", \"rhel\", \"centos\"):\n        return \"dnf\"\n    if distro_id in (\"arch\", \"manjaro\"):\n        return \"pacman\"\n    return None\ndef get_aur_helper():",
+        "detail": "post_installer",
+        "documentation": {}
+    },
+    {
+        "label": "get_aur_helper",
+        "kind": 2,
+        "importPath": "post_installer",
+        "description": "post_installer",
+        "peekOfCode": "def get_aur_helper():\n    for helper in (\"yay\", \"paru\"):\n        if shutil.which(helper):\n            return helper\n    return None\n# ---------------------------------------\n#   CHECK if Snort is installed\n# ---------------------------------------\ndef snort_installed():\n    return shutil.which(\"snort\") is not None or shutil.which(\"snort3\") is not None",
         "detail": "post_installer",
         "documentation": {}
     },
