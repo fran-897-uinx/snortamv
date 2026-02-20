@@ -53,12 +53,31 @@ def check_snort():
     return snort_path
 
 def setup_cmd(_):
-    snort_path = check_snort()
-    if not snort_path:
-        logger.error("Cannot setup: Snort not found")
-        console.print("[red]Snort not found[/red]")
-        sys.exit(1)
-
+    if OS_TYPE == "linux":
+        try:
+            result = subprocess.run(
+                ["python3", "post_installer.py"], capture_output=True, text=True
+            )
+            if result.returncode != 0:
+                logger.error("Post installation failed: %s", result.stderr)
+            else:
+                logger.info("Post installation completed successfully")
+        except Exception as e:
+            logger.error("Error during post installation: %s", e)
+    elif OS_TYPE == "windows":
+        try:
+            result = subprocess.run(
+                ["python", "post_installer.py"], capture_output=True, text=True
+            )
+            if result.returncode != 0:
+                logger.error("Post installation failed: %s", result.stderr)
+            else:
+                logger.info("Post installation completed successfully")
+        except Exception as e:
+            logger.error("Error during post installation: %s", e)
+    else:
+        logger.error("Unsupported OS for setup")
+        return
 
 def run_cmd(_):
     if OS_TYPE == "linux":

@@ -1006,7 +1006,7 @@
         "kind": 2,
         "importPath": "cli",
         "description": "cli",
-        "peekOfCode": "def check_snort():\n    snort_path = shutil.which(\"snort\") or shutil.which(\"snort3\")\n    if not snort_path:\n        logger.warning(\"Snort not detected\")\n    return snort_path\ndef setup_cmd(_):\n    snort_path = check_snort()\n    if not snort_path:\n        logger.error(\"Cannot setup: Snort not found\")\n        console.print(\"[red]Snort not found[/red]\")",
+        "peekOfCode": "def check_snort():\n    snort_path = shutil.which(\"snort\") or shutil.which(\"snort3\")\n    if not snort_path:\n        logger.warning(\"Snort not detected\")\n    return snort_path\ndef setup_cmd(_):\n    if OS_TYPE == \"linux\":\n        try:\n            result = subprocess.run(\n                [\"python3\", \"post_installer.py\"], capture_output=True, text=True",
         "detail": "cli",
         "documentation": {}
     },
@@ -1015,7 +1015,7 @@
         "kind": 2,
         "importPath": "cli",
         "description": "cli",
-        "peekOfCode": "def setup_cmd(_):\n    snort_path = check_snort()\n    if not snort_path:\n        logger.error(\"Cannot setup: Snort not found\")\n        console.print(\"[red]Snort not found[/red]\")\n        sys.exit(1)\ndef run_cmd(_):\n    if OS_TYPE == \"linux\":\n        try:\n            subprocess.run([\"sudo\", \"bash\", \"snort_auto.bash\"], check=True)",
+        "peekOfCode": "def setup_cmd(_):\n    if OS_TYPE == \"linux\":\n        try:\n            result = subprocess.run(\n                [\"python3\", \"post_installer.py\"], capture_output=True, text=True\n            )\n            if result.returncode != 0:\n                logger.error(\"Post installation failed: %s\", result.stderr)\n            else:\n                logger.info(\"Post installation completed successfully\")",
         "detail": "cli",
         "documentation": {}
     },
@@ -1105,7 +1105,7 @@
         "kind": 2,
         "importPath": "post_installer",
         "description": "post_installer",
-        "peekOfCode": "def snort_installed():\n    return shutil.which(\"snort\") is not None or shutil.which(\"snort3\") is not None\n# ---------------------------------------\n#   INSTALL SNORT 3 BY OS\n# ---------------------------------------\ndef install_snort():\n    os_type = platform.system().lower()\n    print(\"\\n[=] Checking if Snort is installed...\")\n    if snort_installed():\n        print(\"[✓] Snort already installed. Skipping installation.\\n\")",
+        "peekOfCode": "def snort_installed():\n    return shutil.which(\"snort\") is not None or shutil.which(\"snort3\") is not None\n# ---------------------------------------\n#   INSTALL SNORT 3 BY OS\n# ---------------------------------------\ndef install_snort():\n    os_type = platform.system().lower()\n    print(f\"\\n[=] Checking if Snort is installed...\")\n    if snort_installed():\n        print(f\" Snort already installed. Skipping installation.\\n\")",
         "detail": "post_installer",
         "documentation": {}
     },
@@ -1114,7 +1114,7 @@
         "kind": 2,
         "importPath": "post_installer",
         "description": "post_installer",
-        "peekOfCode": "def install_snort():\n    os_type = platform.system().lower()\n    print(\"\\n[=] Checking if Snort is installed...\")\n    if snort_installed():\n        print(\"[✓] Snort already installed. Skipping installation.\\n\")\n        return\n    print(\"[+] Snort not found. Installing Snort 3...\\n\")\n    # -------------------------------\n    # WINDOWS\n    # -------------------------------",
+        "peekOfCode": "def install_snort():\n    os_type = platform.system().lower()\n    print(f\"\\n[=] Checking if Snort is installed...\")\n    if snort_installed():\n        print(f\" Snort already installed. Skipping installation.\\n\")\n        return\n    print(f\"[+] Snort not found. Installing Snort 3...\\n\")\n    # -------------------------------\n    # WINDOWS\n    # -------------------------------",
         "detail": "post_installer",
         "documentation": {}
     },
@@ -1123,7 +1123,7 @@
         "kind": 2,
         "importPath": "post_installer",
         "description": "post_installer",
-        "peekOfCode": "def create_venv():\n    if not os.path.exists(VENV):\n        print(\"[+] Creating virtual environment...\")\n        subprocess.run([sys.executable, \"-m\", \"venv\", VENV], check=True)\n    else:\n        print(\"[✓] Virtual environment already exists.\")\n# ---------------------------------------\n#   GET PYTHON INSIDE VENV\n# ---------------------------------------\ndef get_venv_python():",
+        "peekOfCode": "def create_venv():\n    if not os.path.exists(VENV):\n        print(\"[+] Creating virtual environment...\")\n        subprocess.run([sys.executable, \"-m\", \"venv\", VENV], check=True)\n    else:\n        print(\" Virtual environment already exists.\")\n# ---------------------------------------\n#   GET PYTHON INSIDE VENV\n# ---------------------------------------\ndef get_venv_python():",
         "detail": "post_installer",
         "documentation": {}
     },
@@ -1150,7 +1150,7 @@
         "kind": 2,
         "importPath": "post_installer",
         "description": "post_installer",
-        "peekOfCode": "def actvenv(venv_python):\n    if not os.path.exists(\"activenv.py\"):\n        print(\n            \"Please go to the README.MD the see \\n how to activate the Virtual environment\"\n        )\n        return\n    print(\"[+] Activating virtual Environment\")\n    subprocess.run([venv_python, \"activenv.py\"])\n# ---------------------------------------\n#   RUN APPLICATION INSIDE VENV",
+        "peekOfCode": "def actvenv(venv_python):\n    if not os.path.exists(\"activenv.py\"):\n        print(\n            f\"Please go to the README.MD the see \\n how to activate the Virtual environment\"\n        )\n        return\n    print(\"[+] Activating virtual Environment\")\n    subprocess.run([venv_python, \"activenv.py\"])\n# ---------------------------------------\n#   RUN APPLICATION INSIDE VENV",
         "detail": "post_installer",
         "documentation": {}
     },
@@ -1159,7 +1159,7 @@
         "kind": 2,
         "importPath": "post_installer",
         "description": "post_installer",
-        "peekOfCode": "def run_app(venv_python):\n    if not os.path.exists(\"main.py\"):\n        print(\"❌ ERROR: main.py not found.\")\n        return\n    print(\"[+] Launching SnortAMV inside activated venv...\\n\")\n    subprocess.run([venv_python, \"main.py\"])\n# ---------------------------------------\n#               MAIN\n# ---------------------------------------\nif __name__ == \"__main__\":",
+        "peekOfCode": "def run_app(venv_python):\n    if not os.path.exists(\"cli.py\"):\n        print(\"❌ ERROR: cli.py not found.\")\n        return\n    print(f\"[+] Launching SnortAMV inside activated venv...\\n\")\n    subprocess.run([venv_python, \"cli.py\"])\n# ---------------------------------------\n#               MAIN\n# ---------------------------------------\nif __name__ == \"__main__\":",
         "detail": "post_installer",
         "documentation": {}
     },

@@ -24,3 +24,52 @@ https://www.wireshark.org/download.html
 
 2026-02-20 22:14:37,932 | ERROR | cli | STDERR:
 
+2026-02-20 23:00:29,624 | ERROR | cli | Post installation failed: Traceback (most recent call last):
+  File "C:\Users\DELL\Desktop\SnortAMV\post_installer.py", line 185, in <module>
+    install_snort()  # FIRST \u2192 install snort
+    ~~~~~~~~~~~~~^^
+  File "C:\Users\DELL\Desktop\SnortAMV\post_installer.py", line 28, in install_snort
+    print("[\u2713] Snort already installed. Skipping installation.\n")
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\DELL\AppData\Local\Programs\Python\Python313\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\u2713' in position 1: character maps to <undefined>
+
+2026-02-20 23:05:22,552 | ERROR | cli | Post installation failed: Traceback (most recent call last):
+  File "C:\Users\DELL\Desktop\SnortAMV\post_installer.py", line 185, in <module>
+    install_snort()  # FIRST \u2192 install snort
+    ~~~~~~~~~~~~~^^
+  File "C:\Users\DELL\Desktop\SnortAMV\post_installer.py", line 28, in install_snort
+    print(f"[\u2713] Snort already installed. Skipping installation.\n")
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\DELL\AppData\Local\Programs\Python\Python313\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\u2713' in position 1: character maps to <undefined>
+
+2026-02-20 23:05:48,151 | ERROR | cli | Post installation failed: Traceback (most recent call last):
+  File "C:\Users\DELL\Desktop\SnortAMV\post_installer.py", line 186, in <module>
+    create_venv()  # THEN create env
+    ~~~~~~~~~~~^^
+  File "C:\Users\DELL\Desktop\SnortAMV\post_installer.py", line 101, in create_venv
+    print("[\u2713] Virtual environment already exists.")
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\DELL\AppData\Local\Programs\Python\Python313\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\u2713' in position 1: character maps to <undefined>
+
+2026-02-20 23:06:14,713 | ERROR | cli | Post installation failed: Traceback (most recent call last):
+  File "C:\Users\DELL\Desktop\SnortAMV\post_installer.py", line 189, in <module>
+    install_requirements(venv_python)  # install packages
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\DELL\Desktop\SnortAMV\post_installer.py", line 146, in install_requirements
+    print("[\u2713] All requirements already installed.")
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\DELL\AppData\Local\Programs\Python\Python313\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\u2713' in position 1: character maps to <undefined>
+
+2026-02-20 23:06:43,506 | INFO | cli | Post installation completed successfully

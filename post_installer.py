@@ -22,13 +22,13 @@ def snort_installed():
 def install_snort():
     os_type = platform.system().lower()
 
-    print("\n[=] Checking if Snort is installed...")
+    print(f"\n[=] Checking if Snort is installed...")
 
     if snort_installed():
-        print("[✓] Snort already installed. Skipping installation.\n")
+        print(f" Snort already installed. Skipping installation.\n")
         return
 
-    print("[+] Snort not found. Installing Snort 3...\n")
+    print(f"[+] Snort not found. Installing Snort 3...\n")
 
     # -------------------------------
     # WINDOWS
@@ -53,8 +53,16 @@ def install_snort():
     # -------------------------------
     elif os_type == "linux":
         print("[+] Installing Snort 3 for Linux...")
-        subprocess.run(["sudo", "apt", "update"], check=True)
-        subprocess.run(["sudo", "apt", "install", "-y", "snort"], check=True)
+        subprocess.run(
+            ["sudo", "apt", "update"],
+            capture_output=True,
+            text=True,
+        )
+        subprocess.run(
+            ["sudo", "apt", "install", "-y", "snort"],
+            capture_output=True,
+            text=True,
+        )
 
     # -------------------------------
     # MACOS
@@ -79,7 +87,7 @@ def install_snort():
         print("❌ Unsupported OS for Snort installation.")
         return
 
-    print("\n[✓] Snort 3 installation completed.\n")
+    print(f"\n[✓] Snort 3 installation completed.\n")
 
 
 # ---------------------------------------
@@ -90,7 +98,7 @@ def create_venv():
         print("[+] Creating virtual environment...")
         subprocess.run([sys.executable, "-m", "venv", VENV], check=True)
     else:
-        print("[✓] Virtual environment already exists.")
+        print(" Virtual environment already exists.")
 
 
 # ---------------------------------------
@@ -135,12 +143,12 @@ def install_requirements(venv_python):
             missing.append(pkg)
 
     if not missing:
-        print("[✓] All requirements already installed.")
+        print(" All requirements already installed.")
         return
 
     print(f"[+] Installing missing packages: {missing}")
     subprocess.run([venv_python, "-m", "pip", "install", *missing], check=True)
-    print("[✓] Done installing requirements.\n")
+    print(f" Done installing requirements.\n")
 
 
 # -------------------------------------
@@ -149,7 +157,7 @@ def install_requirements(venv_python):
 def actvenv(venv_python):
     if not os.path.exists("activenv.py"):
         print(
-            "Please go to the README.MD the see \n how to activate the Virtual environment"
+            f"Please go to the README.MD the see \n how to activate the Virtual environment"
         )
         return
     print("[+] Activating virtual Environment")
@@ -160,23 +168,23 @@ def actvenv(venv_python):
 #   RUN APPLICATION INSIDE VENV
 # ---------------------------------------
 def run_app(venv_python):
-    if not os.path.exists("main.py"):
-        print("❌ ERROR: main.py not found.")
+    if not os.path.exists("cli.py"):
+        print("❌ ERROR: cli.py not found.")
         return
 
-    print("[+] Launching SnortAMV inside activated venv...\n")
-    subprocess.run([venv_python, "main.py"])
+    print(f"[+] Launching SnortAMV inside activated venv...\n")
+    subprocess.run([venv_python, "cli.py"])
 
 
 # ---------------------------------------
 #               MAIN
 # ---------------------------------------
 if __name__ == "__main__":
-    print("[=] Starting post installation...\n")
+    print(f"[=] Starting post installation...\n")
 
     install_snort()  # FIRST → install snort
     create_venv()  # THEN create env
     venv_python = get_venv_python()  # get python inside env
-    actvenv(venv_python) # activate venv 
+    actvenv(venv_python)  # activate venv
     install_requirements(venv_python)  # install packages
     run_app(venv_python)  # run your tool
