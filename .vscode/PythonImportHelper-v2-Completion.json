@@ -992,6 +992,24 @@
         "documentation": {}
     },
     {
+        "label": "get_linux_distro",
+        "kind": 2,
+        "importPath": "cli",
+        "description": "cli",
+        "peekOfCode": "def get_linux_distro():\n    os_release = Path(\"/etc/os-release\")\n    if not os_release.exists():\n        return None\n    data = {}\n    for line in os_release.read_text().splitlines():\n        if \"=\" in line:\n            k, v = line.split(\"=\", 1)\n            data[k] = v.strip('\"')\n    return {",
+        "detail": "cli",
+        "documentation": {}
+    },
+    {
+        "label": "get_pkg_manager",
+        "kind": 2,
+        "importPath": "cli",
+        "description": "cli",
+        "peekOfCode": "def get_pkg_manager(distro):\n    distro_id = distro[\"id\"]\n    if distro_id in (\"ubuntu\", \"debian\"):\n        return \"apt\"\n    if distro_id in (\"fedora\", \"rhel\", \"centos\"):\n        return \"dnf\"\n    if distro_id in (\"arch\", \"manjaro\"):\n        return \"pacman\"\n    return None\n# ---------------- UI ----------------",
+        "detail": "cli",
+        "documentation": {}
+    },
+    {
         "label": "greeting_by_time",
         "kind": 2,
         "importPath": "cli",
@@ -1032,7 +1050,7 @@
         "kind": 2,
         "importPath": "cli",
         "description": "cli",
-        "peekOfCode": "def run_cmd(_):\n    if OS_TYPE == \"linux\":\n        try:\n            subprocess.run([\"sudo\", \"bash\", \"snort_auto.bash\"], check=True)\n        except subprocess.CalledProcessError as e:\n            logger.error(\"Snort run failed: %s\", e)\n            logger.error(\"Stdout: %s\", e.stdout)\n            logger.error(\"Stderr: %s\", e.stderr)\n            return\n    elif OS_TYPE == \"windows\":",
+        "peekOfCode": "def run_cmd(_):\n    if OS_TYPE == \"linux\":\n        try:\n            subprocess.run([\"bash\", \"snort_auto.bash\"], check=True)\n        except subprocess.CalledProcessError as e:\n            logger.error(\"Snort run failed: %s\", e)\n            logger.error(\"Stdout: %s\", e.stdout)\n            logger.error(\"Stderr: %s\", e.stderr)\n            return\n    elif OS_TYPE == \"windows\":",
         "detail": "cli",
         "documentation": {}
     },
@@ -1068,7 +1086,7 @@
         "kind": 5,
         "importPath": "cli",
         "description": "cli",
-        "peekOfCode": "ROOT = Path(__file__).parent.resolve()\nif str(ROOT) not in sys.path:\n    sys.path.insert(0, str(ROOT))\nconsole = Console()\nOS_TYPE = platform.system().lower()\nVERSION = \"0.0.1\"\nlogger = get_logger(__name__)\n# ---------------- UI ----------------\ndef greeting_by_time():\n    hour = int(time.strftime(\"%H\"))",
+        "peekOfCode": "ROOT = Path(__file__).parent.resolve()\nif str(ROOT) not in sys.path:\n    sys.path.insert(0, str(ROOT))\nconsole = Console()\nOS_TYPE = platform.system().lower()\nVERSION = \"0.0.1\"\nlogger = get_logger(__name__)\n# -------------------- Helper Functions --------------------\ndef get_linux_distro():\n    os_release = Path(\"/etc/os-release\")",
         "detail": "cli",
         "documentation": {}
     },
@@ -1077,7 +1095,7 @@
         "kind": 5,
         "importPath": "cli",
         "description": "cli",
-        "peekOfCode": "console = Console()\nOS_TYPE = platform.system().lower()\nVERSION = \"0.0.1\"\nlogger = get_logger(__name__)\n# ---------------- UI ----------------\ndef greeting_by_time():\n    hour = int(time.strftime(\"%H\"))\n    if hour < 12:\n        return \"Good Morning\"\n    elif hour < 17:",
+        "peekOfCode": "console = Console()\nOS_TYPE = platform.system().lower()\nVERSION = \"0.0.1\"\nlogger = get_logger(__name__)\n# -------------------- Helper Functions --------------------\ndef get_linux_distro():\n    os_release = Path(\"/etc/os-release\")\n    if not os_release.exists():\n        return None\n    data = {}",
         "detail": "cli",
         "documentation": {}
     },
@@ -1086,7 +1104,7 @@
         "kind": 5,
         "importPath": "cli",
         "description": "cli",
-        "peekOfCode": "OS_TYPE = platform.system().lower()\nVERSION = \"0.0.1\"\nlogger = get_logger(__name__)\n# ---------------- UI ----------------\ndef greeting_by_time():\n    hour = int(time.strftime(\"%H\"))\n    if hour < 12:\n        return \"Good Morning\"\n    elif hour < 17:\n        return \"Good Afternoon\"",
+        "peekOfCode": "OS_TYPE = platform.system().lower()\nVERSION = \"0.0.1\"\nlogger = get_logger(__name__)\n# -------------------- Helper Functions --------------------\ndef get_linux_distro():\n    os_release = Path(\"/etc/os-release\")\n    if not os_release.exists():\n        return None\n    data = {}\n    for line in os_release.read_text().splitlines():",
         "detail": "cli",
         "documentation": {}
     },
@@ -1095,7 +1113,7 @@
         "kind": 5,
         "importPath": "cli",
         "description": "cli",
-        "peekOfCode": "VERSION = \"0.0.1\"\nlogger = get_logger(__name__)\n# ---------------- UI ----------------\ndef greeting_by_time():\n    hour = int(time.strftime(\"%H\"))\n    if hour < 12:\n        return \"Good Morning\"\n    elif hour < 17:\n        return \"Good Afternoon\"\n    elif hour < 21:",
+        "peekOfCode": "VERSION = \"0.0.1\"\nlogger = get_logger(__name__)\n# -------------------- Helper Functions --------------------\ndef get_linux_distro():\n    os_release = Path(\"/etc/os-release\")\n    if not os_release.exists():\n        return None\n    data = {}\n    for line in os_release.read_text().splitlines():\n        if \"=\" in line:",
         "detail": "cli",
         "documentation": {}
     },
@@ -1104,7 +1122,16 @@
         "kind": 5,
         "importPath": "cli",
         "description": "cli",
-        "peekOfCode": "logger = get_logger(__name__)\n# ---------------- UI ----------------\ndef greeting_by_time():\n    hour = int(time.strftime(\"%H\"))\n    if hour < 12:\n        return \"Good Morning\"\n    elif hour < 17:\n        return \"Good Afternoon\"\n    elif hour < 21:\n        return \"Good Evening\"",
+        "peekOfCode": "logger = get_logger(__name__)\n# -------------------- Helper Functions --------------------\ndef get_linux_distro():\n    os_release = Path(\"/etc/os-release\")\n    if not os_release.exists():\n        return None\n    data = {}\n    for line in os_release.read_text().splitlines():\n        if \"=\" in line:\n            k, v = line.split(\"=\", 1)",
+        "detail": "cli",
+        "documentation": {}
+    },
+    {
+        "label": "distro",
+        "kind": 5,
+        "importPath": "cli",
+        "description": "cli",
+        "peekOfCode": "distro = get_linux_distro()\nif not distro:\n    print(\" Cannot detect Linux distro\")\n    sys.exit(1)\nprint(f\"Running on {distro['name']} {distro['version']}\")\ndef get_pkg_manager(distro):\n    distro_id = distro[\"id\"]\n    if distro_id in (\"ubuntu\", \"debian\"):\n        return \"apt\"\n    if distro_id in (\"fedora\", \"rhel\", \"centos\"):",
         "detail": "cli",
         "documentation": {}
     },

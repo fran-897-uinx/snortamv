@@ -28,6 +28,45 @@ VERSION = "0.0.1"
 logger = get_logger(__name__)
 
 
+# -------------------- Helper Functions --------------------
+def get_linux_distro():
+    os_release = Path("/etc/os-release")
+    if not os_release.exists():
+        return None
+
+    data = {}
+    for line in os_release.read_text().splitlines():
+        if "=" in line:
+            k, v = line.split("=", 1)
+            data[k] = v.strip('"')
+
+    return {
+        "id": data.get("ID"),
+        "name": data.get("NAME"),
+        "version": data.get("VERSION_ID"),
+    }
+
+
+distro = get_linux_distro()
+if not distro:
+    print(" Cannot detect Linux distro")
+    sys.exit(1)
+print(f"Running on {distro['name']} {distro['version']}")
+
+
+def get_pkg_manager(distro):
+    distro_id = distro["id"]
+
+    if distro_id in ("ubuntu", "debian"):
+        return "apt"
+    if distro_id in ("fedora", "rhel", "centos"):
+        return "dnf"
+    if distro_id in ("arch", "manjaro"):
+        return "pacman"
+
+    return None
+
+
 # ---------------- UI ----------------
 def greeting_by_time():
     hour = int(time.strftime("%H"))
@@ -51,6 +90,7 @@ def check_snort():
     if not snort_path:
         logger.warning("Snort not detected")
     return snort_path
+
 
 def setup_cmd(_):
     if OS_TYPE == "linux":
@@ -79,10 +119,11 @@ def setup_cmd(_):
         logger.error("Unsupported OS for setup")
         return
 
+
 def run_cmd(_):
     if OS_TYPE == "linux":
         try:
-            subprocess.run(["sudo", "bash", "snort_auto.bash"], check=True)
+            subprocess.run(["bash", "snort_auto.bash"], check=True)
         except subprocess.CalledProcessError as e:
             logger.error("Snort run failed: %s", e)
             logger.error("Stdout: %s", e.stdout)
