@@ -112,7 +112,7 @@ def install_snort():
 
         elif pm == "pacman":
             subprocess.run(
-                ["sudo", "pacman", "-Sy", "--noconfirm", "snort"],
+                ["pacman", "-Sy", "--noconfirm", "snort"],
                 check=True,
             )
 

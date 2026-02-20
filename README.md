@@ -49,7 +49,7 @@ A Python-based CLI tool to manage Snort Network Intrusion Detection System (IDS)
    ```
    **For linux and macOS**
    ```bash
-   source/env/bin/activate
+   source env/bin/activate
    ```
 2. **Install the package and dependencies:**
    ```bash
