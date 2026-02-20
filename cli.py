@@ -86,12 +86,36 @@ def run_cmd(_):
 
 def decrypt_cmd(_):
     if OS_TYPE == "linux":
-        subprocess.run(["bash", "decrypt.bash"], check=True)
+        cmd = ["bash", "decrypt.bash"]
     elif OS_TYPE == "windows":
-        subprocess.run(
-            ["powershell", "-ExecutionPolicy", "Bypass", "-File", "decrypt.ps1"],
-            check=True,
-        )
+        cmd = [
+            "powershell",
+            "-ExecutionPolicy",
+            "Bypass",
+            "-File",
+            "decrypt.ps1",
+        ]
+    else:
+        logger.error("Unsupported OS")
+        return
+
+    logger.info("Starting decryption process")
+
+    result = subprocess.run(
+        cmd,
+        capture_output=True,
+        text=True,
+    )
+
+    if result.returncode != 0:
+        logger.error("Decryption failed")
+        logger.error("STDOUT:\n%s", result.stdout)
+        logger.error("STDERR:\n%s", result.stderr)
+        print("[❌] Decryption failed. Check logs for details.")
+        return
+
+    logger.info("Decryption completed successfully")
+    print("[✅] Decryption completed successfully")
 
 
 def version_cmd(_):

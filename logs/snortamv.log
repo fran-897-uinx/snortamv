@@ -14,3 +14,13 @@
 2026-02-18 19:14:11,467 | INFO | cli | SnortAMV started
 2026-02-18 19:14:11,468 | WARNING | cli | Snort not detected, skipping scan
 2026-02-18 19:14:11,469 | ERROR | cli | Failed to parse rule file
+2026-02-20 22:14:35,080 | INFO | cli | Starting decryption process
+2026-02-20 22:14:37,931 | ERROR | cli | Decryption failed
+2026-02-20 22:14:37,931 | ERROR | cli | STDOUT:
+=== Snort TLS Decrypt (Windows) ===
+Missing required tool: tshark.exe
+Install Wireshark from:
+https://www.wireshark.org/download.html
+
+2026-02-20 22:14:37,932 | ERROR | cli | STDERR:
+

@@ -129,6 +129,14 @@
         "documentation": {}
     },
     {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
         "label": "shutil",
         "kind": 6,
         "isExtraImport": true,
@@ -296,12 +304,12 @@
         "documentation": {}
     },
     {
-        "label": "subprocess",
+        "label": "logging",
         "kind": 6,
         "isExtraImport": true,
-        "importPath": "subprocess",
-        "description": "subprocess",
-        "detail": "subprocess",
+        "importPath": "logging",
+        "description": "logging",
+        "detail": "logging",
         "documentation": {}
     },
     {
@@ -311,6 +319,23 @@
         "importPath": "sys",
         "description": "sys",
         "detail": "sys",
+        "documentation": {}
+    },
+    {
+        "label": "RotatingFileHandler",
+        "importPath": "logging.handlers",
+        "description": "logging.handlers",
+        "isExtraImport": true,
+        "detail": "logging.handlers",
+        "documentation": {}
+    },
+    {
+        "label": "subprocess",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "subprocess",
+        "description": "subprocess",
+        "detail": "subprocess",
         "documentation": {}
     },
     {
@@ -386,6 +411,14 @@
         "description": "modules.acc_managt.update_acc",
         "isExtraImport": true,
         "detail": "modules.acc_managt.update_acc",
+        "documentation": {}
+    },
+    {
+        "label": "get_logger",
+        "importPath": "modules.utilities.logger",
+        "description": "modules.utilities.logger",
+        "isExtraImport": true,
+        "detail": "modules.utilities.logger",
         "documentation": {}
     },
     {
@@ -780,6 +813,78 @@
         "documentation": {}
     },
     {
+        "label": "get_logger",
+        "kind": 2,
+        "importPath": "modules.utilities.logger",
+        "description": "modules.utilities.logger",
+        "peekOfCode": "def get_logger(name: str = APP_NAME) -> logging.Logger:\n    return logging.getLogger(name)",
+        "detail": "modules.utilities.logger",
+        "documentation": {}
+    },
+    {
+        "label": "APP_NAME",
+        "kind": 5,
+        "importPath": "modules.utilities.logger",
+        "description": "modules.utilities.logger",
+        "peekOfCode": "APP_NAME = \"snortamv\"\nOS_TYPE = platform.system().lower()\n# ---------------- Paths ----------------\nif OS_TYPE == \"windows\":\n    BASE_DIR = Path.cwd()\n    LOG_DIR = BASE_DIR / \"logs\"\nelif OS_TYPE == \"linux\":\n    LOG_DIR = Path(\"/var/log/snortamv\")\nelse:\n    print(\"Unsupported OS\")",
+        "detail": "modules.utilities.logger",
+        "documentation": {}
+    },
+    {
+        "label": "OS_TYPE",
+        "kind": 5,
+        "importPath": "modules.utilities.logger",
+        "description": "modules.utilities.logger",
+        "peekOfCode": "OS_TYPE = platform.system().lower()\n# ---------------- Paths ----------------\nif OS_TYPE == \"windows\":\n    BASE_DIR = Path.cwd()\n    LOG_DIR = BASE_DIR / \"logs\"\nelif OS_TYPE == \"linux\":\n    LOG_DIR = Path(\"/var/log/snortamv\")\nelse:\n    print(\"Unsupported OS\")\n    sys.exit(1)",
+        "detail": "modules.utilities.logger",
+        "documentation": {}
+    },
+    {
+        "label": "LOG_FILE",
+        "kind": 5,
+        "importPath": "modules.utilities.logger",
+        "description": "modules.utilities.logger",
+        "peekOfCode": "LOG_FILE = LOG_DIR / \"snortamv.log\"\n# ---------------- Logging Setup ----------------\nLOG_LEVEL = logging.INFO  # change to DEBUG for dev\nformatter = logging.Formatter(\n    \"%(asctime)s | %(levelname)s | %(name)s | %(message)s\"\n)\nfile_handler = RotatingFileHandler(\n    LOG_FILE,\n    maxBytes=5 * 1024 * 1024,  # 5MB\n    backupCount=5",
+        "detail": "modules.utilities.logger",
+        "documentation": {}
+    },
+    {
+        "label": "LOG_LEVEL",
+        "kind": 5,
+        "importPath": "modules.utilities.logger",
+        "description": "modules.utilities.logger",
+        "peekOfCode": "LOG_LEVEL = logging.INFO  # change to DEBUG for dev\nformatter = logging.Formatter(\n    \"%(asctime)s | %(levelname)s | %(name)s | %(message)s\"\n)\nfile_handler = RotatingFileHandler(\n    LOG_FILE,\n    maxBytes=5 * 1024 * 1024,  # 5MB\n    backupCount=5\n)\nfile_handler.setFormatter(formatter)",
+        "detail": "modules.utilities.logger",
+        "documentation": {}
+    },
+    {
+        "label": "formatter",
+        "kind": 5,
+        "importPath": "modules.utilities.logger",
+        "description": "modules.utilities.logger",
+        "peekOfCode": "formatter = logging.Formatter(\n    \"%(asctime)s | %(levelname)s | %(name)s | %(message)s\"\n)\nfile_handler = RotatingFileHandler(\n    LOG_FILE,\n    maxBytes=5 * 1024 * 1024,  # 5MB\n    backupCount=5\n)\nfile_handler.setFormatter(formatter)\nconsole_handler = logging.StreamHandler()",
+        "detail": "modules.utilities.logger",
+        "documentation": {}
+    },
+    {
+        "label": "file_handler",
+        "kind": 5,
+        "importPath": "modules.utilities.logger",
+        "description": "modules.utilities.logger",
+        "peekOfCode": "file_handler = RotatingFileHandler(\n    LOG_FILE,\n    maxBytes=5 * 1024 * 1024,  # 5MB\n    backupCount=5\n)\nfile_handler.setFormatter(formatter)\nconsole_handler = logging.StreamHandler()\nconsole_handler.setFormatter(formatter)\nlogging.basicConfig(\n    level=LOG_LEVEL,",
+        "detail": "modules.utilities.logger",
+        "documentation": {}
+    },
+    {
+        "label": "console_handler",
+        "kind": 5,
+        "importPath": "modules.utilities.logger",
+        "description": "modules.utilities.logger",
+        "peekOfCode": "console_handler = logging.StreamHandler()\nconsole_handler.setFormatter(formatter)\nlogging.basicConfig(\n    level=LOG_LEVEL,\n    handlers=[file_handler, console_handler],\n)\ndef get_logger(name: str = APP_NAME) -> logging.Logger:\n    return logging.getLogger(name)",
+        "detail": "modules.utilities.logger",
+        "documentation": {}
+    },
+    {
         "label": "test_app_runs",
         "kind": 2,
         "importPath": "tests.test_app_runs",
@@ -892,7 +997,7 @@
         "kind": 2,
         "importPath": "cli",
         "description": "cli",
-        "peekOfCode": "def banner():\n    console.print(pyfiglet.figlet_format(\"SNORT AMV\"), style=\"bold green\")\n    console.print(f\"{greeting_by_time()} 👋\", style=\"green\")\n# ---------------- Core ----------------\ndef check_snort():\n    return shutil.which(\"snort\") or shutil.which(\"snort3\")\ndef setup_cmd(_):\n    if not check_snort():\n        console.print(\"[red]Snort not found[/red]\")\n        sys.exit(1)",
+        "peekOfCode": "def banner():\n    console.print(pyfiglet.figlet_format(\"SNORT AMV\"), style=\"bold green\")\n    console.print(f\"{greeting_by_time()} 👋\", style=\"green\")\n# ---------------- Core ----------------\ndef check_snort():\n    snort_path = shutil.which(\"snort\") or shutil.which(\"snort3\")\n    if not snort_path:\n        logger.warning(\"Snort not detected\")\n    return snort_path\ndef setup_cmd(_):",
         "detail": "cli",
         "documentation": {}
     },
@@ -901,7 +1006,7 @@
         "kind": 2,
         "importPath": "cli",
         "description": "cli",
-        "peekOfCode": "def check_snort():\n    return shutil.which(\"snort\") or shutil.which(\"snort3\")\ndef setup_cmd(_):\n    if not check_snort():\n        console.print(\"[red]Snort not found[/red]\")\n        sys.exit(1)\n    create_default_rules(ROOT)\n    console.print(\"[green]Setup complete[/green]\")\ndef run_cmd(_):\n    if OS_TYPE == \"linux\":",
+        "peekOfCode": "def check_snort():\n    snort_path = shutil.which(\"snort\") or shutil.which(\"snort3\")\n    if not snort_path:\n        logger.warning(\"Snort not detected\")\n    return snort_path\ndef setup_cmd(_):\n    snort_path = check_snort()\n    if not snort_path:\n        logger.error(\"Cannot setup: Snort not found\")\n        console.print(\"[red]Snort not found[/red]\")",
         "detail": "cli",
         "documentation": {}
     },
@@ -910,7 +1015,7 @@
         "kind": 2,
         "importPath": "cli",
         "description": "cli",
-        "peekOfCode": "def setup_cmd(_):\n    if not check_snort():\n        console.print(\"[red]Snort not found[/red]\")\n        sys.exit(1)\n    create_default_rules(ROOT)\n    console.print(\"[green]Setup complete[/green]\")\ndef run_cmd(_):\n    if OS_TYPE == \"linux\":\n        subprocess.run([\"sudo\", \"bash\", \"snort_auto.bash\"], check=True)\n    elif OS_TYPE == \"windows\":",
+        "peekOfCode": "def setup_cmd(_):\n    snort_path = check_snort()\n    if not snort_path:\n        logger.error(\"Cannot setup: Snort not found\")\n        console.print(\"[red]Snort not found[/red]\")\n        sys.exit(1)\ndef run_cmd(_):\n    if OS_TYPE == \"linux\":\n        try:\n            subprocess.run([\"sudo\", \"bash\", \"snort_auto.bash\"], check=True)",
         "detail": "cli",
         "documentation": {}
     },
@@ -919,7 +1024,7 @@
         "kind": 2,
         "importPath": "cli",
         "description": "cli",
-        "peekOfCode": "def run_cmd(_):\n    if OS_TYPE == \"linux\":\n        subprocess.run([\"sudo\", \"bash\", \"snort_auto.bash\"], check=True)\n    elif OS_TYPE == \"windows\":\n        subprocess.run(\n            [\"powershell\", \"-ExecutionPolicy\", \"Bypass\", \"-File\", \"snort.ps1\"],\n            check=True,\n        )\n    else:\n        sys.exit(\"Unsupported OS\")",
+        "peekOfCode": "def run_cmd(_):\n    if OS_TYPE == \"linux\":\n        try:\n            subprocess.run([\"sudo\", \"bash\", \"snort_auto.bash\"], check=True)\n        except subprocess.CalledProcessError as e:\n            logger.error(\"Snort run failed: %s\", e)\n            logger.error(\"Stdout: %s\", e.stdout)\n            logger.error(\"Stderr: %s\", e.stderr)\n            return\n    elif OS_TYPE == \"windows\":",
         "detail": "cli",
         "documentation": {}
     },
@@ -928,7 +1033,7 @@
         "kind": 2,
         "importPath": "cli",
         "description": "cli",
-        "peekOfCode": "def decrypt_cmd(_):\n    if OS_TYPE == \"linux\":\n        subprocess.run([\"bash\", \"decrypt.bash\"], check=True)\n    elif OS_TYPE == \"windows\":\n        subprocess.run(\n            [\"powershell\", \"-ExecutionPolicy\", \"Bypass\", \"-File\", \"decrypt.ps1\"],\n            check=True,\n        )\ndef version_cmd(_):\n    print(f\"SnortAMV v{VERSION}\")",
+        "peekOfCode": "def decrypt_cmd(_):\n    if OS_TYPE == \"linux\":\n        cmd = [\"bash\", \"decrypt.bash\"]\n    elif OS_TYPE == \"windows\":\n        cmd = [\n            \"powershell\",\n            \"-ExecutionPolicy\",\n            \"Bypass\",\n            \"-File\",\n            \"decrypt.ps1\",",
         "detail": "cli",
         "documentation": {}
     },
@@ -955,7 +1060,7 @@
         "kind": 5,
         "importPath": "cli",
         "description": "cli",
-        "peekOfCode": "ROOT = Path(__file__).parent.resolve()\nif str(ROOT) not in sys.path:\n    sys.path.insert(0, str(ROOT))\nconsole = Console()\nOS_TYPE = platform.system().lower()\nVERSION = \"0.0.1\"\n# ---------------- UI ----------------\ndef greeting_by_time():\n    hour = int(time.strftime(\"%H\"))\n    if hour < 12:",
+        "peekOfCode": "ROOT = Path(__file__).parent.resolve()\nif str(ROOT) not in sys.path:\n    sys.path.insert(0, str(ROOT))\nconsole = Console()\nOS_TYPE = platform.system().lower()\nVERSION = \"0.0.1\"\nlogger = get_logger(__name__)\n# ---------------- UI ----------------\ndef greeting_by_time():\n    hour = int(time.strftime(\"%H\"))",
         "detail": "cli",
         "documentation": {}
     },
@@ -964,7 +1069,7 @@
         "kind": 5,
         "importPath": "cli",
         "description": "cli",
-        "peekOfCode": "console = Console()\nOS_TYPE = platform.system().lower()\nVERSION = \"0.0.1\"\n# ---------------- UI ----------------\ndef greeting_by_time():\n    hour = int(time.strftime(\"%H\"))\n    if hour < 12:\n        return \"Good Morning\"\n    elif hour < 17:\n        return \"Good Afternoon\"",
+        "peekOfCode": "console = Console()\nOS_TYPE = platform.system().lower()\nVERSION = \"0.0.1\"\nlogger = get_logger(__name__)\n# ---------------- UI ----------------\ndef greeting_by_time():\n    hour = int(time.strftime(\"%H\"))\n    if hour < 12:\n        return \"Good Morning\"\n    elif hour < 17:",
         "detail": "cli",
         "documentation": {}
     },
@@ -973,7 +1078,7 @@
         "kind": 5,
         "importPath": "cli",
         "description": "cli",
-        "peekOfCode": "OS_TYPE = platform.system().lower()\nVERSION = \"0.0.1\"\n# ---------------- UI ----------------\ndef greeting_by_time():\n    hour = int(time.strftime(\"%H\"))\n    if hour < 12:\n        return \"Good Morning\"\n    elif hour < 17:\n        return \"Good Afternoon\"\n    elif hour < 21:",
+        "peekOfCode": "OS_TYPE = platform.system().lower()\nVERSION = \"0.0.1\"\nlogger = get_logger(__name__)\n# ---------------- UI ----------------\ndef greeting_by_time():\n    hour = int(time.strftime(\"%H\"))\n    if hour < 12:\n        return \"Good Morning\"\n    elif hour < 17:\n        return \"Good Afternoon\"",
         "detail": "cli",
         "documentation": {}
     },
@@ -982,7 +1087,16 @@
         "kind": 5,
         "importPath": "cli",
         "description": "cli",
-        "peekOfCode": "VERSION = \"0.0.1\"\n# ---------------- UI ----------------\ndef greeting_by_time():\n    hour = int(time.strftime(\"%H\"))\n    if hour < 12:\n        return \"Good Morning\"\n    elif hour < 17:\n        return \"Good Afternoon\"\n    elif hour < 21:\n        return \"Good Evening\"",
+        "peekOfCode": "VERSION = \"0.0.1\"\nlogger = get_logger(__name__)\n# ---------------- UI ----------------\ndef greeting_by_time():\n    hour = int(time.strftime(\"%H\"))\n    if hour < 12:\n        return \"Good Morning\"\n    elif hour < 17:\n        return \"Good Afternoon\"\n    elif hour < 21:",
+        "detail": "cli",
+        "documentation": {}
+    },
+    {
+        "label": "logger",
+        "kind": 5,
+        "importPath": "cli",
+        "description": "cli",
+        "peekOfCode": "logger = get_logger(__name__)\n# ---------------- UI ----------------\ndef greeting_by_time():\n    hour = int(time.strftime(\"%H\"))\n    if hour < 12:\n        return \"Good Morning\"\n    elif hour < 17:\n        return \"Good Afternoon\"\n    elif hour < 21:\n        return \"Good Evening\"",
         "detail": "cli",
         "documentation": {}
     },
