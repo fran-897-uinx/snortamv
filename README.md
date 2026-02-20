@@ -22,7 +22,7 @@ A Python-based CLI tool to manage Snort Network Intrusion Detection System (IDS)
 
 1. **Clone or navigate to the project directory:**
    ```bash
-   cd SnortAMV
+   cd snortamv
    ```
 1.1 **Creating and Activating the Environment:**
 ##### Create & activate a virtual environment (recommended)
@@ -31,8 +31,13 @@ A Python-based CLI tool to manage Snort Network Intrusion Detection System (IDS)
 ###### To isolate dependencies and avoid conflicts with your system Python.
 
    **To Create the environment**
-   ```python
+   ##### For windows
+   ```powershell
    python -m venv env
+   ```
+   ##### Linux
+   ```bash
+   python3 -m venv env
    ```
    **Activating the environment:**
    **For Windows**
