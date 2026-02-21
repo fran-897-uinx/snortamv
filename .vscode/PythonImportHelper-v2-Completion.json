@@ -1032,7 +1032,7 @@
         "kind": 2,
         "importPath": "cli",
         "description": "cli",
-        "peekOfCode": "def check_snort():\n    snort_path = shutil.which(\"snort\") or shutil.which(\"snort3\")\n    if not snort_path:\n        logger.warning(\"Snort not detected\")\n    return snort_path\ndef setup_cmd(_):\n    if OS_TYPE == \"linux\":\n        try:\n            result = subprocess.run(\n                [\"python3\", \"post_installer.py\"], capture_output=True, text=True",
+        "peekOfCode": "def check_snort():\n    snort_path = shutil.which(\"snort\") or shutil.which(\"snort3\")\n    if not snort_path:\n        logger.warning(\"Snort not detected\")\n    return snort_path\ndef setup_cmd(_):\n    if OS_TYPE == \"linux\":\n        try:\n            result = subprocess.run([sys.executable, \"post_installer.py\"], check=True)\n            if result.returncode != 0:",
         "detail": "cli",
         "documentation": {}
     },
@@ -1041,7 +1041,7 @@
         "kind": 2,
         "importPath": "cli",
         "description": "cli",
-        "peekOfCode": "def setup_cmd(_):\n    if OS_TYPE == \"linux\":\n        try:\n            result = subprocess.run(\n                [\"python3\", \"post_installer.py\"], capture_output=True, text=True\n            )\n            if result.returncode != 0:\n                logger.error(\"Post installation failed: %s\", result.stderr)\n            else:\n                logger.info(\"Post installation completed successfully\")",
+        "peekOfCode": "def setup_cmd(_):\n    if OS_TYPE == \"linux\":\n        try:\n            result = subprocess.run([sys.executable, \"post_installer.py\"], check=True)\n            if result.returncode != 0:\n                logger.error(\"Post installation failed: %s\", result.stderr)\n            else:\n                logger.info(\"Post installation completed successfully\")\n        except Exception as e:\n            logger.error(\"Error during post installation: %s\", e)",
         "detail": "cli",
         "documentation": {}
     },

@@ -95,9 +95,7 @@ def check_snort():
 def setup_cmd(_):
     if OS_TYPE == "linux":
         try:
-            result = subprocess.run(
-                ["python3", "post_installer.py"], capture_output=True, text=True
-            )
+            result = subprocess.run([sys.executable, "post_installer.py"], check=True)
             if result.returncode != 0:
                 logger.error("Post installation failed: %s", result.stderr)
             else:
@@ -106,9 +104,7 @@ def setup_cmd(_):
             logger.error("Error during post installation: %s", e)
     elif OS_TYPE == "windows":
         try:
-            result = subprocess.run(
-                ["python", "post_installer.py"], capture_output=True, text=True
-            )
+            result = subprocess.run([sys.executable, "post_installer.py"], check=True)
             if result.returncode != 0:
                 logger.error("Post installation failed: %s", result.stderr)
             else:
