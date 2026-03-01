@@ -6,8 +6,11 @@ import sys
 import platform
 
 OS_TYPE = platform.system().lower()
+
+
 class PostInstallCommand(install):
     """Run post_installer.py automatically after pip install."""
+
     def run(self):
         install.run(self)
         # If a requirements.txt exists, try to install it first using pip
@@ -27,12 +30,10 @@ class PostInstallCommand(install):
                         check=True,
                     )
         except Exception as e:
-            # Do not fail the whole install if requirements installation fails here;
-            # print a warning for the user to handle manually.
             print(f"Warning: failed to install requirements from {req_file}: {e}")
 
-        # Run the project's post installer script (existing behavior)
         subprocess.run([sys.executable, "post_installer.py"], check=True)
+
 
 setup(
     name="snortamv",

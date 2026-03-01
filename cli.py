@@ -1,21 +1,21 @@
 #!/usr/bin/env python3
-import os
-import time
-import pyfiglet
-import shutil
-import platform
-import subprocess
-import sys
-import argparse
+import os, time, pyfiglet, shutil, platform, subprocess, sys, argparse
 from pathlib import Path
 from rich.console import Console
-
 from modules.configuration.setup_rules import create_default_rules, interactive_add_rule
 from modules.configuration.validate_conf import validate_configuration
 from modules.acc_managt.creat_acc import create_account_cli
 from modules.acc_managt.delete_acc import delete_account_cli
 from modules.acc_managt.update_acc import update_account_cli
 from modules.utilities.logger import get_logger
+from modules.configuration.rule_manager import (
+    disable_rule,
+    enable_rule,
+    list_rules,
+    build_ruleset,
+    backup_rules,
+)
+
 
 ROOT = Path(__file__).parent.resolve()
 if str(ROOT) not in sys.path:
@@ -47,11 +47,15 @@ def get_linux_distro():
     }
 
 
-distro = get_linux_distro()
-if not distro:
-    print(" Cannot detect Linux distro")
-    sys.exit(1)
-print(f"Running on {distro['name']} {distro['version']}")
+def distro_detector():
+    distro = get_linux_distro()
+    if OS_TYPE == "linux":
+        if not distro:
+            print(" Cannot detect Linux distro")
+            sys.exit(1)
+        print(f"Running on {distro['name']} {distro['version']}")
+    else:
+        return
 
 
 def get_pkg_manager(distro):
@@ -178,11 +182,41 @@ def version_cmd(_):
     print(f"SnortAMV v{VERSION}")
 
 
+def create_acc(_):
+    from modules.acc_managt.migrate import migrate_acc
+
+    try:
+        # Creates the account
+        create_account_cli(ROOT)
+        #  migrates the account to the database
+        migrate_acc()
+        logger.info("Account Created successfully")
+    except error as e:
+        logger.error("Any error occured while creating account", e.stdout)
+
+
+def rule_enable_cmd(args):
+    enable_rule(args.name, dry_run=args.dry_run)
+
+
+def rule_disable_cmd(args):
+    disable_rule(args.name, dry_run=args.dry_run)
+
+
+def rule_build_cmd(args):
+    build_ruleset(dry_run=args.dry_run)
+
+
 # ---------------- CLI ----------------
 def main():
     banner()
 
     parser = argparse.ArgumentParser(description="SnortAMV – Automated Snort Manager")
+    parser.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="Simulate actions without making changes",
+    )
     sub = parser.add_subparsers(dest="command", required=True)
 
     sub.add_parser("setup", help="Run initial setup").set_defaults(func=setup_cmd)
@@ -204,8 +238,22 @@ def main():
     rule_sub.add_parser("add", help="Create a local rule interactively").set_defaults(
         func=lambda _: interactive_add_rule(ROOT)
     )
-    rule_sub.add_parser("list", help="List local.rules").set_defaults(
-        func=lambda _: print(open(ROOT / "rules/local.rules").read())
+    rule_sub.add_parser("list", help="List rules").set_defaults(
+        func=lambda _: list_rules()
+    )
+    enable = rule_sub.add_parser("enable", help="Enable a rule")
+    enable.add_argument("name", help="Name of the rule to enable")
+    enable.set_defaults(func=rule_enable_cmd)
+
+    disable = rule_sub.add_parser("disable", help="Disable a rule")
+    disable.add_argument("name", help="Name of the rule to disable")
+    disable.set_defaults(func=rule_disable_cmd)
+
+    rule_sub.add_parser("build", help="Build up the rules").set_defaults(
+        func=rule_build_cmd
+    )
+    rule_sub.add_parser("backup", help="List local.rules").set_defaults(
+        func=lambda _: backup_rules()
     )
 
     acc = sub.add_parser(
@@ -213,7 +261,7 @@ def main():
     )
     acc_sub = acc.add_subparsers(dest="action", required=True)
     acc_sub.add_parser("create", help="Create a project user").set_defaults(
-        func=lambda _: create_account_cli(ROOT)
+        func=create_acc
     )
     acc_sub.add_parser("delete", help="Delete a project user").set_defaults(
         func=lambda _: delete_account_cli(ROOT)
@@ -223,6 +271,11 @@ def main():
     )
 
     args = parser.parse_args()
+    if args.dry_run:
+        console.print(
+            "[⚠️] Dry-run mode enabled: No changes will be made to the system.",
+            style="yellow",
+        )
     args.func(args)
 
 

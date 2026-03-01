@@ -38,6 +38,7 @@ def get_connection():
 def hash_password(plaintext: str) -> str:
     return hashlib.sha256(plaintext.encode("utf-8")).hexdigest()
 
+
 # -------------------------
 # Initialize DB
 # -------------------------
@@ -89,6 +90,7 @@ def get_account(username: str) -> Optional[Dict[str, Any]]:
     conn.close()
     return dict(row) if row else None
 
+
 def verify_password(username: str, password: str) -> bool:
     conn = get_connection()
     cur = conn.cursor()
@@ -98,6 +100,7 @@ def verify_password(username: str, password: str) -> bool:
     if not row:
         return False
     return row["password"] == hash_password(password)
+
 
 def update_account(
     username: str,
@@ -133,6 +136,7 @@ def update_account(
     conn.close()
     return True
 
+
 def delete_account(username: str) -> bool:
     conn = get_connection()
     cur = conn.cursor()
@@ -142,6 +146,7 @@ def delete_account(username: str) -> bool:
     conn.close()
     return changed > 0
 
+
 def list_accounts() -> list:
     conn = get_connection()
     cur = conn.cursor()
@@ -149,6 +154,7 @@ def list_accounts() -> list:
     rows = cur.fetchall()
     conn.close()
     return [dict(r) for r in rows]
+
 
 # -------------------------
 # Migrate from JSON
@@ -168,6 +174,7 @@ def migrate_from_json(project_root: Path) -> int:
         if not username or not password:
             continue
         if create_account(username, fullname, password):
+            hash_password(password)
             count += 1
 
     # Rename migrated file
@@ -176,6 +183,7 @@ def migrate_from_json(project_root: Path) -> int:
     except Exception:
         pass
     return count
+
 
 # -------------------------
 # Initialize DB on import

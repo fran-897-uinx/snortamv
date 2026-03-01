@@ -14,27 +14,32 @@ DEFAULT_RULES = [
 def create_default_rules(root: Path):
     rules_dir = root / "rules"
     rules_dir.mkdir(exist_ok=True)
-    local_rules = rules_dir / "local.rules"
+    local_rules = rules_dir / "generated" / "local.rules"
     if not local_rules.exists():
+        local_rules.parent.mkdir(exist_ok=True)
         local_rules.write_text("".join(DEFAULT_RULES))
-        print(f"Created default local.rules at {local_rules}")
+        console.print(f"Created default local.rules at {local_rules}", style="green")
     else:
-        print("local.rules already exists")
+        console.print("local.rules already exists", style="yellow")
 
 
 def interactive_add_rule(root: Path):
     rules_dir = root / "rules"
     rules_dir.mkdir(exist_ok=True)
-
-    local_rules = rules_dir / "local.rules"
+    default_rules = rules_dir / "generated" / "local.rules"
+    filename = input(
+        "What name do want to give to your new rules file (without .rules extension): "
+    ).strip()
+    local_rules = rules_dir / "sources" / f"{filename}.rules"
 
     # Create file with default rules only once
     if not local_rules.exists():
+        local_rules.parent.mkdir(exist_ok=True)
         local_rules.write_text("".join(DEFAULT_RULES))
-        print("local.rules created with default rules.")
+        console.print("local.rules created with default rules.", style="green")
 
     # Show existing rules
-    print("\nCurrent rules:\n")
+    console.print("\nCurrent rules:\n", style="blue")
     console.print(local_rules.read_text(), style="green")
 
     print("\nAdd a simple alert rule (demo)")

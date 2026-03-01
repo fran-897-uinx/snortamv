@@ -5,9 +5,11 @@ set -euo pipefail
 # CONFIGURATION
 # ==============================
 SNORT_PATH="/usr/sbin/snort"
-RULE_PATH="./rules/local.rules"
+RULE_PATH="./rules/generated"
 LOG_DIR="/var/log/snortamv"
 LOG_DOC="$LOG_DIR/log_file.log"
+SNORTCONF="./modules/Snort_Config/linux/snort.conf"
+SNORTLUA="./modules/Snort_Config/linux/snort.lua"
 INTERFACE="eth0"
 DAYS_OF_VALID=7
 
@@ -49,18 +51,9 @@ if [ ! -f "$SNORT_CONF" ]; then
     echo -e "${YELLOW}Snort config not found, generating default...${RESET}"
     sudo mkdir -p "$(dirname "$SNORT_CONF")"
     if [ "$SNORT_TYPE" == "snort3" ]; then
-        sudo tee "$SNORT_CONF" > /dev/null <<EOF
--- Default snort.lua for SnortAMV
-ips =
-{
-  rules = '$(realpath "$RULE_PATH")'
-}
-EOF
+        sudo cp "$SNORTLUA" "$SNORT_CONF"
     else
-        sudo tee "$SNORT_CONF" > /dev/null <<EOF
-# Default snort.conf for SnortAMV
-include $(realpath "$RULE_PATH")
-EOF
+         sudo cp "$SNORTCONF" "$SNORT_CONF"
     fi
     sudo chown root:root "$SNORT_CONF"
     echo -e "${GREEN}Default config created at $SNORT_CONF${RESET}"
@@ -75,8 +68,8 @@ mkdir -p "$LOG_DIR"
 # SHOW RULES
 # ==============================
 echo -e "${YELLOW}RULES UPDATED:${RESET}"
-if [ -f "$RULE_PATH" ]; then
-    cat "$RULE_PATH"
+if [ -d "$RULE_PATH" ]; then
+    cat "$RULE_PATH/snort.rules"
 else
     echo -e "${RED}No rules found at $RULE_PATH${RESET}"
 fi
@@ -89,6 +82,22 @@ if ! $SNORT_PATH -T -c "$SNORT_CONF"; then
     echo -e "${RED}Configuration test failed!${RESET}"
     exit 1
 fi
+
+# ==============================
+# VALIDATE RULES   
+# ==============================
+echo -e "${GREEN}[2.1] Validating Snort rules...${RESET}"
+if ! $SNORT_PATH -T -c "$SNORT_CONF" -R "$RULE_PATH"; then
+    echo -e "${RED}Configuration test failed!${RESET}"
+    exit 1
+fi
+
+# ==============================
+# View Adapters
+# ==============================
+echo -e "${GREEN}[1.1] Available network interfaces:${RESET}"
+ip link show type ether
+$SNORT_PATH --daq-dir /usr/lib/snort/ -W
 
 # ==============================
 # RUN SNORT
@@ -126,6 +135,7 @@ echo -e "${YELLOW}Log documentation updated.${RESET}"
 # CLEANUP OLD LOGS
 # ==============================
 echo -e "${GREEN}[6] Deleting logs older than $DAYS_OF_VALID days...${RESET}"
+find "$LOG_DIR" -type f -mtime +"$DAYS_OF_VALID" -exec cp $LOG_DIR $LOG_DIR.((date +%Y%m%d%H%M%S))
 find "$LOG_DIR" -type f -mtime +"$DAYS_OF_VALID" -delete
 echo -e "${YELLOW}Old logs cleaned.${RESET}"
 
