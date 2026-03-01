@@ -1398,7 +1398,7 @@
         "kind": 2,
         "importPath": "cli",
         "description": "cli",
-        "peekOfCode": "def create_acc(_):\n    from modules.acc_managt.migrate import migrate_acc\n    try:\n        # Creates the account\n        create_account_cli(ROOT)\n        #  migrates the account to the database\n        migrate_acc()\n        logger.info(\"Account Created successfully\")\n    except error as e:\n        logger.error(\"Any error occured while creating account\", e.stdout)",
+        "peekOfCode": "def create_acc(_):\n    from modules.acc_managt.migrate import migrate_acc\n    try:\n        # Creates the account\n        create_account_cli(ROOT)\n        #  migrates the account to the database\n        migrate_acc()\n        logger.info(\"Account Created successfully\")\n    except Exception as e:\n        logger.error(\"Any error occured while creating account: %s\", e)",
         "detail": "cli",
         "documentation": {}
     },

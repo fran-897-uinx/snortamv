@@ -191,8 +191,8 @@ def create_acc(_):
         #  migrates the account to the database
         migrate_acc()
         logger.info("Account Created successfully")
-    except error as e:
-        logger.error("Any error occured while creating account", e.stdout)
+    except Exception as e:
+        logger.error("Any error occured while creating account: %s", e)
 
 
 def rule_enable_cmd(args):
