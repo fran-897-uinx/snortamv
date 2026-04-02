@@ -34,7 +34,8 @@ sqlite.db*
 
 # ============== Runtime Logs ==============
 *logStore/*
-
+logStore/errors/*
+logStore/logs/*
 # ============== Security ==================
 .env
 .env.local

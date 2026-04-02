@@ -32,3 +32,14 @@ https://www.wireshark.org/download.html
 2026-03-05 22:04:44,013 | INFO | 195 | cli | Account Created successfully
 2026-03-05 22:05:26,860 | INFO | modules.acc_managt.creat_acc | Created account: huch
 2026-03-05 22:05:26,862 | INFO | cli | Account Created successfully
+2026-03-14 11:48:15,689 | INFO | modules.configuration.setup_rules | Rule successfully added to {local_rules}
+2026-03-14 11:49:22,474 | INFO | modules.configuration.rule_manager | new.rules has been enabled
+2026-03-20 15:30:57,089 | INFO | modules.configuration.setup_rules | Rule successfully added to {local_rules}
+2026-03-20 15:32:41,430 | INFO | modules.configuration.rule_manager | new_rule.rules has been enabled
+2026-03-26 13:30:55,606 | INFO | __main__ | Snort already installed.
+2026-03-26 13:30:55,633 | INFO | cli | Post installation completed successfully
+2026-03-26 13:31:05,046 | INFO | __main__ | Snort already installed.
+2026-03-26 13:31:05,068 | INFO | cli | Post installation completed successfully
+2026-03-26 13:33:27,203 | INFO | cli | Altered by The user
+2026-03-26 13:34:07,816 | INFO | cli | Altered by The user
+2026-03-28 15:31:44,394 | INFO | modules.configuration.setup_rules | Rule successfully added to {local_rules}

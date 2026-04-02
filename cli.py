@@ -4,9 +4,9 @@ from pathlib import Path
 from rich.console import Console
 from modules.configuration.setup_rules import create_default_rules, interactive_add_rule
 from modules.configuration.validate_conf import validate_configuration
-from modules.acc_managt.creat_acc import create_account_cli
-from modules.acc_managt.delete_acc import delete_account_cli
-from modules.acc_managt.update_acc import update_account_cli
+# from modules.acc_managt.creat_acc import create_account_cli
+# from modules.acc_managt.delete_acc import delete_account_cli
+# from modules.acc_managt.update_acc import update_account_cli
 from modules.utilities.logger import get_logger
 from modules.utilities.error_handler import get_error_logger
 from modules.configuration.rule_manager import (
@@ -24,7 +24,7 @@ if str(ROOT) not in sys.path:
 
 console = Console()
 OS_TYPE = platform.system().lower()
-__version__ = "0.0.2"
+__version__ = "0.0.3-dev"
 
 logger = get_logger(__name__)
 logerror = get_error_logger(__name__)
@@ -137,6 +137,7 @@ def run_cmd(_):
                 ["powershell", "-ExecutionPolicy", "Bypass", "-File", "snort.ps1"],
                 check=True,
             )
+            sys.exit(1)
         except subprocess.CalledProcessError as e:
             logerror.exception("Snort run failed: %s", e)
             logerror.exception("Stdout: %s", e.stdout)
@@ -184,17 +185,17 @@ def version_cmd(_):
     print(f"SnortAMV v{__version__}")
 
 
-def create_acc(_):
-    from modules.acc_managt.migrate import migrate_acc
+# def create_acc(_):
+#     from modules.acc_managt.migrate import migrate_acc
 
-    try:
-        # Creates the account
-        create_account_cli(ROOT)
-        #  migrates the account to the database
-        migrate_acc()
-        logger.info("Account Created successfully")
-    except Exception as e:
-        logerror.exception("Any error occured while creating account: %s", e)
+#     try:
+#         # Creates the account
+#         create_account_cli(ROOT)
+#         #  migrates the account to the database
+#         migrate_acc()
+#         logger.info("Account Created successfully")
+#     except Exception as e:
+#         logerror.exception("Any error occured while creating account: %s", e)
 
 
 def rule_enable_cmd(args):
@@ -227,13 +228,13 @@ def main():
         sub.add_parser("decrypt", help="decrypt the snort to be readable").set_defaults(
             func=decrypt_cmd
         )
-        sub.add_parser("--validate-conf", help="Validate the configuration").set_defaults(
+        sub.add_parser("validate-conf", help="Validate the configuration").set_defaults(
             func=lambda _: validate_configuration(ROOT)
         )
         parser.add_argument(
             "--version",
             action="version",
-            version=f"SnortAMV v{VERSION}",
+            version=f"SnortAMV v{__version__}",
         )
 
         rule = sub.add_parser("rule", help="add an list out rules")
@@ -266,19 +267,19 @@ def main():
             func=lambda _: backup_rules()
         )
 
-        acc = sub.add_parser(
-            "acc", help="Create, Delete and update project profile or users"
-        )
-        acc_sub = acc.add_subparsers(dest="action", required=True)
-        acc_sub.add_parser("create", help="Create a project user").set_defaults(
-            func=create_acc
-        )
-        acc_sub.add_parser("delete", help="Delete a project user").set_defaults(
-            func=lambda _: delete_account_cli(ROOT)
-        )
-        acc_sub.add_parser("update", help="Update a project user").set_defaults(
-            func=lambda _: update_account_cli(ROOT)
-        )
+        # acc = sub.add_parser(
+        #     "acc", help="Create, Delete and update project profile or users"
+        # )
+        # acc_sub = acc.add_subparsers(dest="action", required=True)
+        # acc_sub.add_parser("create", help="Create a project user").set_defaults(
+        #     func=create_acc
+        # )
+        # acc_sub.add_parser("delete", help="Delete a project user").set_defaults(
+        #     func=lambda _: delete_account_cli(ROOT)
+        # )
+        # acc_sub.add_parser("update", help="Update a project user").set_defaults(
+        #     func=lambda _: update_account_cli(ROOT)
+        # )
 
         args = parser.parse_args()
         if args.dry_run:

@@ -2,7 +2,7 @@
 # CONFIGURATION
 # ==============================
 $SNORT_PATH   = "C:\Snort\bin\snort.exe"
-CONFFILE     = ".\modules\Snort_Config\windows\snort.conf"
+$CONFFILE     = ".\modules\Snort_Config\windows\snort.conf"
 $CONF_FILE    = "C:\Snort\etc\snort.conf"
 $RULE_PATH    = ".\rules\generated"
 $LOG_DIR      = "C:\Snort\log"

@@ -238,6 +238,22 @@
         "documentation": {}
     },
     {
+        "label": "PasswordHasher",
+        "importPath": "argon2",
+        "description": "argon2",
+        "isExtraImport": true,
+        "detail": "argon2",
+        "documentation": {}
+    },
+    {
+        "label": "exceptions",
+        "importPath": "argon2",
+        "description": "argon2",
+        "isExtraImport": true,
+        "detail": "argon2",
+        "documentation": {}
+    },
+    {
         "label": "database.db",
         "kind": 6,
         "isExtraImport": true,
@@ -557,30 +573,6 @@
         "documentation": {}
     },
     {
-        "label": "create_account_cli",
-        "importPath": "modules.acc_managt.creat_acc",
-        "description": "modules.acc_managt.creat_acc",
-        "isExtraImport": true,
-        "detail": "modules.acc_managt.creat_acc",
-        "documentation": {}
-    },
-    {
-        "label": "delete_account_cli",
-        "importPath": "modules.acc_managt.delete_acc",
-        "description": "modules.acc_managt.delete_acc",
-        "isExtraImport": true,
-        "detail": "modules.acc_managt.delete_acc",
-        "documentation": {}
-    },
-    {
-        "label": "update_account_cli",
-        "importPath": "modules.acc_managt.update_acc",
-        "description": "modules.acc_managt.update_acc",
-        "isExtraImport": true,
-        "detail": "modules.acc_managt.update_acc",
-        "documentation": {}
-    },
-    {
         "label": "disable_rule",
         "importPath": "modules.configuration.rule_manager",
         "description": "modules.configuration.rule_manager",
@@ -809,7 +801,7 @@
         "kind": 2,
         "importPath": "database.db",
         "description": "database.db",
-        "peekOfCode": "def get_connection():\n    conn = sqlite3.connect(DB_PATH)\n    conn.row_factory = sqlite3.Row  # allows dict-like access\n    return conn\n# -------------------------\n# Password hashing\n# -------------------------\ndef hash_password(plaintext: str) -> str:\n    return hashlib.sha256(plaintext.encode(\"utf-8\")).hexdigest()\n# -------------------------",
+        "peekOfCode": "def get_connection():\n    conn = sqlite3.connect(DB_PATH)\n    conn.row_factory = sqlite3.Row  # allows dict-like access\n    return conn\n# -------------------------\n# Password hashing\n# -------------------------\nph = PasswordHasher()\ndef hash_password(plaintext: str) -> str:\n    \"\"\"",
         "detail": "database.db",
         "documentation": {}
     },
@@ -818,7 +810,16 @@
         "kind": 2,
         "importPath": "database.db",
         "description": "database.db",
-        "peekOfCode": "def hash_password(plaintext: str) -> str:\n    return hashlib.sha256(plaintext.encode(\"utf-8\")).hexdigest()\n# -------------------------\n# Initialize DB\n# -------------------------\ndef init_db():\n    conn = get_connection()\n    cur = conn.cursor()\n    cur.execute(\n        \"\"\"",
+        "peekOfCode": "def hash_password(plaintext: str) -> str:\n    \"\"\"\n    Hash a plaintext password using Argon2.\n    \"\"\"\n    return ph.hash(plaintext)\ndef verify_password_hash(stored_hash: str, plaintext: str) -> bool:\n    \"\"\"\n    Verify a plaintext password against an Argon2 hash.\n    \"\"\"\n    try:",
+        "detail": "database.db",
+        "documentation": {}
+    },
+    {
+        "label": "verify_password_hash",
+        "kind": 2,
+        "importPath": "database.db",
+        "description": "database.db",
+        "peekOfCode": "def verify_password_hash(stored_hash: str, plaintext: str) -> bool:\n    \"\"\"\n    Verify a plaintext password against an Argon2 hash.\n    \"\"\"\n    try:\n        return ph.verify(stored_hash, plaintext)\n    except (argon2_exceptions.VerifyMismatchError, argon2_exceptions.InvalidHash):\n        return False\n# -------------------------\n# Initialize DB",
         "detail": "database.db",
         "documentation": {}
     },
@@ -854,7 +855,7 @@
         "kind": 2,
         "importPath": "database.db",
         "description": "database.db",
-        "peekOfCode": "def verify_password(username: str, password: str) -> bool:\n    conn = get_connection()\n    cur = conn.cursor()\n    cur.execute(\"SELECT password FROM accounts WHERE username = ?\", (username,))\n    row = cur.fetchone()\n    conn.close()\n    if not row:\n        return False\n    return row[\"password\"] == hash_password(password)\ndef update_account(",
+        "peekOfCode": "def verify_password(username: str, password: str) -> bool:\n    conn = get_connection()\n    cur = conn.cursor()\n    cur.execute(\"SELECT password FROM accounts WHERE username = ?\", (username,))\n    row = cur.fetchone()\n    conn.close()\n    if not row:\n        return False\n    return verify_password_hash(row[\"password\"], password)\ndef update_account(",
         "detail": "database.db",
         "documentation": {}
     },
@@ -900,6 +901,15 @@
         "importPath": "database.db",
         "description": "database.db",
         "peekOfCode": "OS_TYPE = platform.system().lower()\n# -------------------------\n# Database paths\n# -------------------------\nif OS_TYPE == \"windows\":\n    USERDIR = os.getlogin()\n    LOCAL_APPDATA = f\"C:\\\\Users\\\\{USERDIR}\\\\Desktop\"\n    APP_DIR = Path(LOCAL_APPDATA) / \"SnortAMV\"\n    APP_DIR.mkdir(parents=True, exist_ok=True)\n    DB_PATH = APP_DIR / \"sqlite.db\"",
+        "detail": "database.db",
+        "documentation": {}
+    },
+    {
+        "label": "ph",
+        "kind": 5,
+        "importPath": "database.db",
+        "description": "database.db",
+        "peekOfCode": "ph = PasswordHasher()\ndef hash_password(plaintext: str) -> str:\n    \"\"\"\n    Hash a plaintext password using Argon2.\n    \"\"\"\n    return ph.hash(plaintext)\ndef verify_password_hash(stored_hash: str, plaintext: str) -> bool:\n    \"\"\"\n    Verify a plaintext password against an Argon2 hash.\n    \"\"\"",
         "detail": "database.db",
         "documentation": {}
     },
@@ -1610,16 +1620,7 @@
         "kind": 2,
         "importPath": "cli",
         "description": "cli",
-        "peekOfCode": "def version_cmd(_):\n    print(f\"SnortAMV v{__version__}\")\ndef create_acc(_):\n    from modules.acc_managt.migrate import migrate_acc\n    try:\n        # Creates the account\n        create_account_cli(ROOT)\n        #  migrates the account to the database\n        migrate_acc()\n        logger.info(\"Account Created successfully\")",
-        "detail": "cli",
-        "documentation": {}
-    },
-    {
-        "label": "create_acc",
-        "kind": 2,
-        "importPath": "cli",
-        "description": "cli",
-        "peekOfCode": "def create_acc(_):\n    from modules.acc_managt.migrate import migrate_acc\n    try:\n        # Creates the account\n        create_account_cli(ROOT)\n        #  migrates the account to the database\n        migrate_acc()\n        logger.info(\"Account Created successfully\")\n    except Exception as e:\n        logerror.exception(\"Any error occured while creating account: %s\", e)",
+        "peekOfCode": "def version_cmd(_):\n    print(f\"SnortAMV v{__version__}\")\n# def create_acc(_):\n#     from modules.acc_managt.migrate import migrate_acc\n#     try:\n#         # Creates the account\n#         create_account_cli(ROOT)\n#         #  migrates the account to the database\n#         migrate_acc()\n#         logger.info(\"Account Created successfully\")",
         "detail": "cli",
         "documentation": {}
     },
@@ -1664,7 +1665,7 @@
         "kind": 5,
         "importPath": "cli",
         "description": "cli",
-        "peekOfCode": "ROOT = Path(__file__).parent.resolve()\nif str(ROOT) not in sys.path:\n    sys.path.insert(0, str(ROOT))\nconsole = Console()\nOS_TYPE = platform.system().lower()\n__version__ = \"0.0.2\"\nlogger = get_logger(__name__)\nlogerror = get_error_logger(__name__)\nclierrorlogger = get_error_logger(\"cli\")\n# -------------------- Helper Functions --------------------",
+        "peekOfCode": "ROOT = Path(__file__).parent.resolve()\nif str(ROOT) not in sys.path:\n    sys.path.insert(0, str(ROOT))\nconsole = Console()\nOS_TYPE = platform.system().lower()\n__version__ = \"0.0.3-dev\"\nlogger = get_logger(__name__)\nlogerror = get_error_logger(__name__)\nclierrorlogger = get_error_logger(\"cli\")\n# -------------------- Helper Functions --------------------",
         "detail": "cli",
         "documentation": {}
     },
@@ -1673,7 +1674,7 @@
         "kind": 5,
         "importPath": "cli",
         "description": "cli",
-        "peekOfCode": "console = Console()\nOS_TYPE = platform.system().lower()\n__version__ = \"0.0.2\"\nlogger = get_logger(__name__)\nlogerror = get_error_logger(__name__)\nclierrorlogger = get_error_logger(\"cli\")\n# -------------------- Helper Functions --------------------\ndef get_linux_distro():\n    os_release = Path(\"/etc/os-release\")\n    if not os_release.exists():",
+        "peekOfCode": "console = Console()\nOS_TYPE = platform.system().lower()\n__version__ = \"0.0.3-dev\"\nlogger = get_logger(__name__)\nlogerror = get_error_logger(__name__)\nclierrorlogger = get_error_logger(\"cli\")\n# -------------------- Helper Functions --------------------\ndef get_linux_distro():\n    os_release = Path(\"/etc/os-release\")\n    if not os_release.exists():",
         "detail": "cli",
         "documentation": {}
     },
@@ -1682,7 +1683,7 @@
         "kind": 5,
         "importPath": "cli",
         "description": "cli",
-        "peekOfCode": "OS_TYPE = platform.system().lower()\n__version__ = \"0.0.2\"\nlogger = get_logger(__name__)\nlogerror = get_error_logger(__name__)\nclierrorlogger = get_error_logger(\"cli\")\n# -------------------- Helper Functions --------------------\ndef get_linux_distro():\n    os_release = Path(\"/etc/os-release\")\n    if not os_release.exists():\n        return None",
+        "peekOfCode": "OS_TYPE = platform.system().lower()\n__version__ = \"0.0.3-dev\"\nlogger = get_logger(__name__)\nlogerror = get_error_logger(__name__)\nclierrorlogger = get_error_logger(\"cli\")\n# -------------------- Helper Functions --------------------\ndef get_linux_distro():\n    os_release = Path(\"/etc/os-release\")\n    if not os_release.exists():\n        return None",
         "detail": "cli",
         "documentation": {}
     },
@@ -1691,7 +1692,7 @@
         "kind": 5,
         "importPath": "cli",
         "description": "cli",
-        "peekOfCode": "__version__ = \"0.0.2\"\nlogger = get_logger(__name__)\nlogerror = get_error_logger(__name__)\nclierrorlogger = get_error_logger(\"cli\")\n# -------------------- Helper Functions --------------------\ndef get_linux_distro():\n    os_release = Path(\"/etc/os-release\")\n    if not os_release.exists():\n        return None\n    data = {}",
+        "peekOfCode": "__version__ = \"0.0.3-dev\"\nlogger = get_logger(__name__)\nlogerror = get_error_logger(__name__)\nclierrorlogger = get_error_logger(\"cli\")\n# -------------------- Helper Functions --------------------\ndef get_linux_distro():\n    os_release = Path(\"/etc/os-release\")\n    if not os_release.exists():\n        return None\n    data = {}",
         "detail": "cli",
         "documentation": {}
     },
